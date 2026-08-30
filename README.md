@@ -8,7 +8,6 @@ results in faster runs and cost optimization.
 `tosh` is a CLI based agentic software development harness which prioritizes local processing for token optimization, 
 resulting in increased speed of development harness and reduced token cost.
 
----
 
 ## Foundation
 What makes this concept token efficient is the use of parseable project and development documentation. In order to
@@ -22,7 +21,6 @@ process will drastically reduce token usage as full document loads are no longer
 
 `tosh` working in concert with a Code Graph tool can take things a step further.
 
----
 
 ## Document Domain Breakdown
 
@@ -45,7 +43,6 @@ built(if it exposes endpoints) and the services the application call as a client
 
 ### Report Documents
 
----
 
 ## Visualization
 This framework provides a base page in which a developer can see documents from all domains in a single pane.
@@ -54,7 +51,6 @@ OpenAPI, and reports are all possible context options in defining, designing and
 
 The work item documents will be created and updated in real time as the harness processes each stage. 
 
----
 
 ## Components
 
@@ -77,7 +73,6 @@ application which has integrated with the REST API. These could allow for a rich
 The UI templates are bundled in the CLI to build local files. In the initial phases the UI will be completely static
 and be maintained by the CLI.
 
----
 
 ## Data Storage
 
@@ -90,14 +85,12 @@ When documentation has been created or updated it gets added to source control a
 synchronization with a traceable history and effective merging. This also reduces time across the team as each
 team member doesn't need to generate their only local copy of the code. 
 
----
 
 ## Partner Project
 At the beginning this harness will utilize `CodeGraph` for token optimization when working with source code files.
 
 In time `tosh` may gain it's own knowledge graph for code making this a more all-in-one solution.
 
----
 
 ## Not a Project Management System
 This is not a project management systems but instead allows for the integration with project management systems. The
