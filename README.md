@@ -1,5 +1,7 @@
 # Token Optimized Software Harness (tosh)
 
+> A CLI-based agentic software development harness designed to maximize speed and minimize LLM token consumption through structured, parseable local documentation.
+
 ## Concept
 An AI dev harness which prioritizes token conservation and speed. Token usage is a major issue for all organizations as 
 they burn through money. Higher token counts not only cost more, they also take longer to run. Token conservation 
