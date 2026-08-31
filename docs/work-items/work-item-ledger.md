@@ -1,8 +1,9 @@
 # Work Item Ledger
 
-## Implementation Ledger Schema (`03_implementation_ledger.json`)
-The ledger acts as the central state machine and DAG (Directed Acyclic Graph) index. It eliminates the need to traverse
+The ledger acts as the central state machine and DAG (Directed Acyclic Graph) index. It eliminates the need to traverse 
 the filesystem when resolving dependencies, checking overall progress, or feeding context to an agent.
+
+## Implementation Ledger Schema (`03_implementation_ledger.json`)
 
 ```json
 {
