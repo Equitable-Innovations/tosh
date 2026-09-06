@@ -1,25 +1,26 @@
 # Work Item Document Metadata Definition
 
 ## Table of Contents
+
 1. [Mandatory Universal Baseline](#mandatory-universal-baseline-all-documents)
 2. [Work Item Level Documents](#work-item-level-documents)
-   1. [Requirements Document](#requirements-00_requirementshtml)
-   2. [Design Specification](#design-specification-01_design_spechtml)
-   3. [Implementation Plan](#implementation-plan-02_implementation_planhtml)
-   4. [Implementation Plan Validation](#implementation-plan-validation-03_plan_validationhtml)
-   5. [Implementation Plan Summary](#implementation-plan-summary-04_plan_summaryhtml)
-   6. [Implementation Plan Conversation Summary](#implementation-plan-conversation-summary-05_plan_conversation_summaryhtml)
-   7. [Implementation Plan Conversation Metrics](#implementation-plan-conversation-metrics-06_plan_conversation_metricsjson)
+    1. [Requirements Document](#requirements-00_requirementshtml)
+    2. [Design Specification](#design-specification-01_design_spechtml)
+    3. [Implementation Plan](#implementation-plan-02_implementation_planhtml)
+    4. [Implementation Plan Validation](#implementation-plan-validation-03_plan_validationhtml)
+    5. [Implementation Plan Summary](#implementation-plan-summary-04_plan_summaryhtml)
+    6. [Implementation Plan Conversation Summary](#implementation-plan-conversation-summary-05_plan_conversation_summaryhtml)
+    7. [Implementation Plan Conversation Metrics](#implementation-plan-conversation-metrics-06_plan_conversation_metricsjson)
 3. [Phase Level Documents](#phase-level-documents)
-   1. [Implementation Phase Specification](#implementation-phase-specification-phasesphasephase_spechtml)
-   2. [Implementation Phase Validation](#implementation-phase-validation-phasesphasephase_validationhtml)
-   3. [Implementation Phase Summary](#implementation-phase-summary-phasesphasephase_summaryhtml)
+    1. [Implementation Phase Specification](#implementation-phase-specification-phasesphasephase_spechtml)
+    2. [Implementation Phase Validation](#implementation-phase-validation-phasesphasephase_validationhtml)
+    3. [Implementation Phase Summary](#implementation-phase-summary-phasesphasephase_summaryhtml)
 4. [Task Level Documents](#task-level-documents)
-   1. [Implementation Task Specification](#implementation-task-specification-taskstasktask_spechtml)
-   2. [Implementation Task Validation](#implementation-task-validation-taskstaskvalidationhtml)
-   3. [Implementation Task Summary](#implementation-task-summary-taskstasksummaryhtml)
-   4. [Implementation Task Conversation Log](#implementation-task-conversation-log-taskstaskconversationjsonl)
-   5. [Implementation Task Conversation Log](#implementation-task-conversation-metrics-taskstaskmetricsjson)
+    1. [Implementation Task Specification](#implementation-task-specification-taskstasktask_spechtml)
+    2. [Implementation Task Validation](#implementation-task-validation-taskstaskvalidationhtml)
+    3. [Implementation Task Summary](#implementation-task-summary-taskstasksummaryhtml)
+    4. [Implementation Task Conversation Log](#implementation-task-conversation-log-taskstaskconversationjsonl)
+    5. [Implementation Task Conversation Log](#implementation-task-conversation-metrics-taskstaskmetricsjson)
 
 ## Mandatory Universal Baseline (All Documents)
 
@@ -50,13 +51,17 @@ schema version, and the root work item:
 
 ### Design Specification (`01_design_spec.html`)
 
-| Tag                    | Definition                                                                            |
-|------------------------|---------------------------------------------------------------------------------------|
-| `doc-type`             | design-spec                                                                           |
-| `parent-doc-id`        | Points to Requirements `doc-id`                                                       |
-| `implements-req`       | Comma-delimited list of requirement IDs covered (e.g., `REQ-001`,`REQ-002`,`REQ-003`) |
-| `architectural-domain` | Scope (e.g., `backend-service`, `database`, `full-stack`)                             |
-| `target-frameworks`    | Tech stack dependencies (e.g., `spring-boot`,`postgresql`,`jwt`)                      |
+| Tag                    | Definition                                                                                                  |
+|------------------------|-------------------------------------------------------------------------------------------------------------|
+| `doc-type`             | design-spec                                                                                                 |
+| `parent-doc-id`        | Points to Requirements `doc-id`                                                                             |
+| `implements-req`       | Comma-delimited list of requirement IDs covered (e.g., `REQ-001`,`REQ-002`,`REQ-003`)                       |
+| `architectural-domain` | Scope (e.g., `backend-service`, `database`, `full-stack`)                                                   |
+| `target-frameworks`    | Tech stack dependencies (e.g., `spring-boot`,`postgresql`,`jwt`)                                            |
+| `assigned-agents`      | Comma-delimited list of assigned agents (e.g., `agent:backend-engineer,agent:security-auditor`)             |
+| `required-skills`      | Comma-delimited list of required skills (e.g., `skill:spring-boot-jwt-auth,skill:owasp-verification`)       |
+| `ai-tools`             | Comma-delimited list of MCP tools/servers (e.g., `mcp:db-inspector,mcp:ast-grep,cli:tosh`)                  |
+| `new-ai-components`    | Comma-delimited list of new AI components (e.g., `skill:spring-boot-jwt-auth,agent:auth-regression-tester`) |
 
 ### Implementation Plan (`02_implementation_plan.html`)
 

@@ -66,7 +66,7 @@ three-tier hierarchy:
                                      ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
 │ TIER 2: PHASES                                                          │
-│ Phase Specification (phase_spec.html)                                  │
+│ Phase Specification (phase_spec.html)                                   │
 │ Phase Validation (phase_validation.html)                                │
 │ Phase Summary (phase_summary.html)                                      │
 └────────────────────────────────────┬────────────────────────────────────┘
@@ -141,16 +141,16 @@ The work item domain defines 16 specialized document types distributed across th
 
 ### Tier 1: Work-Item Level Documents
 
-| # | Document Name                 | Target Filename                     | Format | Purpose & Canonical Specification                                                                                                                                                             |
-|:--|:------------------------------|:------------------------------------|:-------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1 | **Requirements**              | `00_requirements.html`              | XHTML  | Captures user stories, functional/non-functional goals (RFC 2119), acceptance checklists, and Q&A. <br/>- Detailed Spec: [`requirements.md`](requirements.md)                                 |
-| 2 | **Technical Design**          | `01_design_spec.html`               | XHTML  | Defines system architecture, schema models, API boundaries, micro-ADRs, and requirement traceability. <br/>- Detailed Spec: [`technical-design.md`](technical-design.md)                      |
-| 3 | **Implementation Plan**       | `02_implementation_plan.html`       | XHTML  | Details high-level multi-phase execution strategy, phase breakdowns, dependencies, and risk mitigations. <br/>- Detailed Spec: [`implementation-plan.md`](implementation-plan.md)             |
-| 4 | **Implementation Ledger**     | `03_implementation_ledger.json`     | JSON   | Serves as the central state machine, task dependency DAG, and file pointer registry for the work item. <br/>- Detailed Spec: [`work-item-ledger.md`](work-item-ledger.md)                     |
-| 5 | **Plan Validation**           | `03_plan_validation.html`           | XHTML  | Evaluates plan completeness, architectural soundness, security review, and execution readiness prior to coding. <br/>- Detailed Spec: [`plan-validation.md`](plan-validation.md)              |
-| 6 | **Plan Summary**              | `04_plan_summary.html`              | XHTML  | Post-execution rollup synthesizing overall duration, milestone achievements, completed phases/tasks, and final verdict. <br/>- Detailed Spec: [`plan-summary.md`](plan-summary.md)            |
-| 7 | **Plan Conversation Summary** | `05_plan_conversation_summary.html` | XHTML  | Distills key agentic LLM dialogue, architectural decisions, and alternatives debated during planning. <br/>- Detailed Spec: [`plan-conversation-summary.md`](plan-conversation-summary.md)    |
-| 8 | **Plan Conversation Metrics** | `06_plan_conversation_metrics.json` | JSON   | Captures aggregated token consumption, model latencies, tool invocations, and API costs during planning. <br/>- Detailed Spec: [`plan-conversation-metrics.md`](plan-conversation-metrics.md) |
+| # | Document Name                 | Target Filename                     | Format | Purpose & Canonical Specification                                                                                                                                                                 |
+|:--|:------------------------------|:------------------------------------|:-------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1 | **Requirements**              | `00_requirements.html`              | XHTML  | Captures user stories, functional/non-functional goals (RFC 2119), acceptance checklists, and Q&A. <br/>- Detailed Spec: [`requirements.md`](requirements.md)                                     |
+| 2 | **Technical Design**          | `01_design_spec.html`               | XHTML  | Defines system architecture, schema models, API boundaries, micro-ADRs, AI components & tooling, and requirement traceability. <br/>- Detailed Spec: [`technical-design.md`](technical-design.md) |
+| 3 | **Implementation Plan**       | `02_implementation_plan.html`       | XHTML  | Details high-level multi-phase execution strategy, phase breakdowns, dependencies, and risk mitigations. <br/>- Detailed Spec: [`implementation-plan.md`](implementation-plan.md)                 |
+| 4 | **Implementation Ledger**     | `03_implementation_ledger.json`     | JSON   | Serves as the central state machine, task dependency DAG, and file pointer registry for the work item. <br/>- Detailed Spec: [`work-item-ledger.md`](work-item-ledger.md)                         |
+| 5 | **Plan Validation**           | `03_plan_validation.html`           | XHTML  | Evaluates plan completeness, architectural soundness, security review, and execution readiness prior to coding. <br/>- Detailed Spec: [`plan-validation.md`](plan-validation.md)                  |
+| 6 | **Plan Summary**              | `04_plan_summary.html`              | XHTML  | Post-execution rollup synthesizing overall duration, milestone achievements, completed phases/tasks, and final verdict. <br/>- Detailed Spec: [`plan-summary.md`](plan-summary.md)                |
+| 7 | **Plan Conversation Summary** | `05_plan_conversation_summary.html` | XHTML  | Distills key agentic LLM dialogue, architectural decisions, and alternatives debated during planning. <br/>- Detailed Spec: [`plan-conversation-summary.md`](plan-conversation-summary.md)        |
+| 8 | **Plan Conversation Metrics** | `06_plan_conversation_metrics.json` | JSON   | Captures aggregated token consumption, model latencies, tool invocations, and API costs during planning. <br/>- Detailed Spec: [`plan-conversation-metrics.md`](plan-conversation-metrics.md)     |
 
 ---
 

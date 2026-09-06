@@ -68,6 +68,7 @@ The user interface will be built using the Material Design 3 (M3) design system:
 - **Icons:** [Material Symbols Outlined](https://fonts.google.com/icons).
 - **Color Roles & Theming:** Standard M3 CSS custom properties (`--md-sys-color-surface`, `--md-sys-color-primary`,
   `--md-sys-color-outline`, etc.) with dark and light theme adaptability.
+- **Context7 Library ID:** `/material-components/material-web`
 
 ---
 
