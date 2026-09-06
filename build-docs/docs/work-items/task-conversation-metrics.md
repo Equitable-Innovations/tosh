@@ -103,14 +103,14 @@ Each task conversation metrics document resides directly inside its isolated tas
 - **File Name:** `metrics.json`
 - **Format:** Strict JSON (UTF-8, 2-space indentation).
 - **Paired Log:** Session turns captured in [
-  `conversation.jsonl`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-conversation.md).
+  `conversation.jsonl`](task-conversation.md).
 - **Paired Documents:**
     - Instructions: [
-      `task_spec.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-specification.md)
+      `task_spec.html`](task-specification.md)
     - Verification: [
-      `validation.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-validation.md)
-    - Diff: [task.diff](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-diff.md)
-    - Outcome: [`summary.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-summary.md)
+      `validation.html`](task-validation.md)
+    - Diff: [task.diff](task-diff.md)
+    - Outcome: [`summary.html`](task-summary.md)
 
 ---
 
@@ -674,12 +674,12 @@ graph TD
 - **Direct Ledger Sync:** Upon task completion, `tosh` writes the task's execution duration, token count, and USD cost
   directly into `phases[].tasks[].metrics` of
   [
-  `03_implementation_ledger.json`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/work-item-ledger.md).
+  `03_implementation_ledger.json`](work-item-ledger.md).
 - **Phase Milestone Rollup:** [
-  `phase_summary.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/phase-summary.md)
+  `phase_summary.html`](phase-summary.md)
   aggregates all task `metrics.json` records to report cumulative phase tokens, cache hit rates, and total cost.
 - **Root Rollup:** [
-  `04_plan_summary.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/plan-summary.md)
+  `04_plan_summary.html`](plan-summary.md)
   computes the global project metrics rollup across all phases.
 
 ---
@@ -688,7 +688,7 @@ graph TD
 
 1. **Deterministic Verification:** Every completed task must record passing test assertions (`testAssertionsPassed > 0`,
    `testAssertionsFailed == 0`) from
-   [`validation.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-validation.md).
+   [`validation.html`](task-validation.md).
 2. **Zero Boundary Violations:** `boundaryViolationsCount` must be strictly `0`. Any write to a file outside
    `targetFiles` or listed in "do not touch" halts task promotion.
 3. **Atomic Generation:** `metrics.json` is generated deterministically by the harness from `conversation.jsonl` upon

@@ -6,9 +6,9 @@ exhaustive verification criteria, test suites, deterministic command assertions,
 validated in order for the work item's code implementation to be certified as 100% complete and ready for pull request
 merge.
 
-While [`00_requirements.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/requirements.md)
+While [`00_requirements.html`](requirements.md)
 defines *what* business goals and acceptance criteria must be achieved, and [
-`02_implementation_plan.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/implementation-plan.md)
+`02_implementation_plan.html`](implementation-plan.md)
 defines *how* the execution is partitioned into milestones, `03_plan_validation.html` defines *how the implemented code
 will be proven correct*. It guarantees that code delivery is not subjective, but verified through deterministic
 commands, test pyramids, non-functional quality gates, edge-case validations, and explicit manual sign-offs.
@@ -23,12 +23,12 @@ commands, test pyramids, non-functional quality gates, edge-case validations, an
 2. **Execution Completion Stage (Final Completion Gate & Roll-up Audit):** Progressively updated as phases complete, and
    finalized once all phases finish. It executes work-item-wide end-to-end suites, audits the rollup of all Tier 2 Phase
    Validations ([
-   `phase_validation.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/phase-validation.md))
+   `phase_validation.html`](phase-validation.md))
    and Tier 3 Task Validations ([
-   `validation.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-validation.md)), verifies
+   `validation.html`](task-validation.md)), verifies
    acceptance criteria fulfillment, records manual sign-offs, and renders the authoritative completion verdict (`pass` |
    `fail` | `warn`) authorizing [
-   `04_plan_summary.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/plan-summary.md)
+   `04_plan_summary.html`](plan-summary.md)
    generation and pull request submission.
 
 This document fulfills a dual-purpose consumption model:
@@ -40,7 +40,7 @@ This document fulfills a dual-purpose consumption model:
 2. **Agent / Harness Interface (Machine Parseable):** Serves as a deterministic, structured XML document queryable via
    XPath and the `tosh` CLI. The harness mechanically enforces this document as a hard gate: worker agents cannot
    proceed to coding if the pre-execution plan validation fails, and the work item cannot reach `completed` status in [
-   `03_implementation_ledger.json`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/work-item-ledger.md)
+   `03_implementation_ledger.json`](work-item-ledger.md)
    until the final completion validation verdict is `pass`.
 
 ---
@@ -113,17 +113,17 @@ artifacts:
   the `tosh` CLI.
 - **Paired Artifacts:**
     - Requirements: [
-      `00_requirements.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/requirements.md)
+      `00_requirements.html`](requirements.md)
     - Technical Design: [
-      `01_design_spec.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/technical-design.md)
+      `01_design_spec.html`](technical-design.md)
     - Implementation Plan: [
-      `02_implementation_plan.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/implementation-plan.md)
+      `02_implementation_plan.html`](implementation-plan.md)
     - Implementation Ledger: [
-      `03_implementation_ledger.json`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/work-item-ledger.md)
+      `03_implementation_ledger.json`](work-item-ledger.md)
     - Phase Validations: `phases/{phase_id}/phase_validation.html`
     - Task Validations: `tasks/{task_id}/validation.html`
     - Execution Rollup: [
-      `04_plan_summary.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/plan-summary.md)
+      `04_plan_summary.html`](plan-summary.md)
 
 ---
 
@@ -223,8 +223,8 @@ Components (`md-*`), typography scale classes (`md-typescale-*`), and explicit d
 Anchors the document with the work item identification, validation stage badge (`pre-execution-spec` or
 `final-completion-verdict`), validation verdict chip (`pass`, `fail`, `warn`), test pass gauge, blocking issue counter,
 and navigation links back to [
-`00_requirements.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/requirements.md) and [
-`02_implementation_plan.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/implementation-plan.md).
+`00_requirements.html`](requirements.md) and [
+`02_implementation_plan.html`](implementation-plan.md).
 
 
 ### 3.2. Executive Validation Strategy & Completion Definition
@@ -235,13 +235,13 @@ complete" means for the work item:
 - **Definition of Done (DoD):** Explicit checklist of mandatory conditions that must be met before coding is certified
   complete:
     1. 100% of functional requirements and acceptance criteria in [
-       `00_requirements.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/requirements.md) pass
+       `00_requirements.html`](requirements.md) pass
        automated verification.
     2. All Tier 2 Phase Validations ([
-       `phase_validation.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/phase-validation.md))
+       `phase_validation.html`](phase-validation.md))
        report `validation-verdict="pass"` with zero blocking issues.
     3. All Tier 3 Task Validations ([
-       `validation.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-validation.md))
+       `validation.html`](task-validation.md))
        report `validation-verdict="pass"` and clean exit code `0`.
     4. Work-item-wide end-to-end integration and system test suite passes with zero regressions.
     5. Zero protected "do not touch" file boundaries violated.
@@ -253,7 +253,7 @@ complete" means for the work item:
 ### 3.3. Requirements & Acceptance Criteria Verification Matrix
 
 The authoritative 1:1 traceability registry mapping every requirement ID and acceptance criterion from [
-`00_requirements.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/requirements.md) to concrete
+`00_requirements.html`](requirements.md) to concrete
 verification commands, automated test assertions, and pass/fail evidence:
 
 - **Completeness Invariant:** If any requirement ID from `00_requirements.html` is absent from this matrix,
@@ -297,7 +297,7 @@ Verifies that the code meets architectural, security, and maintainability baseli
 ### 3.6. Edge Case, Negative & Boundary Verification
 
 Exhaustively records validation of the negative paths, error handling, adversarial inputs, and edge cases cataloged in [
-`02_implementation_plan.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/implementation-plan.md):
+`02_implementation_plan.html`](implementation-plan.md):
 
 | Edge Case ID | Category       | Scenario / Adversarial Input                   | Expected System Behavior                                         | Verifying Test Case                         | Verdict |
 |:-------------|:---------------|:-----------------------------------------------|:-----------------------------------------------------------------|:--------------------------------------------|:--------|
@@ -328,7 +328,7 @@ The formal gating verdict authorizing work item transitions, combined with the d
 
 - **Formal Verdict:** High-visibility chip or banner indicating:
     - `PASS`: All automated suites, quality gates, rollups, and manual items passed. Work item is authorized for [
-      `04_plan_summary.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/plan-summary.md)
+      `04_plan_summary.html`](plan-summary.md)
       generation and pull request creation.
     - `FAIL`: One or more blocking issues detected. The harness dispatches targeted remediation tasks back to worker
       agents.
@@ -411,7 +411,7 @@ graph TD
   phase validations roll up into `03_plan_validation.html`.
 - **Final Completion Gate:** Once all phases complete and work-item-wide E2E suites pass, `validation-verdict` is
   finalized as `pass`, authorizing [
-  `04_plan_summary.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/plan-summary.md)
+  `04_plan_summary.html`](plan-summary.md)
   generation.
 
 ---
@@ -419,7 +419,7 @@ graph TD
 ## 6. Rules & Constraints
 
 1. **100% Requirement Coverage Invariant:** Every single functional requirement and acceptance criterion defined in [
-   `00_requirements.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/requirements.md) must
+   `00_requirements.html`](requirements.md) must
    have a corresponding entry in the Requirements & Acceptance Criteria Verification Matrix. Zero unverified
    requirements are permitted.
 2. **Deterministic Command Execution:** All automated test entries must specify exact, runnable terminal commands with
@@ -436,7 +436,7 @@ graph TD
 6. **No Deliberative History:** In accordance with repository principles, the document must capture only the
    authoritative verification criteria, execution commands, and factual outcomes. Deliberative debate belongs
    exclusively in [
-   `05_plan_conversation_summary.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/plan-conversation-summary.md).
+   `05_plan_conversation_summary.html`](plan-conversation-summary.md).
 
 ---
 

@@ -217,9 +217,9 @@ Links execution cost and latency telemetry:
 - **Tokens Used:** Prompt, completion, and cache tokens consumed.
 - **Estimated Cost:** API expenditure in USD.
 - **Telemetry Links:** Links to [
-  `task.diff`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-diff.md), [
-  `metrics.json`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-conversation-metrics.md),
-  and [`conversation.jsonl`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-conversation.md).
+  `task.diff`](task-diff.md), [
+  `metrics.json`](task-conversation-metrics.md),
+  and [`conversation.jsonl`](task-conversation.md).
 
 ---
 

@@ -4,14 +4,14 @@ The **Plan Conversation Summary Document** (`05_plan_conversation_summary.html`)
 post-planning narrative synthesis in the **Token Optimized Software Harness (`tosh`)** work item lifecycle. It distills
 the multi-agent LLM dialogue, architectural debates, trade-off analyses, and alignment rounds that produced the
 requirements ([
-`00_requirements.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/requirements.md)), technical
+`00_requirements.html`](requirements.md)), technical
 design ([
-`01_design_spec.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/technical-design.md)), and
+`01_design_spec.html`](technical-design.md)), and
 implementation roadmap ([
-`02_implementation_plan.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/implementation-plan.md)).
+`02_implementation_plan.html`](implementation-plan.md)).
 
 While [
-`06_plan_conversation_metrics.json`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/plan-conversation-metrics.md)
+`06_plan_conversation_metrics.json`](plan-conversation-metrics.md)
 captures granular turn-by-turn telemetry (token counts, latencies, tool execution arrays) and `plan_conversation.jsonl`
 preserves the raw interaction stream, `05_plan_conversation_summary.html` provides the human-readable, executive
 evaluation of planning efficacy. It synthesizes high-level telemetry, reviews conversational performance, identifies
@@ -38,7 +38,7 @@ In `tosh`, the plan conversation summary evaluates planning execution against th
 |:----------------|:--------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Context**     | Relies on tacit codebase conventions and tribal domain knowledge.                     | Needs explicit file paths, referenced patterns, and strict "do not touch" constraints.            | Audits context retrieval precision and repository exploration during planning, ensuring agents grounded their designs in real codebase facts without prompt bloat.                                                                                |
 | **Granularity** | Focuses on high-level patterns and architecture; details left to implementation time. | Requires atomic, single-responsibility sub-tasks with deterministic inputs/outputs.               | Evaluates whether multi-agent dialogue remained focused and progressive, avoiding circular debates or monolithic requirements in favor of atomic phase milestones.                                                                                |
-| **Validation**  | Manual PR review, local exploratory debugging, automated CI.                          | Explicit terminal commands with deterministic output parsing (lint, test, build) after each step. | Reviews the dialogue leading into pre-execution plan validation ([`03_plan_validation.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/plan-validation.md)), certifying that all gates passed on the first pass (FPSR). |
+| **Validation**  | Manual PR review, local exploratory debugging, automated CI.                          | Explicit terminal commands with deterministic output parsing (lint, test, build) after each step. | Reviews the dialogue leading into pre-execution plan validation ([`03_plan_validation.html`](plan-validation.md)), certifying that all gates passed on the first pass (FPSR). |
 | **Edge Cases**  | Usually caught through intuitive testing or code review cycles.                       | Must be exhaustively itemized upfront to prevent naive happy-path assumptions.                    | Documents how effectively conversational participants surfaced adversarial edge cases, schema boundary failures, and security risks during planning debates.                                                                                      |
 
 ---
@@ -101,15 +101,15 @@ artifacts:
   the `tosh` CLI.
 - **Paired Artifacts:**
     - Requirements: [
-      `00_requirements.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/requirements.md)
+      `00_requirements.html`](requirements.md)
     - Technical Design: [
-      `01_design_spec.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/technical-design.md)
+      `01_design_spec.html`](technical-design.md)
     - Implementation Roadmap: [
-      `02_implementation_plan.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/implementation-plan.md)
+      `02_implementation_plan.html`](implementation-plan.md)
     - Plan Validation Gate: [
-      `03_plan_validation.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/plan-validation.md)
+      `03_plan_validation.html`](plan-validation.md)
     - Comprehensive Telemetry: [
-      `06_plan_conversation_metrics.json`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/plan-conversation-metrics.md)
+      `06_plan_conversation_metrics.json`](plan-conversation-metrics.md)
     - Verbatim Transcript: `plan_conversation.jsonl` (or conversational session store)
 
 ---
@@ -201,9 +201,9 @@ Design 3 Web Components (`md-*`), typography scale classes (`md-typescale-*`), a
 
 Anchors the summary with work item identification, status chip (`completed`), conversation verdict chip (`approved`),
 duration badge, total tokens badge, financial expenditure badge, and quick navigation links back to [
-`02_implementation_plan.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/implementation-plan.md)
+`02_implementation_plan.html`](implementation-plan.md)
 and [
-`06_plan_conversation_metrics.json`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/plan-conversation-metrics.md).
+`06_plan_conversation_metrics.json`](plan-conversation-metrics.md).
 
 ### 3.2. Executive Planning Dialogue Synthesis & Decision Log
 
@@ -234,7 +234,7 @@ engineering roadmap:
 ### 3.3. High-Level Planning Telemetry & Metrics Rollup
 
 Presents an executive scorecard of planning economics, surfacing high-level KPIs linked directly to [
-`06_plan_conversation_metrics.json`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/plan-conversation-metrics.md):
+`06_plan_conversation_metrics.json`](plan-conversation-metrics.md):
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -359,10 +359,10 @@ recommendations to optimize the participating AI components for future work item
 Formal sign-off authorizing the transition from planning to execution:
 
 - **Plan Validation Confirmation:** [
-  `03_plan_validation.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/plan-validation.md)
+  `03_plan_validation.html`](plan-validation.md)
   verdict confirmed as `PASS`.
 - **Ledger Status:** [
-  `03_implementation_ledger.json`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/work-item-ledger.md)
+  `03_implementation_ledger.json`](work-item-ledger.md)
   updated to `status: "in_progress"`.
 - **Phase 1 Activation:** Phase `phase_01_database_migration` authorized for immediate worker agent activation.
 
@@ -420,13 +420,13 @@ graph TD
 ```
 
 - **Ledger Pointer:** Referenced in [
-  `03_implementation_ledger.json`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/work-item-ledger.md)
+  `03_implementation_ledger.json`](work-item-ledger.md)
   under root work item metadata.
 - **Summary Link:** Cited in [
-  `04_plan_summary.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/plan-summary.md) as the
+  `04_plan_summary.html`](plan-summary.md) as the
   authoritative planning post-mortem.
 - **Metrics Pairing:** Binds bi-directionally with [
-  `06_plan_conversation_metrics.json`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/plan-conversation-metrics.md).
+  `06_plan_conversation_metrics.json`](plan-conversation-metrics.md).
 
 ---
 
@@ -436,7 +436,7 @@ graph TD
    recorded in `plan_conversation.jsonl`; agents must not invent unrecorded consensus.
 2. **Strict Metrics Alignment:** High-level token counts, duration, costs, and cache hit percentages cited in
    `05_plan_conversation_summary.html` must match the numerical data in [
-   `06_plan_conversation_metrics.json`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/plan-conversation-metrics.md)
+   `06_plan_conversation_metrics.json`](plan-conversation-metrics.md)
    exactly.
 3. **Mandatory AI Improvements Section:** Every plan conversation summary must include actionable recommendations for
    improving AI components (model routing, prompts, skills, tools, cache).

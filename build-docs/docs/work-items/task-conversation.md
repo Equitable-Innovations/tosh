@@ -22,7 +22,7 @@ This document serves a dual purpose:
    streamable format.
 2. **Agent / Harness Interface:** Serves as the machine-parseable event stream from which the harness deterministically
    derives [
-   `metrics.json`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-conversation-metrics.md),
+   `metrics.json`](task-conversation-metrics.md),
    validates boundary compliance, and feeds downstream dataset generators.
 
 ---
@@ -88,11 +88,11 @@ validation, summary, and telemetry documents:
 - **Lifecycle Scope:** Initiated when the task is activated (`status: "in-progress"`) and closed when validation passes
   and `summary.html` is committed.
 - **Paired Artifacts:**
-    - Instructions: [`task_spec.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-specification.md)
-    - Verification Evidence: [`validation.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-validation.md)
-    - Diff: [task.diff](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-diff.md) 
-    - Commit Summary: [`summary.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-summary.md)
-    - Aggregated Telemetry: [`metrics.json`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-conversation-metrics.md)
+    - Instructions: [`task_spec.html`](task-specification.md)
+    - Verification Evidence: [`validation.html`](task-validation.md)
+    - Diff: [task.diff](task-diff.md) 
+    - Commit Summary: [`summary.html`](task-summary.md)
+    - Aggregated Telemetry: [`metrics.json`](task-conversation-metrics.md)
 
 ---
 
@@ -560,7 +560,7 @@ graph TD
 - **Ledger Pointer:** Registered in `03_implementation_ledger.json` under
   `phases[].tasks[].paths.conversation` (`phases/{phase}/tasks/{task}/conversation.jsonl`).
 - **Telemetry Derivation:** [
-  `metrics.json`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-conversation-metrics.md)
+  `metrics.json`](task-conversation-metrics.md)
   is deterministically compiled from `conversation.jsonl` upon task completion.
 - **Audit Lineage:** Cited in `summary.html` and `validation.html` as the authoritative execution transcript.
 
