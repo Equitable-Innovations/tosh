@@ -158,7 +158,7 @@ The work item domain defines 16 specialized document types distributed across th
 
 | #  | Document Name           | Target Filename                           | Format | Purpose & Canonical Specification                                                                                                                                                   |
 |:---|:------------------------|:------------------------------------------|:-------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 9  | **Phase Specification** | `phases/{phase_id}/phase_spec.html`       | XHTML  | Details the boundaries, prerequisites, sequential task manifest, and blocking criteria for a specific phase. <br/>- Detailed Spec: [`plan-specification.md`](plan-specification.md) |
+| 9  | **Phase Specification** | `phases/{phase_id}/phase_spec.html`       | XHTML  | Details the boundaries, prerequisites, sequential task manifest, and blocking criteria for a specific phase. <br/>- Detailed Spec: [`phase-specification.md`](phase-specification.md) |
 | 10 | **Phase Validation**    | `phases/{phase_id}/phase_validation.html` | XHTML  | Evaluates integration test results, cross-task deliverables, and gating criteria across all tasks in the phase. <br/>- Detailed Spec: [`phase-validation.md`](phase-validation.md)  |
 | 11 | **Phase Summary**       | `phases/{phase_id}/phase_summary.html`    | XHTML  | Synthesizes execution outcomes, duration, git commit links, and roll-up metrics for a completed phase. <br/>- Detailed Spec: [`phase-summary.md`](phase-summary.md)                 |
 
