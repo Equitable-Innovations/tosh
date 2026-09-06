@@ -22,12 +22,12 @@ This document serves a dual purpose:
 
 In `tosh`, phase summaries evaluate milestone completion against the four foundational planning dimensions:
 
-| Plan Dimension | Human Engineer Focus | AI Coding Tool Focus | `tosh` Phase Summary Manifestation |
-|:---|:---|:---|:---|
-| **Context** | Relies on tacit codebase conventions and tribal domain knowledge. | Needs explicit file paths, referenced patterns, and strict "do not touch" constraints. | Aggregates all modified files across tasks, audits compliance against phase and global "do not touch" manifests, and captures git commit ranges. |
-| **Granularity** | Focuses on high-level patterns and architecture; details left to implementation time. | Requires atomic, single-responsibility sub-tasks with deterministic inputs/outputs. | Compiles an exhaustive task execution scorecard, verifying that each atomic sub-task completed cleanly without dangling or uncommitted changes. |
-| **Validation** | Manual PR review, local exploratory debugging, automated CI. | Explicit terminal commands with deterministic output parsing (lint, test, build) after each step. | Aggregates integration suite outcomes, test assertion tallies, coverage deltas, and cites the formal passing verdict from `phase_validation.html`. |
-| **Edge Cases** | Usually caught through intuitive testing or code review cycles. | Must be exhaustively itemized upfront to prevent naive happy-path assumptions. | Documents how phase-level boundary hazards, concurrency checks, and migration rollback tests were resolved across all sub-tasks. |
+| Plan Dimension  | Human Engineer Focus                                                                  | AI Coding Tool Focus                                                                              | `tosh` Phase Summary Manifestation                                                                                                                 |
+|:----------------|:--------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Context**     | Relies on tacit codebase conventions and tribal domain knowledge.                     | Needs explicit file paths, referenced patterns, and strict "do not touch" constraints.            | Aggregates all modified files across tasks, audits compliance against phase and global "do not touch" manifests, and captures git commit ranges.   |
+| **Granularity** | Focuses on high-level patterns and architecture; details left to implementation time. | Requires atomic, single-responsibility sub-tasks with deterministic inputs/outputs.               | Compiles an exhaustive task execution scorecard, verifying that each atomic sub-task completed cleanly without dangling or uncommitted changes.    |
+| **Validation**  | Manual PR review, local exploratory debugging, automated CI.                          | Explicit terminal commands with deterministic output parsing (lint, test, build) after each step. | Aggregates integration suite outcomes, test assertion tallies, coverage deltas, and cites the formal passing verdict from `phase_validation.html`. |
+| **Edge Cases**  | Usually caught through intuitive testing or code review cycles.                       | Must be exhaustively itemized upfront to prevent naive happy-path assumptions.                    | Documents how phase-level boundary hazards, concurrency checks, and migration rollback tests were resolved across all sub-tasks.                   |
 
 ---
 
@@ -80,6 +80,7 @@ Every `phase_summary.html` begins with universal baseline `<meta>` tags, phase o
 Material Web ES module importmap loader:
 
 ```xhtml
+
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -126,17 +127,17 @@ Material Web ES module importmap loader:
 
 ### Phase Summary Header Metadata Contracts
 
-| Metadata Tag | Scope | Purpose | Example |
-|:---|:---|:---|:---|
-| `phase-id` | Phase / Summary | Unique phase directory identifier | `phase_01_database_migration` |
-| `phase-sequence` | Phase / Summary | Numeric ordinal representing the milestone position | `1` |
-| `parent-doc-id` | Phase / Summary | Points to the parent Phase Specification `doc-id` | `WI-20260830T170936Z:P01:SPEC` |
-| `execution-duration-ms` | Phase / Summary | Total elapsed time for phase execution in milliseconds | `94500` |
-| `tasks-completed` | Phase / Summary | Count of successfully executed atomic tasks in the phase | `3` |
-| `tasks-failed` | Phase / Summary | Count of failed atomic tasks in the phase | `0` |
-| `phase-verdict` | Phase / Summary | Overall outcome evaluation of the completed phase | `success` \| `partial` \| `failed` |
-| `total-tokens` | Phase / Summary | Total tokens consumed across all tasks and verification in this phase | `24500` |
-| `total-cost-usd` | Phase / Summary | Total monetary cost in USD for LLM usage during this phase | `0.0735` |
+| Metadata Tag            | Scope           | Purpose                                                               | Example                            |
+|:------------------------|:----------------|:----------------------------------------------------------------------|:-----------------------------------|
+| `phase-id`              | Phase / Summary | Unique phase directory identifier                                     | `phase_01_database_migration`      |
+| `phase-sequence`        | Phase / Summary | Numeric ordinal representing the milestone position                   | `1`                                |
+| `parent-doc-id`         | Phase / Summary | Points to the parent Phase Specification `doc-id`                     | `WI-20260830T170936Z:P01:SPEC`     |
+| `execution-duration-ms` | Phase / Summary | Total elapsed time for phase execution in milliseconds                | `94500`                            |
+| `tasks-completed`       | Phase / Summary | Count of successfully executed atomic tasks in the phase              | `3`                                |
+| `tasks-failed`          | Phase / Summary | Count of failed atomic tasks in the phase                             | `0`                                |
+| `phase-verdict`         | Phase / Summary | Overall outcome evaluation of the completed phase                     | `success` \| `partial` \| `failed` |
+| `total-tokens`          | Phase / Summary | Total tokens consumed across all tasks and verification in this phase | `24500`                            |
+| `total-cost-usd`        | Phase / Summary | Total monetary cost in USD for LLM usage during this phase            | `0.0735`                           |
 
 ---
 
@@ -163,11 +164,11 @@ Executive summary of the completed engineering milestone:
 
 Comprehensive execution matrix rolling up all atomic tasks:
 
-| Task ID | Task Title | Category | Status | Duration | Tokens | Cost (USD) | Git Commit |
-|:---|:---|:---|:---|:---|:---|:---|:---|
-| `task_001_create_tables` | Create User & Token Tables | `database` | `completed` | 26.2s | 12,400 | $0.0372 | `a86d7c2` |
-| `task_002_seed_roles` | Seed Initial RBAC Roles | `database` | `completed` | 18.5s | 7,100 | $0.0213 | `d4f33e0` |
-| `task_003_verify_migration` | Verify Migration Suite | `test` | `completed` | 49.8s | 5,000 | $0.0150 | `1b0fd4a` |
+| Task ID                     | Task Title                 | Category   | Status      | Duration | Tokens | Cost (USD) | Git Commit |
+|:----------------------------|:---------------------------|:-----------|:------------|:---------|:-------|:-----------|:-----------|
+| `task_001_create_tables`    | Create User & Token Tables | `database` | `completed` | 26.2s    | 12,400 | $0.0372    | `a86d7c2`  |
+| `task_002_seed_roles`       | Seed Initial RBAC Roles    | `database` | `completed` | 18.5s    | 7,100  | $0.0213    | `d4f33e0`  |
+| `task_003_verify_migration` | Verify Migration Suite     | `test`     | `completed` | 49.8s    | 5,000  | $0.0150    | `1b0fd4a`  |
 
 - Enforces that zero tasks remain uncompleted or untracked.
 
@@ -175,11 +176,11 @@ Comprehensive execution matrix rolling up all atomic tasks:
 
 Aggregated file modifications across all tasks in the phase:
 
-| File Path | Change Type | Net Lines | Participating Tasks |
-|:---|:---|:---|:---|
-| `src/main/resources/db/migration/V1__init_auth.sql` | `CREATED` | +48 / -0 | `task_001` |
-| `src/main/resources/db/migration/V2__seed_roles.sql` | `CREATED` | +32 / -0 | `task_002` |
-| `src/test/java/com/app/AuthMigrationIT.java` | `CREATED` | +115 / -0 | `task_003` |
+| File Path                                            | Change Type | Net Lines | Participating Tasks |
+|:-----------------------------------------------------|:------------|:----------|:--------------------|
+| `src/main/resources/db/migration/V1__init_auth.sql`  | `CREATED`   | +48 / -0  | `task_001`          |
+| `src/main/resources/db/migration/V2__seed_roles.sql` | `CREATED`   | +32 / -0  | `task_002`          |
+| `src/test/java/com/app/AuthMigrationIT.java`         | `CREATED`   | +115 / -0 | `task_003`          |
 
 ### 3.5. Phase Integration & Validation Gate Rollup
 
@@ -244,6 +245,6 @@ Downstream planning agents, work item summary authoring routines, and CLI inspec
 
 ## 5. Revisions
 
-| Date | Version | Description | Source |
-|:---|:---|:---|:---|
-| 2026-09-06 | 0.1.0 | Initial canonical phase summary specification (`phase_summary.html`) establishing milestone scorecards, file touchpoint aggregation, boundary audits, telemetry rollups, and XPath queries. | [Work Item Documents](README.md) |
+| Date       | Version | Description                                                                                                                                                                                 | Source                           |
+|:-----------|:--------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------|
+| 2026-09-06 | 0.1.0   | Initial canonical phase summary specification (`phase_summary.html`) establishing milestone scorecards, file touchpoint aggregation, boundary audits, telemetry rollups, and XPath queries. | [Work Item Documents](README.md) |

@@ -44,7 +44,7 @@ directory and README under `build-docs/docs/`:
 
 | Domain         | Directory                     | Status                                                                                   |
 |----------------|-------------------------------|------------------------------------------------------------------------------------------|
-| Work Items     | `build-docs/docs/work-items/` | Complete (17 specs) — the reference example for depth/format                             |
+| Work Items     | `build-docs/docs/work-items/` | Complete (18 specs) — the reference example for depth/format                             |
 | Project Wiki   | `build-docs/docs/wiki/`       | Pending ideation ([TOPIC-002](topics/TOPIC-002-wiki-documents-domain-definition.md))     |
 | SDK & Code API | `build-docs/docs/sdk-api/`    | Pending ideation ([TOPIC-004](topics/TOPIC-004-sdk-api-documents-domain-definition.md))  |
 | OpenAPI        | `build-docs/docs/open-api/`   | In discussion ([TOPIC-003](topics/TOPIC-003-openapi-documents-rendering-and-storage.md)) |

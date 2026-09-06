@@ -22,12 +22,12 @@ This document serves a dual purpose:
 
 In `tosh`, task summaries document execution compliance against the four foundational planning dimensions:
 
-| Plan Dimension | Human Engineer Focus | AI Coding Tool Focus | `tosh` Task Summary Manifestation |
-|:---|:---|:---|:---|
-| **Context** | Relies on tacit codebase conventions and tribal domain knowledge. | Needs explicit file paths, referenced patterns, and strict "do not touch" constraints. | Formally catalogs the exact files created, modified, and deleted, verifying zero unauthorized changes to protected or "do not touch" files. |
-| **Granularity** | Focuses on high-level patterns and architecture; details left to implementation time. | Requires atomic, single-responsibility sub-tasks with deterministic inputs/outputs. | Isolates code changes and git diff metrics strictly to the atomic task's bounded responsibility, ensuring no cross-task scope pollution. |
-| **Validation** | Manual PR review, local exploratory debugging, automated CI. | Explicit terminal commands with deterministic output parsing (lint, test, build) after each step. | Surfaces deterministic verification evidence: process exit codes, test pass rates, lint compliance, and automated test coverage deltas. |
-| **Edge Cases** | Usually caught through intuitive testing or code review cycles. | Must be exhaustively itemized upfront to prevent naive happy-path assumptions. | Audits execution against the upfront edge case catalog (`EC-###`), verifying that all negative scenarios and boundary tests were satisfied. |
+| Plan Dimension  | Human Engineer Focus                                                                  | AI Coding Tool Focus                                                                              | `tosh` Task Summary Manifestation                                                                                                           |
+|:----------------|:--------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------|
+| **Context**     | Relies on tacit codebase conventions and tribal domain knowledge.                     | Needs explicit file paths, referenced patterns, and strict "do not touch" constraints.            | Formally catalogs the exact files created, modified, and deleted, verifying zero unauthorized changes to protected or "do not touch" files. |
+| **Granularity** | Focuses on high-level patterns and architecture; details left to implementation time. | Requires atomic, single-responsibility sub-tasks with deterministic inputs/outputs.               | Isolates code changes and git diff metrics strictly to the atomic task's bounded responsibility, ensuring no cross-task scope pollution.    |
+| **Validation**  | Manual PR review, local exploratory debugging, automated CI.                          | Explicit terminal commands with deterministic output parsing (lint, test, build) after each step. | Surfaces deterministic verification evidence: process exit codes, test pass rates, lint compliance, and automated test coverage deltas.     |
+| **Edge Cases**  | Usually caught through intuitive testing or code review cycles.                       | Must be exhaustively itemized upfront to prevent naive happy-path assumptions.                    | Audits execution against the upfront edge case catalog (`EC-###`), verifying that all negative scenarios and boundary tests were satisfied. |
 
 ---
 
@@ -64,6 +64,7 @@ validation documents:
                     └── task_{NNN}_{task_slug}/
                         ├── task_spec.html          # Task Instructions & Boundaries
                         ├── validation.html         # Test Execution & Verification Record
+                        ├── task.diff               # Authoritative Task Diff
                         ├── summary.html            # Authoritative Task Output & Diffs
                         ├── conversation.jsonl      # Agent Interaction Log
                         └── metrics.json            # Token & Latency Telemetry
@@ -83,6 +84,7 @@ Every `summary.html` begins with universal baseline `<meta>` tags, task outcome 
 ES module importmap loader:
 
 ```xhtml
+
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -106,6 +108,7 @@ ES module importmap loader:
     <meta name="files-created" content="src/main/resources/db/migration/V1__init_auth.sql"/>
     <meta name="files-modified" content=""/>
     <meta name="commit-hash" content="a86d7c2ca972b77f0e540ed6a84d395c6647dd6d"/>
+    <meta name="diff-ref" content="task.diff"/>
     <meta name="metrics-ref" content="metrics.json"/>
     <meta name="conversation-ref" content="conversation.jsonl"/>
 
@@ -130,18 +133,19 @@ ES module importmap loader:
 
 ### Task Summary Header Metadata Contracts
 
-| Metadata Tag | Scope | Purpose | Example |
-|:---|:---|:---|:---|
-| `task-id` | Task / Summary | Unique task directory identifier | `task_001_create_tables` |
-| `phase-id` | Task / Summary | Parent phase directory identifier | `phase_01_database_migration` |
-| `parent-doc-id` | Task / Summary | Points to the parent Task Specification `doc-id` | `WI-20260830T170936Z:P01:T001:SPEC` |
-| `task-verdict` | Task / Summary | Final outcome classification of task execution | `success` \| `failed` |
-| `execution-duration-ms` | Task / Summary | Total elapsed time for task execution in milliseconds | `26200` |
-| `files-created` | Task / Summary | Comma-delimited relative paths of new source files | `src/db/V1__init.sql` |
-| `files-modified` | Task / Summary | Comma-delimited relative paths of edited source files | `src/app/User.java` |
-| `commit-hash` | Task / Summary | Git commit SHA containing the atomic task code changes | `a86d7c2ca972b77f...` |
-| `metrics-ref` | Task / Summary | Relative path pointer to the task's token metrics JSON | `metrics.json` |
-| `conversation-ref` | Task / Summary | Relative path pointer to the task's conversation JSONL | `conversation.jsonl` |
+| Metadata Tag            | Scope          | Purpose                                                | Example                             |
+|:------------------------|:---------------|:-------------------------------------------------------|:------------------------------------|
+| `task-id`               | Task / Summary | Unique task directory identifier                       | `task_001_create_tables`            |
+| `phase-id`              | Task / Summary | Parent phase directory identifier                      | `phase_01_database_migration`       |
+| `parent-doc-id`         | Task / Summary | Points to the parent Task Specification `doc-id`       | `WI-20260830T170936Z:P01:T001:SPEC` |
+| `task-verdict`          | Task / Summary | Final outcome classification of task execution         | `success` \| `failed`               |
+| `execution-duration-ms` | Task / Summary | Total elapsed time for task execution in milliseconds  | `26200`                             |
+| `files-created`         | Task / Summary | Comma-delimited relative paths of new source files     | `src/db/V1__init.sql`               |
+| `files-modified`        | Task / Summary | Comma-delimited relative paths of edited source files  | `src/app/User.java`                 |
+| `commit-hash`           | Task / Summary | Git commit SHA containing the atomic task code changes | `a86d7c2ca972b77f...`               |
+| `diff-ref`              | Task / Summary | Relative path pointer to the task's unified diff patch | `task.diff`                         |
+| `metrics-ref`           | Task / Summary | Relative path pointer to the task's token metrics JSON | `metrics.json`                      |
+| `conversation-ref`      | Task / Summary | Relative path pointer to the task's conversation JSONL | `conversation.jsonl`                |
 
 ---
 
@@ -168,10 +172,10 @@ Executive summary of the completed atomic work:
 
 Granular breakdown of source code modifications:
 
-| File Path | Change Type | Lines Added | Lines Deleted | Net Delta | Language |
-|:---|:---|:---|:---|:---|:---|
-| `src/main/resources/db/migration/V1__init_auth.sql` | `CREATED` | +48 | -0 | +48 | SQL |
-| `src/test/resources/fixtures/auth_seed.sql` | `MODIFIED` | +12 | -2 | +10 | SQL |
+| File Path                                           | Change Type | Lines Added | Lines Deleted | Net Delta | Language |
+|:----------------------------------------------------|:------------|:------------|:--------------|:----------|:---------|
+| `src/main/resources/db/migration/V1__init_auth.sql` | `CREATED`   | +48         | -0            | +48       | SQL      |
+| `src/test/resources/fixtures/auth_seed.sql`         | `MODIFIED`  | +12         | -2            | +10       | SQL      |
 
 - **Diff View:** Syntax-highlighted unified diff snippets illustrating key structural modifications.
 
@@ -180,7 +184,8 @@ Granular breakdown of source code modifications:
 Records the version control metadata for the change:
 
 - **Git Commit Hash:** Full 40-character SHA and short hash.
-- **Commit Message:** Formatted commit message adhering to project commit standards (e.g., `feat(auth): add users and refresh_tokens migration`).
+- **Commit Message:** Formatted commit message adhering to project commit standards (e.g.,
+  `feat(auth): add users and refresh_tokens migration`).
 - **Working Tree Cleanliness:** Assertion that the git working tree was left clean after the commit.
 
 ### 3.5. Verification & Assertion Rollup
@@ -211,7 +216,10 @@ Links execution cost and latency telemetry:
 - **Duration:** Wall-clock execution time in milliseconds.
 - **Tokens Used:** Prompt, completion, and cache tokens consumed.
 - **Estimated Cost:** API expenditure in USD.
-- **Telemetry Links:** Links to [`metrics.json`](metrics.json) and [`conversation.jsonl`](conversation.jsonl).
+- **Telemetry Links:** Links to [
+  `task.diff`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-diff.md), [
+  `metrics.json`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-conversation-metrics.md),
+  and [`conversation.jsonl`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-conversation.md).
 
 ---
 
@@ -254,6 +262,7 @@ XPath:
 
 ## 5. Revisions
 
-| Date | Version | Description | Source |
-|:---|:---|:---|:---|
-| 2026-09-06 | 0.1.0 | Initial canonical task summary specification (`summary.html`) detailing the 4-dimension paradigm (context diffs, atomic boundaries, validation rollups, edge case satisfaction), git commit tracking, and XPath queries. | [Work Item Documents](README.md) |
+| Date       | Version | Description                                                                                                                                                                                                              | Source                           |
+|:-----------|:--------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------|
+| 2026-09-06 | 0.2.0   | Integrated `task.diff` reference in file structure, metadata header (`diff-ref`), and artifact links.                                                                                                                    | [Work Item Documents](README.md) |
+| 2026-09-06 | 0.1.0   | Initial canonical task summary specification (`summary.html`) detailing the 4-dimension paradigm (context diffs, atomic boundaries, validation rollups, edge case satisfaction), git commit tracking, and XPath queries. | [Work Item Documents](README.md) |

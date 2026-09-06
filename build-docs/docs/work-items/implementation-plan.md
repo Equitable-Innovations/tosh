@@ -1,7 +1,7 @@
 # Implementation Plan Document Definition
 
-The Implementation Plan (`02_implementation_plan.html`) is the authoritative Tier 1 multi-phase execution roadmap in
-the `tosh` work item lifecycle. It bridges the architectural specifications established in the Technical Design Document
+The Implementation Plan (`02_implementation_plan.html`) is the authoritative Tier 1 multi-phase execution roadmap in the
+`tosh` work item lifecycle. It bridges the architectural specifications established in the Technical Design Document
 (`01_design_spec.html`) and the concrete, executable phase specifications (`phases/{phase_id}/phase_spec.html`).
 
 This document defines the high-level engineering strategy, decomposes complex initiatives into ordered milestones
@@ -11,7 +11,8 @@ criteria for downstream agent execution.
 This document serves a dual purpose:
 
 1. **Human Interface:** Renders as a local, fully interactive, static XHTML web page utilizing Material Design 3 Web
-   Components (`@material/web` / **M3**) and inline roadmap diagrams without requiring client-side bundlers or build steps.
+   Components (`@material/web` / **M3**) and inline roadmap diagrams without requiring client-side bundlers or build
+   steps.
 2. **Agent / Harness Interface:** Serves as a deterministic, structured XML document queryable via XPath and the `tosh`
    CLI for token-efficient planning, DAG scheduling, and phase orchestration.
 
@@ -22,12 +23,12 @@ This document serves a dual purpose:
 In `tosh`, implementation planning explicitly bridges the gap between human engineering conventions and AI agent
 execution requirements across four critical dimensions:
 
-| Plan Dimension | Human Engineer Focus | AI Coding Tool Focus | `tosh` Implementation Plan Manifestation |
-|:---|:---|:---|:---|
-| **Context** | Relies on tacit codebase conventions and tribal domain knowledge. | Needs explicit file paths, referenced patterns, and strict "do not touch" constraints. | Formally catalogs all target architectural boundaries, links concrete pattern examples, and declares repo-wide protected file paths. |
-| **Granularity** | Focuses on high-level patterns and architecture; details left to implementation time. | Requires atomic, single-responsibility sub-tasks with deterministic inputs/outputs. | Partitions the roadmap into cohesive phases with bounded scope, explicit DAG dependencies, and atomic task count estimates. |
-| **Validation** | Manual PR review, local exploratory debugging, automated CI. | Explicit terminal commands with deterministic output parsing (lint, test, build) after each step. | Mandates pre-execution plan validation gates and establishes phase-level automated test verification command suites. |
-| **Edge Cases** | Usually caught through intuitive testing or code review cycles. | Must be exhaustively itemized upfront to prevent naive happy-path assumptions. | Pre-defines an exhaustive risk, failure-mode, and rollback matrix that downstream phases and tasks must implement. |
+| Plan Dimension  | Human Engineer Focus                                                                  | AI Coding Tool Focus                                                                              | `tosh` Implementation Plan Manifestation                                                                                             |
+|:----------------|:--------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------|
+| **Context**     | Relies on tacit codebase conventions and tribal domain knowledge.                     | Needs explicit file paths, referenced patterns, and strict "do not touch" constraints.            | Formally catalogs all target architectural boundaries, links concrete pattern examples, and declares repo-wide protected file paths. |
+| **Granularity** | Focuses on high-level patterns and architecture; details left to implementation time. | Requires atomic, single-responsibility sub-tasks with deterministic inputs/outputs.               | Partitions the roadmap into cohesive phases with bounded scope, explicit DAG dependencies, and atomic task count estimates.          |
+| **Validation**  | Manual PR review, local exploratory debugging, automated CI.                          | Explicit terminal commands with deterministic output parsing (lint, test, build) after each step. | Mandates pre-execution plan validation gates and establishes phase-level automated test verification command suites.                 |
+| **Edge Cases**  | Usually caught through intuitive testing or code review cycles.                       | Must be exhaustively itemized upfront to prevent naive happy-path assumptions.                    | Pre-defines an exhaustive risk, failure-mode, and rollback matrix that downstream phases and tasks must implement.                   |
 
 ---
 
@@ -40,7 +41,8 @@ execution requirements across four critical dimensions:
     - 3.2. [Execution Philosophy & Dimension Manifesto](#32-execution-philosophy--dimension-manifesto)
     - 3.3. [Phase Breakdown & Milestone Roadmap](#33-phase-breakdown--milestone-roadmap)
     - 3.4. [Dependency Graph & Critical Path Analysis](#34-dependency-graph--critical-path-analysis)
-    - 3.5. [Global "Do Not Touch" Constraints & Protected Boundaries](#35-global-do-not-touch-constraints--protected-boundaries)
+    -
+    3.5. [Global "Do Not Touch" Constraints & Protected Boundaries](#35-global-do-not-touch-constraints--protected-boundaries)
     - 3.6. [Exhaustive Risk, Failure-Mode & Edge Case Catalog](#36-exhaustive-risk-failure-mode--edge-case-catalog)
     - 3.7. [Phase Verification Gating & Orchestration Strategy](#37-phase-verification-gating--orchestration-strategy)
 4. [Token Optimization & XPath Query Patterns](#4-token-optimization--xpath-query-patterns)
@@ -76,6 +78,7 @@ Every `02_implementation_plan.html` begins with universal baseline `<meta>` tags
 tags, phase metrics, and the Material Web ES module importmap loader:
 
 ```xhtml
+
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -120,15 +123,15 @@ tags, phase metrics, and the Material Web ES module importmap loader:
 
 ### Implementation Plan Header Metadata Contracts
 
-| Metadata Tag | Scope | Purpose | Example |
-|:---|:---|:---|:---|
-| `parent-doc-id` | Work Item / Plan | Points to the parent Technical Design Specification `doc-id` | `WI-20260830T170936Z:01:DESIGN` |
-| `implements-req` | Work Item / Plan | Comma-delimited list of requirement IDs covered by this plan | `REQ-001,REQ-002,REQ-003` |
-| `total-phases` | Work Item / Plan | Total count of planned execution phases | `3` |
-| `estimated-task-count` | Work Item / Plan | Total projected atomic tasks across all phases | `9` |
-| `ledger-path` | Work Item / Plan | Relative path to the central state ledger | `03_implementation_ledger.json` |
-| `assigned-agents` | Work Item / Plan | Agent roles utilized across the plan execution | `agent:backend-engineer,agent:database-specialist` |
-| `required-skills` | Work Item / Plan | Skill packages required by participating agents | `skill:spring-boot-jwt-auth` |
+| Metadata Tag           | Scope            | Purpose                                                      | Example                                            |
+|:-----------------------|:-----------------|:-------------------------------------------------------------|:---------------------------------------------------|
+| `parent-doc-id`        | Work Item / Plan | Points to the parent Technical Design Specification `doc-id` | `WI-20260830T170936Z:01:DESIGN`                    |
+| `implements-req`       | Work Item / Plan | Comma-delimited list of requirement IDs covered by this plan | `REQ-001,REQ-002,REQ-003`                          |
+| `total-phases`         | Work Item / Plan | Total count of planned execution phases                      | `3`                                                |
+| `estimated-task-count` | Work Item / Plan | Total projected atomic tasks across all phases               | `9`                                                |
+| `ledger-path`          | Work Item / Plan | Relative path to the central state ledger                    | `03_implementation_ledger.json`                    |
+| `assigned-agents`      | Work Item / Plan | Agent roles utilized across the plan execution               | `agent:backend-engineer,agent:database-specialist` |
+| `required-skills`      | Work Item / Plan | Skill packages required by participating agents              | `skill:spring-boot-jwt-auth`                       |
 
 ---
 
@@ -148,8 +151,8 @@ estimated task count, and parent technical design link.
 Sets the operational paradigm for executing agents and human reviewers. Explicitly articulates how the four plan
 dimensions are enforced:
 
-- **Context Enforcement:** All tasks must be furnished with exact file paths and referenced patterns rather than
-  relying on tacit conventions.
+- **Context Enforcement:** All tasks must be furnished with exact file paths and referenced patterns rather than relying
+  on tacit conventions.
 - **Granularity Enforcement:** Phase tasks must remain atomic and single-responsibility with deterministic
   inputs/outputs.
 - **Validation Rigor:** Every stage must be verified via explicit terminal commands with deterministic output parsing.
@@ -191,7 +194,8 @@ Pre-empts naive happy-path execution by cataloging potential failure modes acros
 
 - **Data Integrity & Migration Risks:** Potential data loss, migration failures, or schema locking during deployment.
 - **System Concurrency & Race Conditions:** Hazards under parallel worker execution or high-throughput usage.
-- **Agent Drift & Hallucination Vectors:** Code areas prone to subtle syntax or semantic drift, with mandatory guardrails.
+- **Agent Drift & Hallucination Vectors:** Code areas prone to subtle syntax or semantic drift, with mandatory
+  guardrails.
 - **Rollback & Recovery Procedures:** Explicit step-by-step remediation scripts if a phase fails validation.
 
 ### 3.7. Phase Verification Gating & Orchestration Strategy
@@ -199,7 +203,8 @@ Pre-empts naive happy-path execution by cataloging potential failure modes acros
 Defines the universal verification gating mechanism that governs phase transitions:
 
 - **Pre-Execution Plan Validation:** Requirements for `03_plan_validation.html` before any code modification starts.
-- **Phase Gate Invariants:** Mandatory conditions (100% task completion, passing `phase_validation.html`, 0 failing tests)
+- **Phase Gate Invariants:** Mandatory conditions (100% task completion, passing `phase_validation.html`, 0 failing
+  tests)
   required before Phase $N+1$ unlocks in `03_implementation_ledger.json`.
 - **Automated Verification Harness:** Orchestration commands executed by the test harness between phases.
 
@@ -244,6 +249,6 @@ expressions without ingesting the full document:
 
 ## 5. Revisions
 
-| Date | Version | Description | Source |
-|:---|:---|:---|:---|
-| 2026-09-06 | 0.1.0 | Initial canonical implementation plan specification (`02_implementation_plan.html`) establishing the 4-dimension planning paradigm (Context, Granularity, Validation, Edge Cases), milestone roadmap, global constraints, and XPath extraction patterns. | [Work Item Documents](README.md) |
+| Date       | Version | Description                                                                                                                                                                                                                                              | Source                           |
+|:-----------|:--------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------|
+| 2026-09-06 | 0.1.0   | Initial canonical implementation plan specification (`02_implementation_plan.html`) establishing the 4-dimension planning paradigm (Context, Granularity, Validation, Edge Cases), milestone roadmap, global constraints, and XPath extraction patterns. | [Work Item Documents](README.md) |

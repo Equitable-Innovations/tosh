@@ -23,12 +23,12 @@ This document serves a dual purpose:
 
 In `tosh`, the plan summary validates the entire implementation against the four foundational planning dimensions:
 
-| Plan Dimension | Human Engineer Focus | AI Coding Tool Focus | `tosh` Plan Summary Manifestation |
-|:---|:---|:---|:---|
-| **Context** | Relies on tacit codebase conventions and tribal domain knowledge. | Needs explicit file paths, referenced patterns, and strict "do not touch" constraints. | Catalogs the comprehensive repository file diff, audits repo-wide "do not touch" boundary compliance, and records branch/PR metadata. |
-| **Granularity** | Focuses on high-level patterns and architecture; details left to implementation time. | Requires atomic, single-responsibility sub-tasks with deterministic inputs/outputs. | Synthesizes milestone achievements while maintaining drill-down lineage to every atomic task, commit, and conversation transcript. |
-| **Validation** | Manual PR review, local exploratory debugging, automated CI. | Explicit terminal commands with deterministic output parsing (lint, test, build) after each step. | Aggregates full-lifecycle verification evidence: pre-execution plan validation, all passing phase gates, regression suites, and 0 failing tests. |
-| **Edge Cases** | Usually caught through intuitive testing or code review cycles. | Must be exhaustively itemized upfront to prevent naive happy-path assumptions. | Provides a post-mortem audit confirming that all upfront risks, boundary edge cases, and failure modes cataloged in the plan were satisfied. |
+| Plan Dimension  | Human Engineer Focus                                                                  | AI Coding Tool Focus                                                                              | `tosh` Plan Summary Manifestation                                                                                                                |
+|:----------------|:--------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Context**     | Relies on tacit codebase conventions and tribal domain knowledge.                     | Needs explicit file paths, referenced patterns, and strict "do not touch" constraints.            | Catalogs the comprehensive repository file diff, audits repo-wide "do not touch" boundary compliance, and records branch/PR metadata.            |
+| **Granularity** | Focuses on high-level patterns and architecture; details left to implementation time. | Requires atomic, single-responsibility sub-tasks with deterministic inputs/outputs.               | Synthesizes milestone achievements while maintaining drill-down lineage to every atomic task, commit, and conversation transcript.               |
+| **Validation**  | Manual PR review, local exploratory debugging, automated CI.                          | Explicit terminal commands with deterministic output parsing (lint, test, build) after each step. | Aggregates full-lifecycle verification evidence: pre-execution plan validation, all passing phase gates, regression suites, and 0 failing tests. |
+| **Edge Cases**  | Usually caught through intuitive testing or code review cycles.                       | Must be exhaustively itemized upfront to prevent naive happy-path assumptions.                    | Provides a post-mortem audit confirming that all upfront risks, boundary edge cases, and failure modes cataloged in the plan were satisfied.     |
 
 ---
 
@@ -41,7 +41,8 @@ In `tosh`, the plan summary validates the entire implementation against the four
     - 3.2. [Work Item Completion Verdict & Executive Synthesis](#32-work-item-completion-verdict--executive-synthesis)
     - 3.3. [Requirement Fulfillment & Traceability Verification](#33-requirement-fulfillment--traceability-verification)
     - 3.4. [Phase & Milestone Execution Rollup](#34-phase--milestone-execution-rollup)
-    - 3.5. [Cumulative Code Deliverables & File Modification Registry](#35-cumulative-code-deliverables--file-modification-registry)
+    -
+    3.5. [Cumulative Code Deliverables & File Modification Registry](#35-cumulative-code-deliverables--file-modification-registry)
     - 3.6. [Full-Lifecycle Verification & Quality Gate Audit](#36-full-lifecycle-verification--quality-gate-audit)
     - 3.7. [Edge Case, Risk & Failure-Mode Post-Mortem](#37-edge-case-risk--failure-mode-post-mortem)
     - 3.8. [Comprehensive Telemetry & Cost Accounting](#38-comprehensive-telemetry--cost-accounting)
@@ -85,6 +86,7 @@ Every `04_plan_summary.html` begins with universal baseline `<meta>` tags, plan 
 Material Web ES module importmap loader:
 
 ```xhtml
+
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -131,17 +133,17 @@ Material Web ES module importmap loader:
 
 ### Plan Summary Header Metadata Contracts
 
-| Metadata Tag | Scope | Purpose | Example |
-|:---|:---|:---|:---|
-| `parent-doc-id` | Work Item / Summary | Points to the parent Implementation Plan `doc-id` | `WI-20260830T170936Z:02:PLAN` |
-| `execution-duration-ms` | Work Item / Summary | Total elapsed time from first task start to plan sign-off | `312000` |
-| `completed-phases` | Work Item / Summary | Total successfully completed phase count | `3` |
-| `completed-tasks` | Work Item / Summary | Total executed atomic tasks across all phases | `9` |
-| `final-verdict` | Work Item / Summary | Overall implementation outcome classification | `success` \| `partial` \| `failed` |
-| `total-tokens` | Work Item / Summary | Aggregated token consumption across all phases and tasks | `98400` |
-| `total-cost-usd` | Work Item / Summary | Total monetary expenditure in USD for LLM API usage | `0.2952` |
-| `pr-branch` | Work Item / Summary | Git branch containing all committed deliverables | `feature/user-auth-service` |
-| `ledger-path` | Work Item / Summary | Relative path pointer to the implementation ledger | `03_implementation_ledger.json` |
+| Metadata Tag            | Scope               | Purpose                                                   | Example                            |
+|:------------------------|:--------------------|:----------------------------------------------------------|:-----------------------------------|
+| `parent-doc-id`         | Work Item / Summary | Points to the parent Implementation Plan `doc-id`         | `WI-20260830T170936Z:02:PLAN`      |
+| `execution-duration-ms` | Work Item / Summary | Total elapsed time from first task start to plan sign-off | `312000`                           |
+| `completed-phases`      | Work Item / Summary | Total successfully completed phase count                  | `3`                                |
+| `completed-tasks`       | Work Item / Summary | Total executed atomic tasks across all phases             | `9`                                |
+| `final-verdict`         | Work Item / Summary | Overall implementation outcome classification             | `success` \| `partial` \| `failed` |
+| `total-tokens`          | Work Item / Summary | Aggregated token consumption across all phases and tasks  | `98400`                            |
+| `total-cost-usd`        | Work Item / Summary | Total monetary expenditure in USD for LLM API usage       | `0.2952`                           |
+| `pr-branch`             | Work Item / Summary | Git branch containing all committed deliverables          | `feature/user-auth-service`        |
+| `ledger-path`           | Work Item / Summary | Relative path pointer to the implementation ledger        | `03_implementation_ledger.json`    |
 
 ---
 
@@ -167,11 +169,11 @@ Executive summary certifying work item completion:
 
 Audits delivery of each business requirement from `00_requirements.html`:
 
-| Req ID | Requirement Description | Delivering Phase | Delivering Tasks | Verification Verdict | RFC 2119 Level |
-|:---|:---|:---|:---|:---|:---|
-| `REQ-001` | User password authentication with Argon2id | `phase_01`, `phase_02` | `task_001`, `task_004` | `PASS` | `MUST` |
-| `REQ-002` | JWT issue and validation | `phase_02` | `task_005`, `task_006` | `PASS` | `MUST` |
-| `REQ-003` | Refresh token rotation | `phase_01`, `phase_02` | `task_002`, `task_007` | `PASS` | `SHOULD` |
+| Req ID    | Requirement Description                    | Delivering Phase       | Delivering Tasks       | Verification Verdict | RFC 2119 Level |
+|:----------|:-------------------------------------------|:-----------------------|:-----------------------|:---------------------|:---------------|
+| `REQ-001` | User password authentication with Argon2id | `phase_01`, `phase_02` | `task_001`, `task_004` | `PASS`               | `MUST`         |
+| `REQ-002` | JWT issue and validation                   | `phase_02`             | `task_005`, `task_006` | `PASS`               | `MUST`         |
+| `REQ-003` | Refresh token rotation                     | `phase_01`, `phase_02` | `task_002`, `task_007` | `PASS`               | `SHOULD`       |
 
 - Enforces 100% requirement traceability with zero orphaned requirements.
 
@@ -179,11 +181,11 @@ Audits delivery of each business requirement from `00_requirements.html`:
 
 Scorecard aggregating each completed phase:
 
-| Phase ID | Phase Title | Sequence | Status | Tasks | Duration | Tokens | Verdict |
-|:---|:---|:---|:---|:---|:---|:---|:---|
-| `phase_01_database_migration` | Database Schema & Migration | 1 | `completed` | 3/3 | 94.5s | 24,500 | `pass` |
-| `phase_02_service_layer` | Authentication Service & JWT | 2 | `completed` | 4/4 | 142.1s | 48,200 | `pass` |
-| `phase_03_rest_endpoints` | REST Auth Endpoints & Security | 3 | `completed` | 2/2 | 75.4s | 25,700 | `pass` |
+| Phase ID                      | Phase Title                    | Sequence | Status      | Tasks | Duration | Tokens | Verdict |
+|:------------------------------|:-------------------------------|:---------|:------------|:------|:---------|:-------|:--------|
+| `phase_01_database_migration` | Database Schema & Migration    | 1        | `completed` | 3/3   | 94.5s    | 24,500 | `pass`  |
+| `phase_02_service_layer`      | Authentication Service & JWT   | 2        | `completed` | 4/4   | 142.1s   | 48,200 | `pass`  |
+| `phase_03_rest_endpoints`     | REST Auth Endpoints & Security | 3        | `completed` | 2/2   | 75.4s    | 25,700 | `pass`  |
 
 ### 3.5. Cumulative Code Deliverables & File Modification Registry
 
@@ -266,6 +268,6 @@ Downstream CI/CD pipelines, release note generators, and CLI commands extract hi
 
 ## 5. Revisions
 
-| Date | Version | Description | Source |
-|:---|:---|:---|:---|
-| 2026-09-06 | 0.1.0 | Initial canonical plan summary specification (`04_plan_summary.html`) establishing work item executive synthesis, requirement traceability audits, phase rollups, cumulative diffs, and XPath queries. | [Work Item Documents](README.md) |
+| Date       | Version | Description                                                                                                                                                                                            | Source                           |
+|:-----------|:--------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------|
+| 2026-09-06 | 0.1.0   | Initial canonical plan summary specification (`04_plan_summary.html`) establishing work item executive synthesis, requirement traceability audits, phase rollups, cumulative diffs, and XPath queries. | [Work Item Documents](README.md) |

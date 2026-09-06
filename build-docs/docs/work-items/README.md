@@ -137,7 +137,7 @@ flowchart TD
 
 ## Document Catalog & Tier Breakdown
 
-The work item domain defines 16 specialized document types distributed across the three tiers:
+The work item domain defines 17 specialized document types distributed across the three tiers:
 
 ### Tier 1: Work-Item Level Documents
 
@@ -146,8 +146,8 @@ The work item domain defines 16 specialized document types distributed across th
 | 1 | **Requirements**              | `00_requirements.html`              | XHTML  | Captures user stories, functional/non-functional goals (RFC 2119), acceptance checklists, and Q&A. <br/>- Detailed Spec: [`requirements.md`](requirements.md)                                     |
 | 2 | **Technical Design**          | `01_design_spec.html`               | XHTML  | Defines system architecture, schema models, API boundaries, micro-ADRs, AI components & tooling, and requirement traceability. <br/>- Detailed Spec: [`technical-design.md`](technical-design.md) |
 | 3 | **Implementation Plan**       | `02_implementation_plan.html`       | XHTML  | Details high-level multi-phase execution strategy, phase breakdowns, dependencies, and risk mitigations. <br/>- Detailed Spec: [`implementation-plan.md`](implementation-plan.md)                 |
-| 4 | **Implementation Ledger**     | `03_implementation_ledger.json`     | JSON   | Serves as the central state machine, task dependency DAG, and file pointer registry for the work item. <br/>- Detailed Spec: [`work-item-ledger.md`](work-item-ledger.md)                         |
-| 5 | **Plan Validation**           | `03_plan_validation.html`           | XHTML  | Evaluates plan completeness, architectural soundness, security review, and execution readiness prior to coding. <br/>- Detailed Spec: [`plan-validation.md`](plan-validation.md)                  |
+| 4 | **Implementation Ledger**     | `03_implementation_ledger.json`     | JSON   | Central 7-state machine, parallel/sequential DAG scheduling engine, and relational graph binding requirements, target files, and artifacts. <br/>- Detailed Spec: [`work-item-ledger.md`](work-item-ledger.md) |
+| 5 | **Plan Validation**           | `03_plan_validation.html`           | XHTML  | Master validation spec defining all test pyramids, acceptance criteria mapping, and quality gates required to prove the code is 100% complete; serves as pre-execution and completion gate. <br/>- Detailed Spec: [`plan-validation.md`](plan-validation.md) |
 | 6 | **Plan Summary**              | `04_plan_summary.html`              | XHTML  | Post-execution rollup synthesizing overall duration, milestone achievements, completed phases/tasks, and final verdict. <br/>- Detailed Spec: [`plan-summary.md`](plan-summary.md)                |
 | 7 | **Plan Conversation Summary** | `05_plan_conversation_summary.html` | XHTML  | Distills key agentic LLM dialogue, architectural decisions, and alternatives debated during planning. <br/>- Detailed Spec: [`plan-conversation-summary.md`](plan-conversation-summary.md)        |
 | 8 | **Plan Conversation Metrics** | `06_plan_conversation_metrics.json` | JSON   | Captures aggregated token consumption, model latencies, tool invocations, and API costs during planning. <br/>- Detailed Spec: [`plan-conversation-metrics.md`](plan-conversation-metrics.md)     |
@@ -170,9 +170,10 @@ The work item domain defines 16 specialized document types distributed across th
 |:---|:------------------------------|:-------------------------------------|:-------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | 12 | **Task Specification**        | `tasks/{task_id}/task_spec.html`     | XHTML  | Outlines granular file modifications, technical implementation steps, and acceptance criteria for one task. <br/>- Detailed Spec: [`task-specification.md`](task-specification.md)             |
 | 13 | **Task Validation**           | `tasks/{task_id}/validation.html`    | XHTML  | Records test execution logs, exit codes, assertion verdicts, and lint verification for a completed task. <br/>- Detailed Spec: [`task-validation.md`](task-validation.md)                      |
-| 14 | **Task Summary**              | `tasks/{task_id}/summary.html`       | XHTML  | Documents modified file manifests, git diff statistics, PR links, and technical notes from task execution. <br/>- Detailed Spec: [`task-summary.md`](task-summary.md)                          |
-| 15 | **Task Conversation**         | `tasks/{task_id}/conversation.jsonl` | JSONL  | Preserves the verbatim or structured agentic LLM interaction, prompt steps, reasoning, and tool executions. <br/>- Detailed Spec: [`task-conversation.md`](task-conversation.md)               |
-| 16 | **Task Conversation Metrics** | `tasks/{task_id}/metrics.json`       | JSON   | Captures exact token counts (prompt, completion, cached), execution duration, cost (USD), and tool calls. <br/>- Detailed Spec: [`task-conversation-metrics.md`](task-conversation-metrics.md) |
+| 14 | **Task Diff**                 | `tasks/{task_id}/task.diff`          | Diff   | Captures the authoritative unified git diff patch of all code modifications produced during task execution. <br/>- Detailed Spec: [`task-diff.md`](task-diff.md)                              |
+| 15 | **Task Summary**              | `tasks/{task_id}/summary.html`       | XHTML  | Documents modified file manifests, git diff statistics, PR links, and technical notes from task execution. <br/>- Detailed Spec: [`task-summary.md`](task-summary.md)                          |
+| 16 | **Task Conversation**         | `tasks/{task_id}/conversation.jsonl` | JSONL  | Preserves the verbatim or structured agentic LLM interaction, prompt steps, reasoning, and tool executions. <br/>- Detailed Spec: [`task-conversation.md`](task-conversation.md)               |
+| 17 | **Task Conversation Metrics** | `tasks/{task_id}/metrics.json`       | JSON   | Captures exact token counts (prompt, completion, cached), execution duration, cost (USD), and tool calls. <br/>- Detailed Spec: [`task-conversation-metrics.md`](task-conversation-metrics.md) |
 
 ---
 
@@ -204,6 +205,7 @@ Work items adhere to strict naming conventions and directory structures under `.
                 │       ├── task_001_{task_slug}/
                 │       │   ├── task_spec.html      # Task 1 Implementation Spec & Checklist
                 │       │   ├── validation.html     # Task 1 Test Execution & Verification Verdict
+                │       │   ├── task.diff           # Task 1 diff File
                 │       │   ├── summary.html        # Task 1 Code Modifications & Git Diff Summary
                 │       │   ├── conversation.jsonl  # Task 1 Raw Agent Interaction & Tool Logs
                 │       │   └── metrics.json        # Task 1 Token Consumption & Cost Telemetry
@@ -211,6 +213,7 @@ Work items adhere to strict naming conventions and directory structures under `.
                 │       └── task_002_{task_slug}/
                 │           ├── task_spec.html
                 │           ├── validation.html
+                │           ├── task.diff 
                 │           ├── summary.html
                 │           ├── conversation.jsonl
                 │           └── metrics.json
@@ -281,6 +284,7 @@ traversal:
           "paths": {
             "spec": "phases/phase_01_database_migration/tasks/task_001_create_tables/task_spec.html",
             "validation": "phases/phase_01_database_migration/tasks/task_001_create_tables/validation.html",
+            "diff": "phases/phase_01_database_migration/tasks/task_001_create_tables/task.diff",
             "summary": "phases/phase_01_database_migration/tasks/task_001_create_tables/summary.html",
             "conversation": "phases/phase_01_database_migration/tasks/task_001_create_tables/conversation.jsonl",
             "metrics": "phases/phase_01_database_migration/tasks/task_001_create_tables/metrics.json"
@@ -304,6 +308,7 @@ traversal:
           "paths": {
             "spec": "phases/phase_01_database_migration/tasks/task_002_seed_data/task_spec.html",
             "validation": "phases/phase_01_database_migration/tasks/task_002_seed_data/validation.html",
+            "diff": "phases/phase_01_database_migration/tasks/task_002_seed_data/task.diff",
             "summary": "phases/phase_01_database_migration/tasks/task_002_seed_data/summary.html",
             "conversation": "phases/phase_01_database_migration/tasks/task_002_seed_data/conversation.jsonl",
             "metrics": "phases/phase_01_database_migration/tasks/task_002_seed_data/metrics.json"
@@ -399,7 +404,8 @@ lineage, and instant indexing for crawlers, CLI commands, and XPath extractors.
 |:----------------------------|:-----------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------|
 | **Work Item Core**          | `00_requirements.html`<br/>`01_design_spec.html`<br/>`02_implementation_plan.html` | `req-version`<br/>`priority`<br/>`business-impact`<br/>`architectural-domain`<br/>`estimated-phases`                       | `/html/head/meta[@name='implements-req']/@content`     |
 | **Phase Level**             | `phase_spec.html`<br/>`phase_validation.html`<br/>`phase_summary.html`             | `phase-sequence`<br/>`blocking`<br/>`validation-verdict (pass/fail)`<br/>`total-tasks`<br/>`completed-tasks`               | `/html/head/meta[@name='validation-verdict']/@content` |
-| **Task Level**              | `task_spec.html`<br/>`validation.html`<br/>`summary.html`                          | `task-sequence`<br/>`task-category (db, api, ui, test)`<br/>`test-exit-code`<br/>`validation-verdict`<br/>`pr-link`        | `/html/head/meta[@name='status']/@content`             |
+| **Task Level**              | `task_spec.html`<br/>`validation.html`<br/>`summary.html`                          | `task-sequence`<br/>`task-category (db, api, ui, test)`<br/>`test-exit-code`<br/>`validation-verdict`<br/>`pr-link`<br/>`diff-ref` | `/html/head/meta[@name='status']/@content`             |
+| **Task Code Patches**       | `task.diff`                                                                        | Unified diff hunks, file headers, line deltas                                                                              | Direct patch analysis / `git apply --check`            |
 | **LLM Metrics & Telemetry** | `metrics.json`<br/>`conversation.jsonl`                                            | `total-tokens`<br/>`prompt-tokens`<br/>`completion-tokens`<br/>`total-cost-usd`<br/>`tool-call-count`<br/>`retry-attempts` | Direct JSON Key / jq queries                           |
 
 ---
@@ -446,7 +452,8 @@ graph TD
     REQ["Requirement: REQ-001<br/>(00_requirements.html)"] -->|" implements-req "| DESIGN["Design Spec: Component Model<br/>(01_design_spec.html)"]
     DESIGN -->|" implements-req "| PLAN["Phase 1: DB Migration<br/>(phase_spec.html)"]
     PLAN -->|" parent-doc-id "| TASK["Task 001: Create Tables<br/>(task_spec.html)"]
-    TASK -->|" validates-artifact "| VAL["Task Validation: Test Run<br/>(validation.html)"]
+    TASK -->|" produces patch "| DIFF["Task Diff: Code Changes<br/>(task.diff)"]
+    DIFF -->|" validated by "| VAL["Task Validation: Test Run<br/>(validation.html)"]
     VAL -->|" verdict: pass "| SUM["Task Summary: Git Commit<br/>(summary.html)"]
     SUM -->|" rolls up to "| PSUM["Phase Summary<br/>(phase_summary.html)"]
     PSUM -->|" rolls up to "| WISUM["Plan Summary<br/>(04_plan_summary.html)"]
@@ -483,5 +490,6 @@ graph TD
 
 | Date       | Version | Description                                                                                                                                                                                             | Source                           |
 |:-----------|:--------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------|
+| 2026-09-06 | 0.3.0   | Integrated Task Diff (`task.diff` / `task-diff.md`) into Tier 3 catalog, ledger paths, metadata matrix, and traceability graph.                                                                        | Work Item Architecture Alignment |
 | 2026-09-05 | 0.2.0   | Established comprehensive architectural specification: 3-tier hierarchy, lifecycle state machine, full 16-document catalog, state ledger schema, XPath query patterns, and bi-directional traceability. | Work Item Architecture Alignment |
 | 2026-08-30 | 0.1.0   | Initial baseline outline of work item document types and metadata headers.                                                                                                                              | Initial Specification            |

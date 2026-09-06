@@ -88,16 +88,11 @@ validation, summary, conversation log, and metrics:
   passes, and committed alongside [
   `summary.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-summary.md).
 - **Paired Artifacts:**
-    - Instructions: [
-      `task_spec.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-specification.md)
-    - Verification Evidence: [
-      `validation.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-validation.md)
-    - Commit Summary: [
-      `summary.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-summary.md)
-    - Verbatim Transcript: [
-      `conversation.jsonl`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-conversation.md)
-    - Aggregated Telemetry: [
-      `metrics.json`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-conversation-metrics.md)
+    - Instructions: [`task_spec.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-specification.md)
+    - Verification Evidence: [`validation.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-validation.md)
+    - Commit Summary: [`summary.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-summary.md)
+    - Verbatim Transcript: [`conversation.jsonl`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-conversation.md)
+    - Aggregated Telemetry: [`metrics.json`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-conversation-metrics.md)
 
 ---
 

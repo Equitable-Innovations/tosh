@@ -2,8 +2,8 @@
 
 The Phase Validation Document (`phases/{phase_id}/phase_validation.html`) is the authoritative Tier 2 verification gate
 in the `tosh` work item lifecycle. It records the automated integration test execution, sub-task verdict rollups,
-architectural boundary integrity audits, and formal gating decisions (`pass` | `fail` | `warn`) required before downstream
-phases are unlocked in the implementation ledger.
+architectural boundary integrity audits, and formal gating decisions (`pass` | `fail` | `warn`) required before
+downstream phases are unlocked in the implementation ledger.
 
 Phase validation shifts verification from retrospective, manual human inspection to deterministic, automated gating
 enforced by the `tosh` harness.
@@ -22,12 +22,12 @@ This document serves a dual purpose:
 
 In `tosh`, phase validation enforces mechanical rigor by anchoring verification to the four core planning dimensions:
 
-| Plan Dimension | Human Engineer Focus | AI Coding Tool Focus | `tosh` Phase Validation Manifestation |
-|:---|:---|:---|:---|
-| **Context** | Relies on tacit codebase conventions and tribal domain knowledge. | Needs explicit file paths, referenced patterns, and strict "do not touch" constraints. | Performs an automated file boundary audit verifying that zero protected or "do not touch" files were modified during the phase. |
-| **Granularity** | Focuses on high-level patterns and architecture; details left to implementation time. | Requires atomic, single-responsibility sub-tasks with deterministic inputs/outputs. | Aggregates individual atomic task verdicts into an exhaustive roll-up matrix, ensuring 100% of sub-tasks reached passing status. |
-| **Validation** | Manual PR review, local exploratory debugging, automated CI. | Explicit terminal commands with deterministic output parsing (lint, test, build) after each step. | Executes explicit terminal integration suites, parses process exit codes and assertion counts, and logs raw command outputs deterministically. |
-| **Edge Cases** | Usually caught through intuitive testing or code review cycles. | Must be exhaustively itemized upfront to prevent naive happy-path assumptions. | Validates that all phase-level boundary edge cases, negative test scenarios, and error-injection suites itemized in `phase_spec.html` pass. |
+| Plan Dimension  | Human Engineer Focus                                                                  | AI Coding Tool Focus                                                                              | `tosh` Phase Validation Manifestation                                                                                                          |
+|:----------------|:--------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------|
+| **Context**     | Relies on tacit codebase conventions and tribal domain knowledge.                     | Needs explicit file paths, referenced patterns, and strict "do not touch" constraints.            | Performs an automated file boundary audit verifying that zero protected or "do not touch" files were modified during the phase.                |
+| **Granularity** | Focuses on high-level patterns and architecture; details left to implementation time. | Requires atomic, single-responsibility sub-tasks with deterministic inputs/outputs.               | Aggregates individual atomic task verdicts into an exhaustive roll-up matrix, ensuring 100% of sub-tasks reached passing status.               |
+| **Validation**  | Manual PR review, local exploratory debugging, automated CI.                          | Explicit terminal commands with deterministic output parsing (lint, test, build) after each step. | Executes explicit terminal integration suites, parses process exit codes and assertion counts, and logs raw command outputs deterministically. |
+| **Edge Cases**  | Usually caught through intuitive testing or code review cycles.                       | Must be exhaustively itemized upfront to prevent naive happy-path assumptions.                    | Validates that all phase-level boundary edge cases, negative test scenarios, and error-injection suites itemized in `phase_spec.html` pass.    |
 
 ---
 
@@ -39,7 +39,8 @@ In `tosh`, phase validation enforces mechanical rigor by anchoring verification 
     - 3.1. [Document Header & Metadata Bar](#31-document-header--metadata-bar)
     - 3.2. [Phase Validation Verdict & Gating Decision](#32-phase-validation-verdict--gating-decision)
     - 3.3. [Task Manifest Execution & Verdict Rollup](#33-task-manifest-execution--verdict-rollup)
-    - 3.4. [Integration Command Execution & Deterministic Output Parsing](#34-integration-command-execution--deterministic-output-parsing)
+    -
+    3.4. [Integration Command Execution & Deterministic Output Parsing](#34-integration-command-execution--deterministic-output-parsing)
     - 3.5. [Boundary Invariant & "Do Not Touch" Compliance Audit](#35-boundary-invariant--do-not-touch-compliance-audit)
     - 3.6. [Phase Edge Case & Negative Suite Verification](#36-phase-edge-case--negative-suite-verification)
     - 3.7. [Remediation & Defect Resolution Log](#37-remediation--defect-resolution-log)
@@ -79,6 +80,7 @@ Every `phase_validation.html` begins with universal baseline `<meta>` tags, vali
 the Material Web ES module importmap loader:
 
 ```xhtml
+
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -123,22 +125,22 @@ the Material Web ES module importmap loader:
 
 ### Phase Validation Header Metadata Contracts
 
-| Metadata Tag | Scope | Purpose | Example |
-|:---|:---|:---|:---|
-| `phase-id` | Phase / Validation | Unique phase directory identifier | `phase_01_database_migration` |
-| `phase-sequence` | Phase / Validation | Numeric ordinal representing the milestone position | `1` |
-| `parent-doc-id` | Phase / Validation | Points to the parent Phase Specification `doc-id` | `WI-20260830T170936Z:P01:SPEC` |
-| `validation-verdict` | Phase / Validation | Final gating evaluation outcome | `pass` \| `fail` \| `warn` |
-| `tests-passed` | Phase / Validation | Count of passing phase-level integration/system tests | `14` |
-| `tests-failed` | Phase / Validation | Count of failing phase-level integration/system tests | `0` |
-| `blocking-issues-count` | Phase / Validation | Tally of unresolved defects blocking phase transition | `0` |
+| Metadata Tag            | Scope              | Purpose                                               | Example                        |
+|:------------------------|:-------------------|:------------------------------------------------------|:-------------------------------|
+| `phase-id`              | Phase / Validation | Unique phase directory identifier                     | `phase_01_database_migration`  |
+| `phase-sequence`        | Phase / Validation | Numeric ordinal representing the milestone position   | `1`                            |
+| `parent-doc-id`         | Phase / Validation | Points to the parent Phase Specification `doc-id`     | `WI-20260830T170936Z:P01:SPEC` |
+| `validation-verdict`    | Phase / Validation | Final gating evaluation outcome                       | `pass` \| `fail` \| `warn`     |
+| `tests-passed`          | Phase / Validation | Count of passing phase-level integration/system tests | `14`                           |
+| `tests-failed`          | Phase / Validation | Count of failing phase-level integration/system tests | `0`                            |
+| `blocking-issues-count` | Phase / Validation | Tally of unresolved defects blocking phase transition | `0`                            |
 
 ---
 
 ## 3. Required Sections & M3 Component Structure
 
-The Phase Validation document contains 7 standardized sections combining semantic XHTML elements, Material Design 3
-Web Components (`md-*`), typography scale classes (`md-typescale-*`), and explicit data attributes (`data-*`).
+The Phase Validation document contains 7 standardized sections combining semantic XHTML elements, Material Design 3 Web
+Components (`md-*`), typography scale classes (`md-typescale-*`), and explicit data attributes (`data-*`).
 
 ### 3.1. Document Header & Metadata Bar
 
@@ -159,11 +161,11 @@ The executive evaluation governing the work item lifecycle:
 
 Aggregates the individual status and validation verdicts of all atomic tasks defined in `phase_spec.html`:
 
-| Task ID | Task Title | Category | Status | Validation Verdict | Exit Code | Assertions Passed | Assertions Failed |
-|:---|:---|:---|:---|:---|:---|:---|:---|
-| `task_001_create_tables` | Create User & Token Tables | `database` | `completed` | `pass` | `0` | 8 | 0 |
-| `task_002_seed_roles` | Seed Initial RBAC Roles | `database` | `completed` | `pass` | `0` | 4 | 0 |
-| `task_003_verify_migration` | Verify Migration Suite | `test` | `completed` | `pass` | `0` | 2 | 0 |
+| Task ID                     | Task Title                 | Category   | Status      | Validation Verdict | Exit Code | Assertions Passed | Assertions Failed |
+|:----------------------------|:---------------------------|:-----------|:------------|:-------------------|:----------|:------------------|:------------------|
+| `task_001_create_tables`    | Create User & Token Tables | `database` | `completed` | `pass`             | `0`       | 8                 | 0                 |
+| `task_002_seed_roles`       | Seed Initial RBAC Roles    | `database` | `completed` | `pass`             | `0`       | 4                 | 0                 |
+| `task_003_verify_migration` | Verify Migration Suite     | `test`     | `completed` | `pass`             | `0`       | 2                 | 0                 |
 
 - Enforces that zero tasks remain in `pending`, `in-progress`, or `failed` status.
 
@@ -189,7 +191,8 @@ Automated compliance check verifying repository integrity:
 
 Records the testing of all upfront edge cases and boundary hazards itemized in `phase_spec.html`:
 
-- **Negative Input Injection:** Verifies proper rejection and error handling for malformed data or unauthorized requests.
+- **Negative Input Injection:** Verifies proper rejection and error handling for malformed data or unauthorized
+  requests.
 - **Concurrency & Race Condition Checks:** Validates multi-threaded or parallel execution integrity.
 - **Rollback Drills:** Asserts that migration down-scripts or rollback procedures operate idempotently.
 
@@ -242,6 +245,6 @@ Orchestrators, harness lifecycle runners, and reporting agents query specific va
 
 ## 5. Revisions
 
-| Date | Version | Description | Source |
-|:---|:---|:---|:---|
-| 2026-09-06 | 0.1.0 | Initial canonical phase validation specification (`phase_validation.html`) defining automated gating verdicts, task rollups, integration command parsing, boundary compliance audits, and XPath queries. | [Work Item Documents](README.md) |
+| Date       | Version | Description                                                                                                                                                                                              | Source                           |
+|:-----------|:--------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------|
+| 2026-09-06 | 0.1.0   | Initial canonical phase validation specification (`phase_validation.html`) defining automated gating verdicts, task rollups, integration command parsing, boundary compliance audits, and XPath queries. | [Work Item Documents](README.md) |

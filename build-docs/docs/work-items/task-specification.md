@@ -1,12 +1,12 @@
 # Task Specification Document Definition
 
-The Task Specification Document (`tasks/{task_id}/task_spec.html`) is the authoritative Tier 3 atomic unit of
-execution in the `tosh` work item lifecycle. It provides unambiguous, surgically scoped instructions for an AI coding
-agent or human engineer to execute a single-responsibility code modification.
+The Task Specification Document (`tasks/{task_id}/task_spec.html`) is the authoritative Tier 3 atomic unit of execution
+in the `tosh` work item lifecycle. It provides unambiguous, surgically scoped instructions for an AI coding agent or
+human engineer to execute a single-responsibility code modification.
 
 Every task specification eliminates guesswork by establishing explicit file targets, referencing canonical codebase
-patterns, locking down forbidden files, declaring step-by-step implementation instructions, pre-defining exhaustive
-edge cases, and mandating deterministic terminal verification commands.
+patterns, locking down forbidden files, declaring step-by-step implementation instructions, pre-defining exhaustive edge
+cases, and mandating deterministic terminal verification commands.
 
 This document serves a dual purpose:
 
@@ -23,12 +23,12 @@ This document serves a dual purpose:
 In `tosh`, task specifications translate the core planning dimensions into concrete, actionable boundaries for AI coding
 tools:
 
-| Plan Dimension | Human Engineer Focus | AI Coding Tool Focus | `tosh` Task Specification Manifestation |
-|:---|:---|:---|:---|
-| **Context** | Relies on tacit codebase conventions and tribal domain knowledge. | Needs explicit file paths, referenced patterns, and strict "do not touch" constraints. | Specifies exact target file paths, provides clickable links and line-range anchors to existing patterns, and itemizes forbidden files and methods. |
-| **Granularity** | Focuses on high-level patterns and architecture; details left to implementation time. | Requires atomic, single-responsibility sub-tasks with deterministic inputs/outputs. | Restricts task scope strictly to a single responsibility (e.g., author one DDL file or implement one endpoint handler), eliminating multi-module sprawl. |
-| **Validation** | Manual PR review, local exploratory debugging, automated CI. | Explicit terminal commands with deterministic output parsing (lint, test, build) after each step. | Prescribes exact terminal commands (test target, lint, build), process exit codes (`0`), and regex matchers for immediate feedback loops. |
-| **Edge Cases** | Usually caught through intuitive testing or code review cycles. | Must be exhaustively itemized upfront to prevent naive happy-path assumptions. | Pre-defines an exhaustive edge case and negative scenario matrix that the implementation and unit tests MUST satisfy. |
+| Plan Dimension  | Human Engineer Focus                                                                  | AI Coding Tool Focus                                                                              | `tosh` Task Specification Manifestation                                                                                                                  |
+|:----------------|:--------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Context**     | Relies on tacit codebase conventions and tribal domain knowledge.                     | Needs explicit file paths, referenced patterns, and strict "do not touch" constraints.            | Specifies exact target file paths, provides clickable links and line-range anchors to existing patterns, and itemizes forbidden files and methods.       |
+| **Granularity** | Focuses on high-level patterns and architecture; details left to implementation time. | Requires atomic, single-responsibility sub-tasks with deterministic inputs/outputs.               | Restricts task scope strictly to a single responsibility (e.g., author one DDL file or implement one endpoint handler), eliminating multi-module sprawl. |
+| **Validation**  | Manual PR review, local exploratory debugging, automated CI.                          | Explicit terminal commands with deterministic output parsing (lint, test, build) after each step. | Prescribes exact terminal commands (test target, lint, build), process exit codes (`0`), and regex matchers for immediate feedback loops.                |
+| **Edge Cases**  | Usually caught through intuitive testing or code review cycles.                       | Must be exhaustively itemized upfront to prevent naive happy-path assumptions.                    | Pre-defines an exhaustive edge case and negative scenario matrix that the implementation and unit tests MUST satisfy.                                    |
 
 ---
 
@@ -41,9 +41,11 @@ tools:
     - 3.2. [Task Objective & Atomic Responsibility Scope](#32-task-objective--atomic-responsibility-scope)
     - 3.3. [Target Files & Strict "Do Not Touch" Constraints](#33-target-files--strict-do-not-touch-constraints)
     - 3.4. [Referenced Code Patterns & Structural Conventions](#34-referenced-code-patterns--structural-conventions)
-    - 3.5. [Step-by-Step Deterministic Implementation Instructions](#35-step-by-step-deterministic-implementation-instructions)
+    -
+    3.5. [Step-by-Step Deterministic Implementation Instructions](#35-step-by-step-deterministic-implementation-instructions)
     - 3.6. [Exhaustive Upfront Edge Cases & Boundary Scenarios](#36-exhaustive-upfront-edge-cases--boundary-scenarios)
-    - 3.7. [Deterministic Verification Commands & Output Parsing Rules](#37-deterministic-verification-commands--output-parsing-rules)
+    -
+    3.7. [Deterministic Verification Commands & Output Parsing Rules](#37-deterministic-verification-commands--output-parsing-rules)
     - 3.8. [Acceptance Criteria Checklist](#38-acceptance-criteria-checklist)
 4. [Token Optimization & XPath Query Patterns](#4-token-optimization--xpath-query-patterns)
 5. [Revisions](#5-revisions)
@@ -64,6 +66,7 @@ Each task specification resides inside its dedicated task directory within its p
                     └── task_{NNN}_{task_slug}/
                         ├── task_spec.html          # Authoritative Task Specification
                         ├── validation.html         # Test Execution & Verification Record
+                        ├── task.diff               # Authoritative Task Diff
                         ├── summary.html            # Code Modifications & Diffs
                         ├── conversation.jsonl      # Verbatim Agent Interaction Log
                         └── metrics.json            # Token Consumption & Cost Telemetry
@@ -83,6 +86,7 @@ Every `task_spec.html` begins with universal baseline `<meta>` tags, task-specif
 the Material Web ES module importmap loader:
 
 ```xhtml
+
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -129,16 +133,16 @@ the Material Web ES module importmap loader:
 
 ### Task Specification Header Metadata Contracts
 
-| Metadata Tag | Scope | Purpose | Example |
-|:---|:---|:---|:---|
-| `task-id` | Task / Spec | Unique task directory identifier | `task_001_create_tables` |
-| `task-sequence` | Task / Spec | Numeric ordinal representing the execution order within the phase | `1` |
-| `parent-doc-id` | Task / Spec | Points to the parent Phase Specification `doc-id` | `WI-20260830T170936Z:P01:SPEC` |
-| `depends-on` | Task / Spec | Comma-delimited prerequisite task IDs that must be completed | `task_001_create_tables` |
-| `implements-req` | Task / Spec | Requirement IDs directly delivered or satisfied by this task | `REQ-001,REQ-002` |
-| `target-files` | Task / Spec | Comma-delimited list of source code files modified or created | `src/db/migration/V1__init.sql` |
-| `assigned-agent` | Task / Spec | Primary agent assigned to execute this task | `agent:database-specialist` |
-| `required-skills` | Task / Spec | Skill packages required by the worker before executing edits | `skill:postgresql-migration` |
+| Metadata Tag      | Scope       | Purpose                                                           | Example                         |
+|:------------------|:------------|:------------------------------------------------------------------|:--------------------------------|
+| `task-id`         | Task / Spec | Unique task directory identifier                                  | `task_001_create_tables`        |
+| `task-sequence`   | Task / Spec | Numeric ordinal representing the execution order within the phase | `1`                             |
+| `parent-doc-id`   | Task / Spec | Points to the parent Phase Specification `doc-id`                 | `WI-20260830T170936Z:P01:SPEC`  |
+| `depends-on`      | Task / Spec | Comma-delimited prerequisite task IDs that must be completed      | `task_001_create_tables`        |
+| `implements-req`  | Task / Spec | Requirement IDs directly delivered or satisfied by this task      | `REQ-001,REQ-002`               |
+| `target-files`    | Task / Spec | Comma-delimited list of source code files modified or created     | `src/db/migration/V1__init.sql` |
+| `assigned-agent`  | Task / Spec | Primary agent assigned to execute this task                       | `agent:database-specialist`     |
+| `required-skills` | Task / Spec | Skill packages required by the worker before executing edits      | `skill:postgresql-migration`    |
 
 ---
 
@@ -183,20 +187,22 @@ Links to canonical patterns in the project so the agent replicates existing conv
 Chronological, numbered instructions guiding the implementation:
 
 1. Step 1: Create file `src/main/resources/db/migration/V1__init_auth.sql`.
-2. Step 2: Define `users` table with primary key `id UUID`, `email VARCHAR(255) UNIQUE NOT NULL`, `password_hash VARCHAR(255) NOT NULL`, `created_at TIMESTAMP WITH TIME ZONE NOT NULL`.
-3. Step 3: Define `refresh_tokens` table with foreign key constraint `fk_user_id` referencing `users(id) ON DELETE CASCADE`.
+2. Step 2: Define `users` table with primary key `id UUID`, `email VARCHAR(255) UNIQUE NOT NULL`,
+   `password_hash VARCHAR(255) NOT NULL`, `created_at TIMESTAMP WITH TIME ZONE NOT NULL`.
+3. Step 3: Define `refresh_tokens` table with foreign key constraint `fk_user_id` referencing
+   `users(id) ON DELETE CASCADE`.
 4. Step 4: Add index on `refresh_tokens(token_hash)` and `users(email)`.
 
 ### 3.6. Exhaustive Upfront Edge Cases & Boundary Scenarios
 
 Exhaustively catalogs boundary conditions and negative scenarios to prevent naive happy-path implementations:
 
-| Edge Case ID | Condition / Scenario | Expected Handling / Behavior | Test Assertion Target |
-|:---|:---|:---|:---|
-| `EC-001` | Duplicate email insertion | Triggers unique constraint violation (`users_email_key`) | `UserMigrationTest#testDuplicateEmail` |
-| `EC-002` | Cascading user deletion | Deleting a user must cascade delete all associated refresh tokens | `UserMigrationTest#testCascadeDelete` |
-| `EC-003` | Null or empty token hash | Schema column constraint rejects `NULL` values | `UserMigrationTest#testNullTokenRejection` |
-| `EC-004` | Timezone persistence | `created_at` timestamp must store and return UTC without offset truncation | `UserMigrationTest#testUtcTimezone` |
+| Edge Case ID | Condition / Scenario      | Expected Handling / Behavior                                               | Test Assertion Target                      |
+|:-------------|:--------------------------|:---------------------------------------------------------------------------|:-------------------------------------------|
+| `EC-001`     | Duplicate email insertion | Triggers unique constraint violation (`users_email_key`)                   | `UserMigrationTest#testDuplicateEmail`     |
+| `EC-002`     | Cascading user deletion   | Deleting a user must cascade delete all associated refresh tokens          | `UserMigrationTest#testCascadeDelete`      |
+| `EC-003`     | Null or empty token hash  | Schema column constraint rejects `NULL` values                             | `UserMigrationTest#testNullTokenRejection` |
+| `EC-004`     | Timezone persistence      | `created_at` timestamp must store and return UTC without offset truncation | `UserMigrationTest#testUtcTimezone`        |
 
 ### 3.7. Deterministic Verification Commands & Output Parsing Rules
 
@@ -257,6 +263,7 @@ Executing agents, subagents, and tools query precise subsections of the task spe
 
 ## 5. Revisions
 
-| Date | Version | Description | Source |
-|:---|:---|:---|:---|
-| 2026-09-06 | 0.1.0 | Initial canonical task specification (`task_spec.html`) detailing the 4-dimension paradigm (explicit context, atomic granularity, deterministic validation, upfront edge cases), verification commands, and XPath patterns. | [Work Item Documents](README.md) |
+| Date       | Version | Description                                                                                                                                                                                                                 | Source                           |
+|:-----------|:--------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------|
+| 2026-09-06 | 0.2.0   | Added `task.diff` to task directory layout and artifact catalog.                                                                                                                                                            | [Work Item Documents](README.md) |
+| 2026-09-06 | 0.1.0   | Initial canonical task specification (`task_spec.html`) detailing the 4-dimension paradigm (explicit context, atomic granularity, deterministic validation, upfront edge cases), verification commands, and XPath patterns. | [Work Item Documents](README.md) |

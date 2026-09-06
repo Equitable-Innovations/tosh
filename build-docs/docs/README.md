@@ -176,6 +176,7 @@ The TOSH documentation ecosystem is partitioned into five distinct domains:
   - `phases/phase_##/phase_summary.html`: Phase milestone completion summary.
   - `phases/phase_##/tasks/task_###/task_spec.html`: Granular task instructions and modified file targets.
   - `phases/phase_##/tasks/task_###/validation.html`: Unit/integration test results and verification logs.
+  - `phases/phase_##/tasks/task_###/task.diff`: Unified git diff of code modifications produced by the task.
   - `phases/phase_##/tasks/task_###/summary.html`: Implemented file changes, git diff summary, and PR links.
   - `phases/phase_##/tasks/task_###/conversation.jsonl`: Raw agentic interaction and tool invocation log.
   - `phases/phase_##/tasks/task_###/metrics.json`: Granular token, cost, and latency telemetry.
@@ -230,7 +231,7 @@ To complete the design phase for the document ecosystem, each domain under `buil
 
 | Domain Subfolder | Specification Status | Tracking Topic / Artifacts |
 |:---|:---|:---|
-| [`work-items/`](work-items/README.md) | **Complete (17 specs)** | 17 detailed specifications authored: `requirements.md`, `technical-design.md`, `implementation-plan.md`, `work-item-ledger.md`, `plan-validation.md`, `plan-summary.md`, `plan-conversation-summary.md`, `plan-conversation-metrics.md`, `phase-specification.md`, `phase-validation.md`, `phase-summary.md`, `task-specification.md`, `task-validation.md`, `task-summary.md`, `task-conversation.md`, `task-conversation-metrics.md`, `work-item-document-metadata-definition.md`. |
+| [`work-items/`](work-items/README.md) | **Complete (18 specs)** | 18 detailed specifications authored: `requirements.md`, `technical-design.md`, `implementation-plan.md`, `work-item-ledger.md`, `plan-validation.md`, `plan-summary.md`, `plan-conversation-summary.md`, `plan-conversation-metrics.md`, `phase-specification.md`, `phase-validation.md`, `phase-summary.md`, `task-specification.md`, `task-validation.md`, `task-diff.md`, `task-summary.md`, `task-conversation.md`, `task-conversation-metrics.md`, `work-item-document-metadata-definition.md`. |
 | [`wiki/`](wiki/README.md) | *Pending Ideation* | Tracked in [`TOPIC-002`](../../topics/TOPIC-002-wiki-documents-domain-definition.md) (Defining wiki document types, templates, and metadata). |
 | [`sdk-api/`](sdk-api/README.md) | *Pending Ideation* | Tracked in [`TOPIC-004`](../../topics/TOPIC-004-sdk-api-documents-domain-definition.md) (Defining code API document types, granularity, and CodeGraph linkage). |
 | [`open-api/`](open-api/README.md) | *In Discussion* | Tracked in [`TOPIC-003`](../../topics/TOPIC-003-openapi-documents-rendering-and-storage.md) (OpenAPI JSON/YAML rendering in UI; defining storage layout and querying). |
@@ -266,6 +267,7 @@ When `tosh` operates inside a project repository, it generates and maintains all
 │   │   │       │       ├── task_001_create_tables/
 │   │   │       │       │   ├── task_spec.html
 │   │   │       │       │   ├── validation.html
+│   │   │       │       │   ├── task.diff
 │   │   │       │       │   ├── summary.html
 │   │   │       │       │   ├── conversation.jsonl
 │   │   │       │       │   └── metrics.json
@@ -391,5 +393,6 @@ All documents under `.tosh/` are plain text (XHTML, JSON, JSONL, CSS) designed f
 
 | Date | Version | Description | Source |
 |:---|:---|:---|:---|
+| 2026-09-06 | 0.3.0 | Added `task.diff` (Task Diff) specification to Work Items domain artifact inventory and directory layout. | Work Item Architecture Alignment |
 | 2026-09-05 | 0.2.0 | Fully built out document ecosystem architecture: 5-domain taxonomy, specification blueprint inventory, subsystem integration matrix, `.tosh/` runtime layout, universal XHTML baseline, token querying patterns, cross-domain DAG, and linkage to ideation topics TOPIC-001 through TOPIC-004. | Build Docs Harmonization |
 | 2026-08-30 | 0.1.0 | Initial outline of document domain breakdown. | Initial Document |

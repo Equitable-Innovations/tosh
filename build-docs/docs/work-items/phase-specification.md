@@ -1,8 +1,8 @@
 # Phase Specification Document Definition
 
 The Phase Specification (`phases/{phase_id}/phase_spec.html`) is the authoritative Tier 2 milestone specification
-governing an isolated phase of execution in the `tosh` work item lifecycle. It translates the high-level roadmap from the
-Implementation Plan (`02_implementation_plan.html`) into an ordered, bounded sequence of atomic task manifests.
+governing an isolated phase of execution in the `tosh` work item lifecycle. It translates the high-level roadmap from
+the Implementation Plan (`02_implementation_plan.html`) into an ordered, bounded sequence of atomic task manifests.
 
 Every phase specification enforces engineering discipline by establishing explicit context boundaries, referencing
 concrete codebase patterns, locking down forbidden files, decomposing work into single-responsibility tasks, and
@@ -23,12 +23,12 @@ This document serves a dual purpose:
 In `tosh`, phase specifications eliminate ambiguity by applying the four execution dimensions directly to milestone
 authoring:
 
-| Plan Dimension | Human Engineer Focus | AI Coding Tool Focus | `tosh` Phase Specification Manifestation |
-|:---|:---|:---|:---|
-| **Context** | Relies on tacit codebase conventions and tribal domain knowledge. | Needs explicit file paths, referenced patterns, and strict "do not touch" constraints. | Formulates an explicit phase workspace scope, cites target pattern files, and specifies a strict phase-level "do not touch" file manifest. |
-| **Granularity** | Focuses on high-level patterns and architecture; details left to implementation time. | Requires atomic, single-responsibility sub-tasks with deterministic inputs/outputs. | Deconstructs the phase milestone into an ordered manifest of atomic tasks (`task_001`, `task_002`), each with strict single responsibilities and contracts. |
-| **Validation** | Manual PR review, local exploratory debugging, automated CI. | Explicit terminal commands with deterministic output parsing (lint, test, build) after each step. | Prescribes phase-level integration test commands, prerequisite verification, and deterministic exit code gates before phase sign-off. |
-| **Edge Cases** | Usually caught through intuitive testing or code review cycles. | Must be exhaustively itemized upfront to prevent naive happy-path assumptions. | Itemizes phase-level boundary hazards, schema migration anomalies, concurrency race conditions, and rollback triggers upfront. |
+| Plan Dimension  | Human Engineer Focus                                                                  | AI Coding Tool Focus                                                                              | `tosh` Phase Specification Manifestation                                                                                                                    |
+|:----------------|:--------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Context**     | Relies on tacit codebase conventions and tribal domain knowledge.                     | Needs explicit file paths, referenced patterns, and strict "do not touch" constraints.            | Formulates an explicit phase workspace scope, cites target pattern files, and specifies a strict phase-level "do not touch" file manifest.                  |
+| **Granularity** | Focuses on high-level patterns and architecture; details left to implementation time. | Requires atomic, single-responsibility sub-tasks with deterministic inputs/outputs.               | Deconstructs the phase milestone into an ordered manifest of atomic tasks (`task_001`, `task_002`), each with strict single responsibilities and contracts. |
+| **Validation**  | Manual PR review, local exploratory debugging, automated CI.                          | Explicit terminal commands with deterministic output parsing (lint, test, build) after each step. | Prescribes phase-level integration test commands, prerequisite verification, and deterministic exit code gates before phase sign-off.                       |
+| **Edge Cases**  | Usually caught through intuitive testing or code review cycles.                       | Must be exhaustively itemized upfront to prevent naive happy-path assumptions.                    | Itemizes phase-level boundary hazards, schema migration anomalies, concurrency race conditions, and rollback triggers upfront.                              |
 
 ---
 
@@ -80,6 +80,7 @@ Every `phase_spec.html` begins with universal baseline `<meta>` tags, phase-spec
 Material Web ES module importmap loader:
 
 ```xhtml
+
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -124,15 +125,15 @@ Material Web ES module importmap loader:
 
 ### Phase Specification Header Metadata Contracts
 
-| Metadata Tag | Scope | Purpose | Example |
-|:---|:---|:---|:---|
-| `phase-id` | Phase / Spec | Unique phase directory identifier | `phase_01_database_migration` |
-| `phase-sequence` | Phase / Spec | Numeric ordinal representing the milestone position in the plan | `1` |
-| `parent-doc-id` | Phase / Spec | Points to the parent Implementation Plan `doc-id` | `WI-20260830T170936Z:02:PLAN` |
+| Metadata Tag        | Scope        | Purpose                                                                   | Example                       |
+|:--------------------|:-------------|:--------------------------------------------------------------------------|:------------------------------|
+| `phase-id`          | Phase / Spec | Unique phase directory identifier                                         | `phase_01_database_migration` |
+| `phase-sequence`    | Phase / Spec | Numeric ordinal representing the milestone position in the plan           | `1`                           |
+| `parent-doc-id`     | Phase / Spec | Points to the parent Implementation Plan `doc-id`                         | `WI-20260830T170936Z:02:PLAN` |
 | `depends-on-phases` | Phase / Spec | Comma-delimited prerequisite phase IDs that must reach `completed` status | `phase_01_database_migration` |
-| `total-tasks` | Phase / Spec | Total planned atomic task count defined in this phase | `3` |
-| `assigned-agents` | Phase / Spec | Agent roles assigned to execute or verify tasks in this phase | `agent:database-specialist` |
-| `required-skills` | Phase / Spec | Skill packages required by agents executing tasks in this phase | `skill:postgresql-migration` |
+| `total-tasks`       | Phase / Spec | Total planned atomic task count defined in this phase                     | `3`                           |
+| `assigned-agents`   | Phase / Spec | Agent roles assigned to execute or verify tasks in this phase             | `agent:database-specialist`   |
+| `required-skills`   | Phase / Spec | Skill packages required by agents executing tasks in this phase           | `skill:postgresql-migration`  |
 
 ---
 
@@ -143,8 +144,8 @@ Web Components (`md-*`), typography classes (`md-typescale-*`), and explicit dat
 
 ### 3.1. Document Header & Metadata Bar
 
-Anchors the phase document with the work item identifier, phase ordinal, phase title, lifecycle status chips, prerequisite
-phase references, and parent implementation plan navigation link.
+Anchors the phase document with the work item identifier, phase ordinal, phase title, lifecycle status chips,
+prerequisite phase references, and parent implementation plan navigation link.
 
 ### 3.2. Phase Objective & Milestone Scope
 
@@ -159,10 +160,10 @@ Defines the exact architectural deliverable of this milestone:
 Replaces implicit tribal assumptions with explicit boundaries:
 
 - **Target Modification Whitelist:** Explicit directories and package roots where task workers are permitted to write.
-- **Phase "Do Not Touch" Manifest:** Specific files and modules strictly quarantined during this phase to protect
-  system integrity (e.g., existing API routes, core security configurations, shared utilities).
-- **Inviolable Constraints:** Architectural invariants that no task in this phase may violate (e.g., zero breaking schema
-  changes, zero raw SQL queries outside repository layers).
+- **Phase "Do Not Touch" Manifest:** Specific files and modules strictly quarantined during this phase to protect system
+  integrity (e.g., existing API routes, core security configurations, shared utilities).
+- **Inviolable Constraints:** Architectural invariants that no task in this phase may violate (e.g., zero breaking
+  schema changes, zero raw SQL queries outside repository layers).
 
 ### 3.4. Referenced Architectural Patterns & Code Templates
 
@@ -177,13 +178,14 @@ architectural norms:
 
 The operational core of the phase specification. Details each atomic task in the execution sequence:
 
-| Task ID | Sequence | Category | Single Responsibility Summary | Target Files | Prerequisites (`dependsOn`) | Assigned Agent |
-|:---|:---|:---|:---|:---|:---|:---|
-| `task_001_create_tables` | 1 | `database` | Author Flyway migration for user and token entities | `V1__init_auth.sql` | None | `agent:database-specialist` |
-| `task_002_seed_roles` | 2 | `database` | Seed baseline RBAC permissions | `V2__seed_roles.sql` | `task_001_create_tables` | `agent:database-specialist` |
-| `task_003_verify_migration` | 3 | `test` | Execute migration integration test suite | `AuthMigrationIT.java` | `task_002_seed_roles` | `agent:backend-engineer` |
+| Task ID                     | Sequence | Category   | Single Responsibility Summary                       | Target Files           | Prerequisites (`dependsOn`) | Assigned Agent              |
+|:----------------------------|:---------|:-----------|:----------------------------------------------------|:-----------------------|:----------------------------|:----------------------------|
+| `task_001_create_tables`    | 1        | `database` | Author Flyway migration for user and token entities | `V1__init_auth.sql`    | None                        | `agent:database-specialist` |
+| `task_002_seed_roles`       | 2        | `database` | Seed baseline RBAC permissions                      | `V2__seed_roles.sql`   | `task_001_create_tables`    | `agent:database-specialist` |
+| `task_003_verify_migration` | 3        | `test`     | Execute migration integration test suite            | `AuthMigrationIT.java` | `task_002_seed_roles`       | `agent:backend-engineer`    |
 
 Each task entry enforces:
+
 - **Atomic Single Responsibility:** Scoped strictly to one discrete modification or artifact.
 - **Deterministic Inputs & Preconditions:** Initial state of schema, files, and dependencies before task start.
 - **Deterministic Outputs & Postconditions:** Expected files created, modified, or deleted upon completion.
@@ -200,9 +202,10 @@ Exhaustively catalogs boundary hazards and race conditions specific to the phase
 
 Specifies the automated integration commands that must execute successfully before the phase can be marked `completed`:
 
-- **Integration Test Commands:** Deterministic CLI commands (e.g., `mvn verify -Pmigration-tests`, `npm run test:e2e:phase1`).
-- **Deterministic Output Parsing Rules:** Required exit codes (`0`), expected test count thresholds, and forbidden stderr
-  patterns.
+- **Integration Test Commands:** Deterministic CLI commands (e.g., `mvn verify -Pmigration-tests`,
+  `npm run test:e2e:phase1`).
+- **Deterministic Output Parsing Rules:** Required exit codes (`0`), expected test count thresholds, and forbidden
+  stderr patterns.
 - **Sign-off Gate:** Verification that `phase_validation.html` records `validation-verdict="pass"` before Phase $N+1$
   is scheduled in the implementation ledger.
 
@@ -246,6 +249,6 @@ Downstream task planners, subagents, and orchestrators query targeted fragments 
 
 ## 5. Revisions
 
-| Date | Version | Description | Source |
-|:---|:---|:---|:---|
-| 2026-09-06 | 0.1.0 | Initial canonical phase specification (`phase_spec.html`) detailing the 4-dimension execution paradigm, sequential atomic task manifest, context constraints, referenced patterns, and XPath queries. | [Work Item Documents](README.md) |
+| Date       | Version | Description                                                                                                                                                                                           | Source                           |
+|:-----------|:--------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------|
+| 2026-09-06 | 0.1.0   | Initial canonical phase specification (`phase_spec.html`) detailing the 4-dimension execution paradigm, sequential atomic task manifest, context constraints, referenced patterns, and XPath queries. | [Work Item Documents](README.md) |
