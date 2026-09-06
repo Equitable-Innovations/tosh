@@ -4,9 +4,9 @@ The Task Diff Document (`tasks/{task_id}/task.diff`) is the authoritative Tier 3
 item lifecycle. It records the deterministic, unified git diff of all source code modifications, file creations, and
 deletions performed by an agent during atomic task execution.
 
-While [`task_spec.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-specification.md)
+While [`task_spec.html`](task-specification.md)
 declares upfront modification instructions and [
-`summary.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-summary.md) renders
+`summary.html`](task-summary.md) renders
 human-friendly M3 visual cards and summary metrics, `task.diff` is the pure, portable code patch file (`text/x-diff`,
 UTF-8). It provides an immutable, machine-applicable code diff that directly bridges agent code generation with version
 control systems, verification suites, and automated patch review pipelines.
@@ -19,7 +19,7 @@ This document serves a dual purpose:
 2. **Auditability & Boundary Verification:** Serves as an immutable artifact for verifying that only `target-files`
    declared in `task_spec.html` were altered and no files declared in the "do not touch" manifest were modified.
    Directly feeds into the `diffChurnRatio` calculations in [
-   `metrics.json`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-conversation-metrics.md).
+   `metrics.json`](task-conversation-metrics.md).
 
 ---
 
@@ -84,15 +84,15 @@ validation, summary, conversation log, and metrics:
 - **File Name:** `task.diff`
 - **Format:** Unified Diff format (`text/x-diff`, UTF-8, POSIX line endings `\n`).
 - **Lifecycle Scope:** Generated upon completion of task execution turns once code changes are made, preserved immutably
-  when [`validation.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-validation.md)
+  when [`validation.html`](task-validation.md)
   passes, and committed alongside [
-  `summary.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-summary.md).
+  `summary.html`](task-summary.md).
 - **Paired Artifacts:**
-    - Instructions: [`task_spec.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-specification.md)
-    - Verification Evidence: [`validation.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-validation.md)
-    - Commit Summary: [`summary.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-summary.md)
-    - Verbatim Transcript: [`conversation.jsonl`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-conversation.md)
-    - Aggregated Telemetry: [`metrics.json`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-conversation-metrics.md)
+    - Instructions: [`task_spec.html`](task-specification.md)
+    - Verification Evidence: [`validation.html`](task-validation.md)
+    - Commit Summary: [`summary.html`](task-summary.md)
+    - Verbatim Transcript: [`conversation.jsonl`](task-conversation.md)
+    - Aggregated Telemetry: [`metrics.json`](task-conversation-metrics.md)
 
 ---
 
@@ -294,7 +294,7 @@ Because `task.diff` is a standard unified patch, it enables deterministic worksp
 ### 5.1. Calculating Diff Churn Ratio
 
 `task.diff` provides the raw data required to calculate the `diffChurnRatio` metric recorded in [
-`metrics.json`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/task-conversation-metrics.md):
+`metrics.json`](task-conversation-metrics.md):
 
 $$\text{Diff Churn Ratio} = \frac{\text{Generated Lines Changed}}{\text{Net Accepted Lines}} = \frac{\text{Lines Added} + \text{Lines Deleted}}{\text{Lines Added} - \text{Lines Deleted}}$$
 

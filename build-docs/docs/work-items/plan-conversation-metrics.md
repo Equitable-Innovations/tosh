@@ -108,7 +108,7 @@ documents:
 - **Paired Log:** Session turns captured in `plan_conversation.jsonl` (or conversational memory store).
 - **Summary Document:** Rendered human narrative documented in
   [
-  `05_plan_conversation_summary.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/plan-conversation-summary.md).
+  `05_plan_conversation_summary.html`](plan-conversation-summary.md).
 
 ---
 
@@ -695,12 +695,12 @@ graph TD
   the root directory.
 - **Narrative Binding:** Detailed conversational exchanges and trade-offs are summarized in
   [
-  `05_plan_conversation_summary.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/plan-conversation-summary.md),
+  `05_plan_conversation_summary.html`](plan-conversation-summary.md),
   which links directly to `06_plan_conversation_metrics.json`.
 - **Ledger Rollup:** Key aggregates (`totalTokens`, `totalCostUsd`, `cacheReadHitRatePct`) are copied into the
   `metricsRollup` object of
   [
-  `03_implementation_ledger.json`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/work-item-ledger.md).
+  `03_implementation_ledger.json`](work-item-ledger.md).
 
 ---
 

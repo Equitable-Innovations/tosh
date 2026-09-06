@@ -929,7 +929,7 @@ graph LR
 ### 6.1. 1:1 Requirement Traceability (`implementsReq`)
 
 Every task explicitly itemizes the requirement IDs from [
-`00_requirements.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/requirements.md) that it
+`00_requirements.html`](requirements.md) that it
 fulfills:
 
 - Enables instant calculation of requirement completion percentages.
@@ -1109,14 +1109,14 @@ graph TD
 ```
 
 - **Plan Validation Gate:** The ledger's root `status` remains `pending` and all phases remain locked until [
-  `03_plan_validation.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/plan-validation.md)
+  `03_plan_validation.html`](plan-validation.md)
   records `validation-verdict="pass"`.
 - **Phase Validation Gate:** Phase $N+1$ cannot transition from `pending` to `ready` until Phase $N$'s [
-  `phase_validation.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/phase-validation.md)
+  `phase_validation.html`](phase-validation.md)
   records `pass`.
 - **Summary Generation:** When all tasks and phases reach `completed`, the ledger's aggregated metrics, task lists, and
   file registries are compiled into [
-  `04_plan_summary.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/plan-summary.md).
+  `04_plan_summary.html`](plan-summary.md).
 
 ---
 
@@ -1134,7 +1134,7 @@ graph TD
    Draft 2020-12 definition. Any malformed write is rejected.
 6. **No Historical Deliberation:** The ledger contains only facts, states, paths, metrics, and relationships. Narrative
    debates belong strictly in [
-   `05_plan_conversation_summary.html`](file:///C:/Users/samue/IdeaProjects/tosh/build-docs/docs/work-items/plan-conversation-summary.md).
+   `05_plan_conversation_summary.html`](plan-conversation-summary.md).
 
 ---
 
