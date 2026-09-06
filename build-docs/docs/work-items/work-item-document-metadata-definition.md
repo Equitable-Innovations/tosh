@@ -1,25 +1,27 @@
 # Work Item Document Metadata Definition
 
 ## Table of Contents
+
 1. [Mandatory Universal Baseline](#mandatory-universal-baseline-all-documents)
 2. [Work Item Level Documents](#work-item-level-documents)
-   1. [Requirements Document](#requirements-00_requirementshtml)
-   2. [Design Specification](#design-specification-01_design_spechtml)
-   3. [Implementation Plan](#implementation-plan-02_implementation_planhtml)
-   4. [Implementation Plan Validation](#implementation-plan-validation-03_plan_validationhtml)
-   5. [Implementation Plan Summary](#implementation-plan-summary-04_plan_summaryhtml)
-   6. [Implementation Plan Conversation Summary](#implementation-plan-conversation-summary-05_plan_conversation_summaryhtml)
-   7. [Implementation Plan Conversation Metrics](#implementation-plan-conversation-metrics-06_plan_conversation_metricsjson)
+    1. [Requirements Document](#requirements-00_requirementshtml)
+    2. [Design Specification](#design-specification-01_design_spechtml)
+    3. [Implementation Plan](#implementation-plan-02_implementation_planhtml)
+    4. [Implementation Plan Validation](#implementation-plan-validation-03_plan_validationhtml)
+    5. [Implementation Plan Summary](#implementation-plan-summary-04_plan_summaryhtml)
+    6. [Implementation Plan Conversation Summary](#implementation-plan-conversation-summary-05_plan_conversation_summaryhtml)
+    7. [Implementation Plan Conversation Metrics](#implementation-plan-conversation-metrics-06_plan_conversation_metricsjson)
 3. [Phase Level Documents](#phase-level-documents)
-   1. [Implementation Phase Specification](#implementation-phase-specification-phasesphasephase_spechtml)
-   2. [Implementation Phase Validation](#implementation-phase-validation-phasesphasephase_validationhtml)
-   3. [Implementation Phase Summary](#implementation-phase-summary-phasesphasephase_summaryhtml)
+    1. [Implementation Phase Specification](#implementation-phase-specification-phasesphasephase_spechtml)
+    2. [Implementation Phase Validation](#implementation-phase-validation-phasesphasephase_validationhtml)
+    3. [Implementation Phase Summary](#implementation-phase-summary-phasesphasephase_summaryhtml)
 4. [Task Level Documents](#task-level-documents)
-   1. [Implementation Task Specification](#implementation-task-specification-taskstasktask_spechtml)
-   2. [Implementation Task Validation](#implementation-task-validation-taskstaskvalidationhtml)
-   3. [Implementation Task Summary](#implementation-task-summary-taskstasksummaryhtml)
-   4. [Implementation Task Conversation Log](#implementation-task-conversation-log-taskstaskconversationjsonl)
-   5. [Implementation Task Conversation Log](#implementation-task-conversation-metrics-taskstaskmetricsjson)
+    1. [Implementation Task Specification](#implementation-task-specification-taskstasktask_spechtml)
+    2. [Implementation Task Validation](#implementation-task-validation-taskstaskvalidationhtml)
+    3. [Implementation Task Diff](#implementation-task-diff-taskstasktaskdiff)
+    4. [Implementation Task Summary](#implementation-task-summary-taskstasksummaryhtml)
+    5. [Implementation Task Conversation Log](#implementation-task-conversation-log-taskstaskconversationjsonl)
+    6. [Implementation Task Conversation Metrics](#implementation-task-conversation-metrics-taskstaskmetricsjson)
 
 ## Mandatory Universal Baseline (All Documents)
 
@@ -50,13 +52,17 @@ schema version, and the root work item:
 
 ### Design Specification (`01_design_spec.html`)
 
-| Tag                    | Definition                                                                            |
-|------------------------|---------------------------------------------------------------------------------------|
-| `doc-type`             | design-spec                                                                           |
-| `parent-doc-id`        | Points to Requirements `doc-id`                                                       |
-| `implements-req`       | Comma-delimited list of requirement IDs covered (e.g., `REQ-001`,`REQ-002`,`REQ-003`) |
-| `architectural-domain` | Scope (e.g., `backend-service`, `database`, `full-stack`)                             |
-| `target-frameworks`    | Tech stack dependencies (e.g., `spring-boot`,`postgresql`,`jwt`)                      |
+| Tag                    | Definition                                                                                                  |
+|------------------------|-------------------------------------------------------------------------------------------------------------|
+| `doc-type`             | design-spec                                                                                                 |
+| `parent-doc-id`        | Points to Requirements `doc-id`                                                                             |
+| `implements-req`       | Comma-delimited list of requirement IDs covered (e.g., `REQ-001`,`REQ-002`,`REQ-003`)                       |
+| `architectural-domain` | Scope (e.g., `backend-service`, `database`, `full-stack`)                                                   |
+| `target-frameworks`    | Tech stack dependencies (e.g., `spring-boot`,`postgresql`,`jwt`)                                            |
+| `assigned-agents`      | Comma-delimited list of assigned agents (e.g., `agent:backend-engineer,agent:security-auditor`)             |
+| `required-skills`      | Comma-delimited list of required skills (e.g., `skill:spring-boot-jwt-auth,skill:owasp-verification`)       |
+| `ai-tools`             | Comma-delimited list of MCP tools/servers (e.g., `mcp:db-inspector,mcp:ast-grep,cli:tosh`)                  |
+| `new-ai-components`    | Comma-delimited list of new AI components (e.g., `skill:spring-boot-jwt-auth,agent:auth-regression-tester`) |
 
 ### Implementation Plan (`02_implementation_plan.html`)
 
@@ -71,13 +77,21 @@ schema version, and the root work item:
 
 ### Implementation Plan Validation (`03_plan_validation.html`)
 
-| Tag                     | Definition                                           |
-|-------------------------|------------------------------------------------------|
-| `doc-type`              | plan-validation                                      |
-| `parent-doc-id`         | Points to Implementation Plan `doc-id`               |
-| `validation-verdict`    | `pass` \| `fail` \| `warn`                           |
-| `validation-scope`      | `completeness`,`feasibility`,`security`              |
-| `blocking-issues-count` | Total blocking defects found in the plan (e.g., `0`) |
+| Tag                            | Definition                                                                  |
+|--------------------------------|-----------------------------------------------------------------------------|
+| `doc-type`                     | plan-validation                                                             |
+| `parent-doc-id`                | Points to Implementation Plan `doc-id`                                      |
+| `validation-stage`             | Lifecycle stage (`pre-execution-spec` \| `final-completion-verdict`)         |
+| `validation-verdict`           | Formal gating verdict (`pass` \| `fail` \| `warn` \| `pending`)             |
+| `validation-scope`             | Evaluated domains (`completeness,feasibility,security,acceptance,e2e`)      |
+| `tests-planned`                | Total planned test assertions across all suites (e.g., `42`)                 |
+| `tests-executed`               | Number of test assertions executed (e.g., `42`)                              |
+| `tests-passed`                 | Total passing test assertions (e.g., `42`)                                  |
+| `tests-failed`                 | Total failing test assertions (e.g., `0`)                                   |
+| `blocking-issues-count`        | Total blocking defects found (e.g., `0`)                                    |
+| `fpsr`                         | First-Pass Success Rate (`1.0` \| `0.0`)                                    |
+| `manual-verification-required` | Whether manual verification items exist (`true` \| `false`)                 |
+| `manual-sign-off-status`       | Status of manual sign-off (`pending` \| `approved` \| `rejected` \| `n/a`)  |
 
 ### Implementation Plan Summary (`04_plan_summary.html`)
 
@@ -92,13 +106,18 @@ schema version, and the root work item:
 
 ### Implementation Plan Conversation Summary (`05_plan_conversation_summary.html`)
 
-| Tag                  | Definition                                                                        |
-|----------------------|-----------------------------------------------------------------------------------|
-| `doc-type`           | plan-conversation-summary                                                         |
-| `parent-doc-id`      | Points to Implementation Plan `doc-id`                                            |
-| `metrics-ref`        | Relative path to Plan Conversation Metrics (`06_plan_conversation_metrics.json`)  |
-| `agent-participants` | Comma-delimited list of agents (e.g., `orchestrator`,`architect`,code-`reviewer`) |
-| `turn-count`         | Total human-to-agent or agent-to-agent exchanges (e.g., `18`)                     |
+| Tag                    | Definition                                                                        |
+|------------------------|-----------------------------------------------------------------------------------|
+| `doc-type`             | plan-conversation-summary                                                         |
+| `parent-doc-id`        | Points to Implementation Plan `doc-id`                                            |
+| `metrics-ref`          | Relative path to Plan Conversation Metrics (`06_plan_conversation_metrics.json`)  |
+| `agent-participants`   | Comma-delimited list of agents (e.g., `orchestrator`,`architect`,code-`reviewer`) |
+| `turn-count`           | Total human-to-agent or agent-to-agent exchanges (e.g., `18`)                     |
+| `planning-duration-ms` | Elapsed wall-clock time for planning in milliseconds                              |
+| `total-tokens`         | Total tokens consumed during planning phase                                       |
+| `total-cost-usd`       | Total API cost of planning in USD                                                 |
+| `conversation-verdict` | Final conversational verdict (`approved` \| `reworked` \| `escalated`)            |
+| `fpsr`                 | First-Pass Success Rate for plan approval (`1.0` \| `0.0`)                        |
 
 ### Implementation Plan Conversation Metrics (`06_plan_conversation_metrics.json`)
 
@@ -183,6 +202,13 @@ schema version, and the root work item:
 | `assertions-failed`    | Count of failing assertions (e.g., `0`) |
 | `coverage-delta`       | Code coverage delta (e.g., `+2.4%`)     |
 
+### Implementation Task Diff (`.../tasks/{task}/task.diff`)
+
+Raw unified git diff file capturing code modifications created during task execution. Standard unified diff (`diff -u`) format with file paths relative to repository root.
+
+- **Format:** Unified Diff (`text/x-diff`, UTF-8).
+- **Referenced In:** `03_implementation_ledger.json` (`phases[].tasks[].paths.diff`), `summary.html` (`<meta name="diff-ref" content="task.diff"/>`), `conversation.jsonl` (`paths.diff`).
+
 ### Implementation Task Summary (`.../tasks/{task}/summary.html`)
 
 | Tag                     | Definition                             |
@@ -195,6 +221,7 @@ schema version, and the root work item:
 | `files-created`         | Comma-delimited paths of new files     |
 | `files-modified`        | Comma-delimited paths of updated files |
 | `task-verdict`          | `success` \| `failed`                  |
+| `diff-ref`              | Relative path pointer to `task.diff`   |
 
 ### Implementation Task Conversation Log (`.../tasks/{task}/conversation.jsonl`)
 
