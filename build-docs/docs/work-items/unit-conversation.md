@@ -1,11 +1,11 @@
-# Task Conversation Log Document Definition
+# Unit Conversation Log Document Definition
 
-The **Task Conversation Log Document** (`tasks/{task_id}/conversation.jsonl`) is the authoritative Tier 3 interaction
+The **Unit Conversation Log Document** (`units/{unit_id}/conversation.jsonl`) is the authoritative Tier 3 interaction
 record in the **Token Optimized Software Harness (`tosh`)** work item lifecycle. It provides an immutable, append-only,
 turn-by-turn log of the entire agentic LLM dialogue, system prompts, reasoning traces, tool executions, terminal command
-streams, and verification feedback from atomic task activation through task closure.
+streams, and verification feedback from atomic unit activation through unit closure.
 
-In `tosh`, task conversation logs are not mere debugging dumps. They form the foundational telemetry data lake powering
+In `tosh`, unit conversation logs are not mere debugging dumps. They form the foundational telemetry data lake powering
 **systemic feedback loops**, including:
 
 - **Offline Model Fine-Tuning & Distillation (SFT/DPO):** Mining successful execution trajectories for high-performance
@@ -22,22 +22,22 @@ This document serves a dual purpose:
    streamable format.
 2. **Agent / Harness Interface:** Serves as the machine-parseable event stream from which the harness deterministically
    derives [
-   `metrics.json`](task-conversation-metrics.md),
+   `metrics.json`](unit-conversation-metrics.md),
    validates boundary compliance, and feeds downstream dataset generators.
 
 ---
 
-## Core Execution Paradigm: Applying the 4 Dimensions to Task Conversations
+## Core Execution Paradigm: Applying the 4 Dimensions to Unit Conversations
 
-In `tosh`, the task conversation log mechanically records the agent's interaction across the four core planning
+In `tosh`, the unit conversation log mechanically records the agent's interaction across the four core
 dimensions:
 
-| Plan Dimension  | Human Engineer Focus                                                                  | AI Coding Tool Focus                                                                              | `tosh` Task Conversation Log Manifestation                                                                                                    |
+| Dimension       | Human Engineer Focus                                                                  | AI Coding Tool Focus                                                                              | `tosh` Unit Conversation Log Manifestation                                                                                                    |
 |:----------------|:--------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------|
 | **Context**     | Relies on tacit codebase conventions and tribal domain knowledge.                     | Needs explicit file paths, referenced patterns, and strict "do not touch" constraints.            | Logs exact system prompt states, injected file contents, and scratchpad memory for every turn, tracking context drift and cache invalidation. |
-| **Granularity** | Focuses on high-level patterns and architecture; details left to implementation time. | Requires atomic, single-responsibility sub-tasks with deterministic inputs/outputs.               | Strictly isolates conversation turns to the bounded lifecycle of an individual task, eliminating multi-task chatter and context dilution.     |
-| **Validation**  | Manual PR review, local exploratory debugging, automated CI.                          | Explicit terminal commands with deterministic output parsing (lint, test, build) after each step. | Captures verbatim terminal tool inputs, stdout, stderr, process return codes, and test assertions that prompted agent code adjustments.       |
-| **Edge Cases**  | Usually caught through intuitive testing or code review cycles.                       | Must be exhaustively itemized upfront to prevent naive happy-path assumptions.                    | Records the exact dialogue steps where the agent encountered, reasoned through, and satisfied the task's itemized edge cases (`EC-###`).      |
+| **Granularity** | Focuses on high-level patterns and architecture; details left to implementation time. | Requires atomic, single-responsibility sub-units with deterministic inputs/outputs.               | Strictly isolates conversation turns to the bounded lifecycle of an individual unit, eliminating multi-unit chatter and context dilution.     |
+| **Verification** | Manual PR review, local exploratory debugging, automated CI.                          | Explicit terminal commands with deterministic output parsing (lint, test, build) after each step. | Captures verbatim terminal tool inputs, stdout, stderr, process return codes, and test assertions that prompted agent code adjustments.       |
+| **Edge Cases**  | Usually caught through intuitive testing or code review cycles.                       | Must be exhaustively itemized upfront to prevent naive happy-path assumptions.                    | Records the exact dialogue steps where the agent encountered, reasoned through, and satisfied the unit's itemized edge cases (`EC-###`).      |
 
 ---
 
@@ -64,35 +64,35 @@ dimensions:
 
 ## 1. File Location & Organization Standard
 
-The task conversation log resides directly inside the isolated task directory alongside its paired specification,
+The unit conversation log resides directly inside the isolated unit directory alongside its paired specification,
 validation, summary, and telemetry documents:
 
 ```text
 .tosh/
 └── work_items/
-    └── {work-item-id}/
-        └── phases/
+    └── {intent-id}/
+        └── sub_intents/
             └── phase_{NN}_{phase_slug}/
-                └── tasks/
+                └── units/
                     └── task_{NNN}_{task_slug}/
-                        ├── task_spec.html          # Scope, File Targets & Verification Commands
-                        ├── validation.html         # Test Runs, Exit Codes & Formal Verdict
-                        ├── task.diff               # Task File Diff 
+                        ├── intent_unit_spec.html          # Scope, File Targets & Verification Commands
+                        ├── verification.html         # Test Runs, Exit Codes & Formal Verdict
+                        ├── intent.diff               # Unit File Diff 
                         ├── summary.html            # File Touchpoints & Git Diff Summary
                         ├── conversation.jsonl      # Authoritative Turn-by-Turn Interaction Log
                         └── metrics.json            # Derived Token, Trajectory & Cost Telemetry
 ```
 
-- **File Name:** `conversation.jsonl` (also referenced as `task-conversation.jsonl` in conversational workflows).
+- **File Name:** `conversation.jsonl` (also referenced as `unit-conversation.jsonl` in conversational workflows).
 - **Format:** JSON Lines (`application/x-ndjson`, UTF-8, exactly one JSON object per line).
-- **Lifecycle Scope:** Initiated when the task is activated (`status: "in-progress"`) and closed when validation passes
+- **Lifecycle Scope:** Initiated when the unit is activated (`status: "in-progress"`) and closed when validation passes
   and `summary.html` is committed.
 - **Paired Artifacts:**
-    - Instructions: [`task_spec.html`](task-specification.md)
-    - Verification Evidence: [`validation.html`](task-validation.md)
-    - Diff: [task.diff](task-diff.md) 
-    - Commit Summary: [`summary.html`](task-summary.md)
-    - Aggregated Telemetry: [`metrics.json`](task-conversation-metrics.md)
+    - Instructions: [`intent_unit_spec.html`](intent-unit-specification.md)
+    - Verification Evidence: [`verification.html`](unit-verification.md)
+    - Diff: [intent.diff](intent-diff.md) 
+    - Commit Summary: [`summary.html`](unit-summary.md)
+    - Aggregated Telemetry: [`metrics.json`](unit-conversation-metrics.md)
 
 ---
 
@@ -102,7 +102,7 @@ validation, summary, and telemetry documents:
 prompts, assistant reasoning, and raw tool payloads) with structured telemetry metadata envelopes (usage, prompt
 caching, intermediate verification checks, and context statistics).
 
-The event stream follows a 3-phase structural lifecycle:
+The event stream follows a 3-sub-intent structural lifecycle:
 
 ```mermaid
 sequenceDiagram
@@ -110,16 +110,16 @@ sequenceDiagram
     participant Harness as Tosh Harness
     participant Log as conversation.jsonl
     participant LLM as Agent Model
-    Note over Harness, Log: Phase 1: Activation
-    Harness ->> Log: Append Event 1: event = "metadata" (Task Identity & Config)
-    Note over Harness, LLM: Phase 2: Iterative Execution Loop
-    loop Task Execution Turns (1 to N)
+    Note over Harness, Log: Sub-Intent 1: Activation
+    Harness ->> Log: Append Event 1: event = "metadata" (Unit Identity & Config)
+    Note over Harness, LLM: Sub-Intent 2: Iterative Execution Loop
+    loop Unit Execution Turns (1 to N)
         Harness ->> LLM: Ingest User / Tool Context
         LLM -->> Harness: Reasoning + Tool Call / Text Response
         Harness ->> Log: Append Event: event = "turn" (Verbatim Content + Telemetry Envelope)
     end
 
-    Note over Harness, Log: Phase 3: Closure
+    Note over Harness, Log: Sub-Intent 3: Closure
     Harness ->> Log: Append Final Event: event = "session_close" (Verdict & Rollup Pointer)
 ```
 
@@ -133,12 +133,12 @@ and parent work-item coordinates:
 ```json
 {
   "event": "metadata",
-  "docId": "WI-20260830T170936Z:P01:T001:CONV",
-  "docType": "task-conversation-log",
+  "docId": "WI-20260830T170936Z:S01:U001:CONV",
+  "docType": "unit-conversation-log",
   "schemaVersion": "1.0.0",
   "workItemId": "20260830T170936Z_user_auth_service",
-  "phaseId": "phase_01_database_migration",
-  "taskId": "task_001_create_tables",
+  "subIntentId": "sub_intent_01_database_migration",
+  "unitId": "unit_001_create_tables",
   "sessionId": "sess-wi-20260830T170936Z-p01-t001",
   "agent": {
     "role": "backend-engineer",
@@ -147,11 +147,11 @@ and parent work-item coordinates:
     "harnessVersion": "tosh-v0.2.0"
   },
   "paths": {
-    "spec": "phases/phase_01_database_migration/tasks/task_001_create_tables/task_spec.html",
-    "validation": "phases/phase_01_database_migration/tasks/task_001_create_tables/validation.html",
-    "diff": "phases/phase_01_database_migration/tasks/task_001_create_tables/task.diff",
-    "summary": "phases/phase_01_database_migration/tasks/task_001_create_tables/summary.html",
-    "metrics": "phases/phase_01_database_migration/tasks/task_001_create_tables/metrics.json"
+    "spec": "sub_intents/sub_intent_01_database_migration/units/unit_001_create_tables/intent_unit_spec.html",
+    "validation": "sub_intents/sub_intent_01_database_migration/units/unit_001_create_tables/verification.html",
+    "diff": "sub_intents/sub_intent_01_database_migration/units/unit_001_create_tables/intent.diff",
+    "summary": "sub_intents/sub_intent_01_database_migration/units/unit_001_create_tables/summary.html",
+    "metrics": "sub_intents/sub_intent_01_database_migration/units/unit_001_create_tables/metrics.json"
   },
   "createdAt": "2026-08-30T17:10:00Z"
 }
@@ -227,19 +227,19 @@ conversational data and structured telemetry:
 
 ### 2.3. Session Closure Event (`event: session_close`)
 
-The final entry records formal task termination, linking to the passing validation verdict and generated metrics:
+The final entry records formal unit termination, linking to the passing validation verdict and generated metrics:
 
 ```json
 {
   "event": "session_close",
   "sessionId": "sess-wi-20260830T170936Z-p01-t001",
-  "taskId": "task_001_create_tables",
+  "unitId": "unit_001_create_tables",
   "status": "completed",
   "finalVerdict": "pass",
   "totalTurns": 4,
   "completedAt": "2026-08-30T17:14:22Z",
   "executionDurationMs": 262000,
-  "metricsRollupRef": "phases/phase_01_database_migration/tasks/task_001_create_tables/metrics.json"
+  "metricsRollupRef": "sub_intents/sub_intent_01_database_migration/units/unit_001_create_tables/metrics.json"
 }
 ```
 
@@ -247,17 +247,17 @@ The final entry records formal task termination, linking to the passing validati
 
 ## 3. Complete Multi-Turn JSONL Walkthrough Example
 
-The following annotated JSONL excerpt demonstrates a clean, 4-turn execution of an atomic database migration task:
+The following annotated JSONL excerpt demonstrates a clean, 4-turn execution of an atomic database migration unit:
 
 ```json
 {
   "event": "metadata",
-  "docId": "WI-20260830T170936Z:P01:T001:CONV",
-  "docType": "task-conversation-log",
+  "docId": "WI-20260830T170936Z:S01:U001:CONV",
+  "docType": "unit-conversation-log",
   "schemaVersion": "1.0.0",
   "workItemId": "20260830T170936Z_user_auth_service",
-  "phaseId": "phase_01_database_migration",
-  "taskId": "task_001_create_tables",
+  "subIntentId": "sub_intent_01_database_migration",
+  "unitId": "unit_001_create_tables",
   "sessionId": "sess-wi-20260830T170936Z-p01-t001",
   "agent": {
     "role": "backend-engineer",
@@ -274,7 +274,7 @@ The following annotated JSONL excerpt demonstrates a clean, 4-turn execution of 
   "content": [
     {
       "type": "text",
-      "text": "Execute task task_001_create_tables according to phases/phase_01_database_migration/tasks/task_001_create_tables/task_spec.html"
+      "text": "Execute unit unit_001_create_tables according to sub_intents/sub_intent_01_database_migration/units/unit_001_create_tables/intent_unit_spec.html"
     }
   ],
   "usage": {
@@ -336,7 +336,7 @@ The following annotated JSONL excerpt demonstrates a clean, 4-turn execution of 
   "turnIndex": 3,
   "timestamp": "2026-08-30T17:11:50Z",
   "role": "assistant",
-  "thinking": "Now authoring the initial Flyway migration script V1__init_auth.sql containing user_accounts and refresh_tokens tables as specified in task_spec.html.",
+  "thinking": "Now authoring the initial Flyway migration script V1__init_auth.sql containing user_accounts and refresh_tokens tables as specified in intent_unit_spec.html.",
   "content": [
     {
       "type": "text",
@@ -383,7 +383,7 @@ The following annotated JSONL excerpt demonstrates a clean, 4-turn execution of 
   "turnIndex": 4,
   "timestamp": "2026-08-30T17:13:30Z",
   "role": "assistant",
-  "thinking": "Executing deterministic terminal test command defined in task_spec.html: mvn test -Dtest=FlywayMigrationTest.",
+  "thinking": "Executing deterministic terminal test command defined in intent_unit_spec.html: mvn test -Dtest=FlywayMigrationTest.",
   "content": [
     {
       "type": "text",
@@ -428,13 +428,13 @@ The following annotated JSONL excerpt demonstrates a clean, 4-turn execution of 
 {
   "event": "session_close",
   "sessionId": "sess-wi-20260830T170936Z-p01-t001",
-  "taskId": "task_001_create_tables",
+  "unitId": "unit_001_create_tables",
   "status": "completed",
   "finalVerdict": "pass",
   "totalTurns": 4,
   "completedAt": "2026-08-30T17:14:22Z",
   "executionDurationMs": 262000,
-  "metricsRollupRef": "phases/phase_01_database_migration/tasks/task_001_create_tables/metrics.json"
+  "metricsRollupRef": "sub_intents/sub_intent_01_database_migration/units/unit_001_create_tables/metrics.json"
 }
 ```
 
@@ -446,7 +446,7 @@ The following annotated JSONL excerpt demonstrates a clean, 4-turn execution of 
 
 ```mermaid
 flowchart TD
-    LOGS["conversation.jsonl<br/>(Task Session Logs)"] --> HARVESTER["Tosh Telemetry & Trajectory Harvester"]
+    LOGS["conversation.jsonl<br/>(Unit Session Logs)"] --> HARVESTER["Tosh Telemetry & Trajectory Harvester"]
 
     subgraph FeedbackLoops [Automated Feedback & Optimization Loops]
         HARVESTER -->|FPSR = 1 . 0 & Turns ≤ 4| SFT["1. SFT / DPO Dataset Generator<br/>(Gold Standard Exemplars & Preference Pairs)"]
@@ -491,7 +491,7 @@ flowchart TD
   `E0382: borrow of moved value`)
   and correlates them with the number of repair turns required to fix them.
 - When high-repair-depth errors are identified, the harness automatically injects targeted few-shot repair prompts or
-  pre-linting shims directly into future task execution templates.
+  pre-linting shims directly into future unit execution templates.
 
 ---
 
@@ -545,24 +545,24 @@ jq -c '
 
 ## 6. Lineage, Rollup & Ledger Integration
 
-The task conversation log anchors the lowest level of execution evidence, feeding into summaries and state ledgers:
+The unit conversation log anchors the lowest level of execution evidence, feeding into summaries and state ledgers:
 
 ```mermaid
 graph TD
-    SPEC["task_spec.html"] --> LOG["conversation.jsonl<br/>(Verbatim Interaction & Tools)"]
+    SPEC["intent_unit_spec.html"] --> LOG["conversation.jsonl<br/>(Verbatim Interaction & Tools)"]
     LOG -->|" Aggregated into "| METRICS["metrics.json<br/>(Token & Cost Telemetry)"]
-    LOG -->|" Git Patch Capture "| DIFF["task.diff<br/>(Unified Git Diff)"]
-    DIFF -->|" Verification Evidence "| VAL["validation.html<br/>(Exit Codes & Assertion Verdict)"]
+    LOG -->|" Git Patch Capture "| DIFF["intent.diff<br/>(Unified Git Diff)"]
+    DIFF -->|" Verification Evidence "| VAL["verification.html<br/>(Exit Codes & Assertion Verdict)"]
     DIFF -->|" Git Diff Telemetry "| SUM["summary.html<br/>(Modified Files & Diffs)"]
-    METRICS -->|" Rollup to Task Node "| LEDGER["03_implementation_ledger.json"]
+    METRICS -->|" Rollup to Unit Node "| LEDGER["03_intent_ledger.json"]
 ```
 
-- **Ledger Pointer:** Registered in `03_implementation_ledger.json` under
-  `phases[].tasks[].paths.conversation` (`phases/{phase}/tasks/{task}/conversation.jsonl`).
+- **Ledger Pointer:** Registered in `03_intent_ledger.json` under
+  `sub-intents[].units[].paths.conversation` (`sub_intents/{sub-intent}/units/{unit}/conversation.jsonl`).
 - **Telemetry Derivation:** [
-  `metrics.json`](task-conversation-metrics.md)
-  is deterministically compiled from `conversation.jsonl` upon task completion.
-- **Audit Lineage:** Cited in `summary.html` and `validation.html` as the authoritative execution transcript.
+  `metrics.json`](unit-conversation-metrics.md)
+  is deterministically compiled from `conversation.jsonl` upon unit completion.
+- **Audit Lineage:** Cited in `summary.html` and `verification.html` as the authoritative execution transcript.
 
 ---
 
@@ -584,6 +584,7 @@ graph TD
 
 | Date       | Version | Description                                                                                                                                                                                                     | Source                 |
 |:-----------|:--------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------|
-| 2026-09-06 | 1.1.0   | Added `task.diff` path to metadata event schema and updated execution lineage graph.                                                                                                                            | Feature Specification  |
-| 2026-09-06 | 1.0.0   | Authoritative specification for Task Conversation Log (`tasks/{task_id}/conversation.jsonl`) defining the hybrid event stream schema, multi-turn walkthrough, and downstream feedback loop optimization engine. | Feature Specification  |
+| 2026-10-31 | 1.2.0 | Moved to the intent-based document set: intent, sub-intent, and unit terminology, convergence states, required target scope, and evidence requirement IDs. | TOPIC-005 |
+| 2026-09-06 | 1.1.0   | Added `intent.diff` path to metadata event schema and updated execution lineage graph.                                                                                                                            | Feature Specification  |
+| 2026-09-06 | 1.0.0   | Authoritative specification for Unit Conversation Log (`units/{unit_id}/conversation.jsonl`) defining the hybrid event stream schema, multi-turn walkthrough, and downstream feedback loop optimization engine. | Feature Specification  |
 | 2026-08-30 | 0.1.0   | Initial baseline stub in metadata definition.                                                                                                                                                                   | Architecture Alignment |

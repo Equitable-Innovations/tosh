@@ -3,7 +3,7 @@
 | Metadata | Value |
 | :--- | :--- |
 | **Topic ID** | `TOPIC-005` |
-| **Status** | `IN_DISCUSSION` |
+| **Status** | `GRADUATED` |
 | **Facilitator** | @architect |
 | **Participants** | @architect, @team |
 | **Created Date** | 2026-10-31 |
@@ -46,18 +46,18 @@ Under this paradigm, the AI agent is not treated as a typist following a procedu
 
 ### Goals
 
-- [ ] Formulate the core philosophy and taxonomy of an **Intent-Based SDLC** tailored for autonomous AI agents within `tosh`.
-- [ ] Redefine the Three-Tier Execution Hierarchy from procedural artifacts (Work Item &rarr; Phase &rarr; Task) into an Intent-Driven Hierarchy (Intent Package &rarr; Sub-Intent Milestones &rarr; Atomic Intent Execution Units).
-- [ ] Establish explicit Intent terminology across document naming, schemas, and directories (e.g., `intent_spec.html`, `intent_decomposition.html`, `intent_ledger.json`, `intent_unit_spec.html`).
-- [ ] Define the Intent Convergence State Machine (`declared` &rarr; `formulating` &rarr; `converging` &rarr; `verified` &rarr; `settled`, with a `drift_detected` guard).
-- [ ] Map the migration and replacement strategy for all 18 existing documents in `build-docs/docs/work-items/`.
-- [ ] Detail token optimization benefits, XPath extraction patterns, and local CLI query mechanisms under declarative intent.
-- [ ] Align the Intent hierarchy with the stage model of the AI-native SDLC playbook (Plan, Design, Build, Test, Deploy, Maintain) and record where `tosh` follows or differs from it (see Section 9).
-- [ ] Define how invariants are enforced deterministically (hooks and CI gates) instead of only being declared in documents.
-- [ ] Define autonomy tiers, approval gates, and the rule that the agent that writes a change cannot approve it.
-- [ ] Define a "lessons" feedback loop so that failures become permanent invariants or verification checks.
-- [ ] Define stage handoff triggers and confidence gates, so that a state change in the ledger starts the next stage and unattended runs stop at a gate (see Section 9.9).
-- [ ] Define a plan-drift check that compares each `intent.diff` with its declared Target Scope (see Section 9.10).
+- [x] Formulate the core philosophy and taxonomy of an **Intent-Based SDLC** tailored for autonomous AI agents within `tosh`.
+- [x] Redefine the Three-Tier Execution Hierarchy from procedural artifacts (Work Item &rarr; Phase &rarr; Task) into an Intent-Driven Hierarchy (Intent Package &rarr; Sub-Intent Milestones &rarr; Atomic Intent Execution Units).
+- [x] Establish explicit Intent terminology across document naming, schemas, and directories (e.g., `intent_spec.html`, `intent_decomposition.html`, `intent_ledger.json`, `intent_unit_spec.html`).
+- [x] Define the Intent Convergence State Machine (`declared` &rarr; `formulating` &rarr; `converging` &rarr; `verified` &rarr; `settled`, with a `drift_detected` guard).
+- [x] Map the migration and replacement strategy for all 18 existing documents in `build-docs/docs/work-items/`.
+- [x] Detail token optimization benefits, XPath extraction patterns, and local CLI query mechanisms under declarative intent.
+- [x] Align the Intent hierarchy with the stage model of the AI-native SDLC playbook (Plan, Design, Build, Test, Deploy, Maintain) and record where `tosh` follows or differs from it (see Section 9).
+- [x] Define how invariants are enforced deterministically (hooks and CI gates) instead of only being declared in documents.
+- [x] Define autonomy tiers, approval gates, and the rule that the agent that writes a change cannot approve it.
+- [x] Define a "lessons" feedback loop so that failures become permanent invariants or verification checks.
+- [x] Define stage handoff triggers and confidence gates, so that a state change in the ledger starts the next stage and unattended runs stop at a gate (see Section 9.9).
+- [x] Define a plan-drift check that compares each `intent.diff` with its declared Target Scope (see Section 9.10).
 
 ### Non-Goals
 
@@ -445,17 +445,28 @@ Proposal for `tosh`:
 
 ## 10. Open Questions & Spikes
 
-- [ ] **Q1**: Should the parent directory remain `.tosh/work_items/` or be renamed to `.tosh/intents/`? *(Owner: @architect)*
-- [ ] **Q2**: How should the CLI command surface evolve? (e.g., `tosh intent new`, `tosh intent converge`, `tosh intent verify` vs. `tosh work-item ...`). *(Owner: @cli-team)*
-- [ ] **Q3**: What standard format should Invariant assertions take to allow automated CLI drift checks? (e.g., regex, AST rules, or custom shell commands). *(Owner: @team)* Partial input from Section 9.4: a shell command with an exit code plus an enforcement level.
-- [ ] **Q4**: Should `tosh` merge `00_intent_spec` and `01_solution_strategy` into one document, as the playbook merges requirements and design? *(Owner: @architect)*
-- [ ] **Q5**: Should `tosh` ship hook templates that enforce `build-gate` invariants for Claude Code, and how does the MCP server expose gate state? *(Owner: @cli-team)*
-- [ ] **Q6**: Do review policy and lessons log belong in the Work Items domain, the Wiki domain, or the Report domain? *(Owner: @architect)*
-- [ ] **Q7**: Which autonomy tiers does `tosh` support in its first release? *(Owner: @team)*
-- [ ] **Q8**: Which confidence gates does `tosh` support between stages: a deterministic check, an adversarial reviewing agent, or both? Who owns the escalation to a human? *(Owner: @architect)* Input from Section 9.9.
-- [ ] **Q9**: Does `tosh` own control-band detection, or does it only receive findings as new intents through `origin-ref`? *(Owner: @architect)* Input from Section 9.11.
-- [ ] **Q10**: Is the repository the source of truth for every document by default, and how does `tosh` store `external-ref` links to legacy records? *(Owner: @team)* Input from Section 9.13.
-- [ ] **Q11**: Does the unit spec list the files that it touches, so that the CLI can compute parallel-safe branches and detect plan drift? *(Owner: @cli-team)* Input from Section 9.10.
+- [x] **Q1**: Should the parent directory remain `.tosh/work_items/` or be renamed to `.tosh/intents/`? *(Owner: @architect)*
+  - **Resolved 2026-10-31**: Keep `.tosh/work_items/`.
+- [x] **Q2**: How should the CLI command surface evolve? (e.g., `tosh intent new`, `tosh intent converge`, `tosh intent verify` vs. `tosh work-item ...`). *(Owner: @cli-team)*
+  - **Resolved 2026-10-31**: Keep the `tosh work-item ...` command group. Subcommands use the new terms.
+- [x] **Q3**: What standard format should Invariant assertions take to allow automated CLI drift checks? (e.g., regex, AST rules, or custom shell commands). *(Owner: @team)* Partial input from Section 9.4: a shell command with an exit code plus an enforcement level.
+  - **Resolved 2026-10-31**: An invariant is a shell command with an exit code, plus an enforcement level (`advisory`, `build-gate`, `ci-gate`, `human-gate`).
+- [x] **Q4**: Should `tosh` merge `00_intent_spec` and `01_solution_strategy` into one document, as the playbook merges requirements and design? *(Owner: @architect)*
+  - **Resolved 2026-10-31**: Keep two documents. One session can author both.
+- [x] **Q5**: Should `tosh` ship hook templates that enforce `build-gate` invariants for Claude Code, and how does the MCP server expose gate state? *(Owner: @cli-team)*
+  - **Resolved 2026-10-31**: Ship Claude Code hook templates and expose gate state through the MCP server.
+- [x] **Q6**: Do review policy and lessons log belong in the Work Items domain, the Wiki domain, or the Report domain? *(Owner: @architect)*
+  - **Resolved 2026-10-31**: Both live in the Work Items domain: a project-level review policy and lessons log, and a per-intent `review_findings.html`.
+- [x] **Q7**: Which autonomy tiers does `tosh` support in its first release? *(Owner: @team)*
+  - **Resolved 2026-10-31**: Support all four tiers. The default is `propose`.
+- [x] **Q8**: Which confidence gates does `tosh` support between stages: a deterministic check, an adversarial reviewing agent, or both? Who owns the escalation to a human? *(Owner: @architect)* Input from Section 9.9.
+  - **Resolved 2026-10-31**: Support deterministic and adversarial-agent gates. A failed gate holds the ledger state and names a human approver.
+- [x] **Q9**: Does `tosh` own control-band detection, or does it only receive findings as new intents through `origin-ref`? *(Owner: @architect)* Input from Section 9.11.
+  - **Resolved 2026-10-31**: No. `tosh` accepts findings as new `declared` intents with an `origin-ref` tag. Detection stays in the user monitoring stack.
+- [x] **Q10**: Is the repository the source of truth for every document by default, and how does `tosh` store `external-ref` links to legacy records? *(Owner: @team)* Input from Section 9.13.
+  - **Resolved 2026-10-31**: The repository owns every `tosh` document. An optional `external-ref` tag holds a legacy record ID.
+- [x] **Q11**: Does the unit spec list the files that it touches, so that the CLI can compute parallel-safe branches and detect plan drift? *(Owner: @cli-team)* Input from Section 9.10.
+  - **Resolved 2026-10-31**: Yes, required. Target Scope is a required list of paths or globs in `intent_unit_spec.html`.
 
 ---
 
@@ -464,6 +475,8 @@ Proposal for `tosh`:
 - **2026-10-31** (@architect): Initial topic created following user directive to convert work-item documentation from a Traditional SDLC to an Intent-Based SDLC for AI. Defined core philosophy, 3-tier intent hierarchy, state machine, directory conventions, and 18-document migration matrix.
 - **2026-10-31** (@architect): Reviewed the AI-native SDLC playbook and four connected pages. Added Section 9. Findings: the stage model fits the Intent hierarchy. The topic lacked an enforcement model for invariants, autonomy tiers, separation of duties between writer and approver, and a lessons loop. Added Q4 to Q7. The 40%, 60%, and 25-40% token figures have no external support and are marked as unmeasured design targets.
 - **2026-10-31** (@architect): Reviewed the PDF edition of the playbook (`AI Native SDLC Playbook_designv2.pdf`, 54 pages). Added Sections 9.9 to 9.14: stage handoff triggers and confidence gates, plan drift and parallel work, control bands for the Maintain stage, evals for agent configuration, source of truth and hook scope, and the intent format with git-derived metrics. Added Q8 to Q11 and two goals. The PDF confirms the stage mapping in Section 9.2 and gives no token or cost figures.
+
+- **2026-10-31** (@architect): Resolved Q1 to Q11 with the recommended option for each (see Section 10). The Q7 default tier is `propose`.
 
 ---
 
@@ -478,22 +491,25 @@ Proposal for `tosh`:
 - **Decision Date**: 2026-10-31
 - **Sign-off**: @architect, @team
 
+- **2026-10-31** (@architect): Transcribed the decisions into build-docs (work-items README and 21 specs, docs README, static-ui README). Marked the topic `GRADUATED`.
+
 ---
 
 ## 13. Build-Docs Conversion Plan
 
 ### 13.1 Target Build-Docs Destinations
-- [ ] `build-docs/docs/work-items/README.md` (Rewrite master architecture)
-- [ ] `build-docs/docs/README.md` (Update domain overview and directory mappings)
-- [ ] `build-docs/README.md` (Update Work Item domain summary)
-- [ ] `build-docs/docs/work-items/*.md` (Update all 18 individual specifications according to the migration matrix)
+- [x] [`build-docs/docs/work-items/README.md`](../build-docs/docs/work-items/README.md) (Rewrite master architecture)
+- [x] [`build-docs/docs/README.md`](../build-docs/docs/README.md) (Update domain overview and directory mappings)
+- [x] [`build-docs/README.md`](../build-docs/README.md) (No Work Item domain summary exists. No change needed.)
+- [x] `build-docs/docs/work-items/*.md` (18 specifications renamed and rewritten according to the migration matrix, plus [`review-policy.md`](../build-docs/docs/work-items/review-policy.md), [`review-findings.md`](../build-docs/docs/work-items/review-findings.md), and [`lessons-log.md`](../build-docs/docs/work-items/lessons-log.md))
+- [x] [`build-docs/static-ui/README.md`](../build-docs/static-ui/README.md) (Templates renamed to the intent-based document set)
 
 ### 13.2 Specification Authoring Checklist
-- [ ] Resolve Q3 to Q11 before transcribing Section 9 content (enforcement levels, autonomy tiers, lessons loop, new documents) into build-docs.
-- [ ] Drafted normative, prescriptive technical specifications.
-- [ ] Verified compliance with [`build-docs/README.md`](../build-docs/README.md) rules:
-  - [ ] Content represents the **current state** of the design.
-  - [ ] Content is **strictly void** of references to past decisions, debate, or rejected alternatives (those remain preserved in this topic).
-- [ ] Added entry to the `## Revisions` table in all updated build-docs referencing `TOPIC-005`.
-- [ ] Updated status in this topic to `GRADUATED` once build-docs migration is completed.
-- [ ] Updated Topic Registry table in [`topics/topic-registry.md`](topic-registry.md).
+- [x] Resolve Q3 to Q11 before transcribing Section 9 content (enforcement levels, autonomy tiers, lessons loop, new documents) into build-docs.
+- [x] Drafted normative, prescriptive technical specifications.
+- [x] Verified compliance with [`build-docs/README.md`](../build-docs/README.md) rules:
+  - [x] ] Content represents the **current state** of the design.
+  - [x] ] Content is **strictly void** of references to past decisions, debate, or rejected alternatives (those remain preserved in this topic).
+- [x] Added entry to the `## Revisions` table in all updated build-docs referencing `TOPIC-005`.
+- [x] Updated status in this topic to `GRADUATED` once build-docs migration is completed.
+- [x] Updated Topic Registry table in [`topics/topic-registry.md`](topic-registry.md).

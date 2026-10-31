@@ -83,15 +83,15 @@ how each component must be leveraged across documentation views:
   breadcrumbs, search trigger, and theme switcher.
 - **Navigation Rail & Drawer (`md-navigation-rail`, `md-navigation-drawer`):** Left-hand navigation hierarchy enabling
   top-level domain switching (Work Items, Wiki, SDK API, OpenAPI, Reports).
-- **Tabs (`md-tabs`, `md-primary-tab`, `md-secondary-tab`):** Horizontal switcher for multi-phase workflows, task
+- **Tabs (`md-tabs`, `md-primary-tab`, `md-secondary-tab`):** Horizontal switcher for multi-sub-intent workflows, unit
   suites, or switching between visual rendered view and raw XHTML source.
 
 ### 2. Containers & Data Display
 
 - **Cards (`md-elevated-card`, `md-outlined-card`, `md-filled-card`):** Primary building blocks for encapsulating
-  requirements, design sections, task instructions, and metric blocks.
-- **Lists (`md-list`, `md-list-item`):** Displays task checklists, dependency hierarchies, modified file lists, and
-  phase task breakdowns.
+  intents, strategy sections, unit goals, and metric blocks.
+- **Lists (`md-list`, `md-list-item`):** Displays invariant lists, dependency hierarchies, target scope lists, and
+  sub-intent unit breakdowns.
 - **Dividers (`md-divider`):** Clean separation between specification sections.
 
 ### 3. Metadata & Status Chips
@@ -99,9 +99,12 @@ how each component must be leveraged across documentation views:
 - **Chips & Chip Sets (`md-chip-set`, `md-assist-chip`, `md-filter-chip`):** Visually exposes document header metadata
   for rapid inspection:
     - **Status:** `pending`, `in-progress`, `completed`, `failed`, `blocked`
+    - **Convergence:** `declared`, `formulating`, `converging`, `verified`, `drift_detected`, `settled`
+    - **Autonomy tier:** `observe`, `propose`, `change-with-review`, `scoped-automation`
+    - **Enforcement level:** `advisory`, `build-gate`, `ci-gate`, `human-gate`
     - **Priority:** `critical`, `high`, `medium`, `low`
     - **Verdicts:** `pass`, `fail`
-    - **Classification:** `requirements`, `design-spec`, `task-spec`, `validation`, etc.
+    - **Classification:** `intent-spec`, `solution-strategy`, `intent-unit-spec`, `unit-verification`, etc.
 
 ### 4. Interactive Controls
 
@@ -113,8 +116,8 @@ how each component must be leveraged across documentation views:
 
 ### 5. Progress Indicators
 
-- **Progress Bars (`md-linear-progress`, `md-circular-progress`):** Displays execution completion percentages for
-  phases, tasks, and test suites.
+- **Progress Bars (`md-linear-progress`, `md-circular-progress`):** Displays convergence completion percentages for
+  sub-intents, units, and test suites.
 
 ---
 
@@ -126,7 +129,7 @@ presentation mode:
 
 | Document Domain            | Source Path in `build-docs/docs`                       | UI Presentation Specification                                                                                                                                                    |
 |:---------------------------|:-------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Work Items**             | [`docs/work-items/`](../docs/work-items/README.md) | Multi-stage execution views covering requirements, technical design, implementation plans, phase/task specifications, test validation outputs, conversation logs, and telemetry. |
+| **Work Items**             | [`docs/work-items/`](../docs/work-items/README.md) | Multi-stage execution views covering intents and invariants, solution strategies, decompositions, sub-intent and unit specifications, verification outputs, review findings, the lessons log, conversation logs, and telemetry. |
 | **Project Wiki**           | [`docs/wiki/`](../docs/wiki/README.md)                 | Structured documentation reader for team knowledge: project setup, coding standards, architecture decisions, and risk registries.                                                |
 | **SDK & API Reference**    | [`docs/sdk-api/`](../docs/sdk-api/README.md)           | Package and class reference view: module trees, type hierarchies, method signatures, parameter tables, and return types.                                                         |
 | **OpenAPI Specifications** | [`docs/open-api/`](../docs/open-api/README.md)         | Interactive endpoint explorer: HTTP method badges (`GET`, `POST`, etc.), path parameters, payload schemas, and response definitions.                                             |
@@ -145,7 +148,7 @@ All document templates inherit a standard XHTML shell:
 
 - **XML / XHTML Prolog:** Strict XML declaration and XHTML namespace (`xmlns="http://www.w3.org/1999/xhtml"`).
 - **Standardized Metadata Header:** The mandatory 7 baseline `<meta>` tags (`doc-id`, `doc-type`, `schema-version`,
-  `work-item-id`, `status`, `created-at`, `updated-at`) plus domain-specific metadata.
+  `domain`, `status`, `created-at`, `updated-at`) plus domain-specific metadata.
 - **Component Loader:** Standard `<script type="importmap">` and ES module script importing `@material/web/all.js`.
 - **Semantic Structure:** Semantic landmarks (`<header>`, `<nav>`, `<main>`, `<aside>`, `<footer>`) styled with M3
   typography and layout tokens.
@@ -159,10 +162,11 @@ All document templates inherit a standard XHTML shell:
     <title>Work Item Specification</title>
 
     <!-- Universal Baseline Metadata Tags -->
-    <meta name="doc-id" content="WI-20260830T170936Z:00:REQ"/>
-    <meta name="doc-type" content="requirements"/>
+    <meta name="doc-id" content="WI-20260830T170936Z:00:SPEC"/>
+    <meta name="doc-type" content="intent-spec"/>
     <meta name="schema-version" content="1.0.0"/>
-    <meta name="work-item-id" content="20260830T170936Z_user_auth_service"/>
+    <meta name="domain" content="work-items"/>
+    <meta name="intent-id" content="20260830T170936Z_user_auth_service"/>
     <meta name="status" content="completed"/>
     <meta name="created-at" content="2026-08-30T17:10:00Z"/>
     <meta name="updated-at" content="2026-08-30T17:14:22Z"/>
@@ -192,56 +196,67 @@ All document templates inherit a standard XHTML shell:
 
 ### 2. Domain-Specific Template Specifications
 
-#### A. Requirements Template (`00_requirements.html`)
+#### A. Intent Specification Template (`00_intent_spec.html`)
 
-- **Header Section:** Displays business impact, feature priority, author, and requirement count via chips.
-- **Scope Overview Card:** Executive summary and business goals.
-- **Requirement Cards:** Individual `<md-outlined-card>` for each requirement ID containing functional details, edge
-  cases, and acceptance checklist with `<md-checkbox>` items.
+- **Header Section:** Displays convergence status, autonomy tier, priority, author, and invariant and evidence counts via
+  chips.
+- **Declared Intent Card:** The originator's statement of the problem, the proposed outcome, and the affected systems.
+- **Invariant List:** One `md-list-item` per invariant with its shell command and an enforcement level chip.
+- **Evidence Cards:** One `<md-outlined-card>` per evidence requirement ID with its verification command and verdict.
 
-#### B. Technical Design Template (`01_design_spec.html`)
+#### B. Solution Strategy Template (`01_solution_strategy.html`)
 
-- **System Architecture:** Visual diagrams, topology overviews, and component interaction maps.
+- **Solution Hypothesis:** Visual diagrams, topology overviews, and component interaction maps.
+- **Invariant Preservation Table:** For each invariant, the protective mechanism and its enforcement level.
 - **Component & Schema Models:** Entity relationship tables, schema definitions, and interface specifications.
-- **Decision Records:** Design decision tables and trade-off rationales.
+- **Flagged Concerns:** Concern list with owner and status chips.
+- **Decision Records:** Micro-ADR cards.
 
-#### C. Implementation Plan & Ledger Template (`02_implementation_plan.html`, `work-item-ledger.md`)
+#### C. Intent Decomposition & Ledger Template (`02_intent_decomposition.html`, `03_intent_ledger.json`)
 
-- **Execution Overview:** Multi-phase progression strategy, overall progress bar (`md-linear-progress`), and dependency
-  graph.
-- **Phase Roadmap Table:** Sequence, blocking criteria, estimates, and task summaries.
-- **Ledger Tree View:** Interactive state machine showing real-time task status and relative file links.
+- **Convergence Overview:** Sub-intent DAG, overall progress bar (`md-linear-progress`), and parallel branches.
+- **Sub-Intent Roadmap Table:** Sequence, gating criteria, estimates, and unit summaries.
+- **Protected Resource Registry:** List of protected paths and frozen contracts.
+- **Ledger Tree View:** Interactive state machine showing real-time unit state, holds, gate verdicts, approver names, and
+  relative file links.
 
-#### D. Phase Templates (`phase_spec.html`, `phase_validation.html`, `phase_summary.html`)
+#### D. Sub-Intent Templates (`sub_intent_spec.html`, `sub_intent_verification.html`, `sub_intent_summary.html`)
 
-- **Phase Specification:** Scope boundaries, prerequisite checks, and ordered task lists.
-- **Phase Validation:** Test suite outputs, verification commands, and pass/fail verdict badges.
-- **Phase Summary:** Completed milestones, execution duration, and roll-up metrics.
+- **Sub-Intent Specification:** Scope boundaries, prerequisite checks, and the unit manifest.
+- **Sub-Intent Verification:** Test suite outputs, cross-component invariant checks, and pass/fail verdict badges.
+- **Sub-Intent Summary:** Verified milestones, execution duration, and roll-up metrics.
 
-#### E. Task Templates (`task_spec.html`, `validation.html`, `summary.html`)
+#### E. Unit Templates (`intent_unit_spec.html`, `verification.html`, `summary.html`)
 
-- **Task Specification:** Granular modification instructions, target files, and checklist items.
-- **Task Validation:** Test execution output, lint results, error codes, and verification status.
-- **Task Summary:** Modified files manifest, git diff viewer, and pull request references.
+- **Intent Unit Specification:** Unit goal, target scope chips, invariants, protected paths, and the verification
+  contract.
+- **Unit Verification:** Literal command output, exit codes, invariant audit, scope audit, and the verifier result.
+- **Unit Summary:** Modified files manifest, git diff viewer, and pull request references.
 
-#### F. Conversation & Metrics Templates (`conversation.jsonl`, `metrics.json`)
+#### F. Review & Lessons Templates (`07_review_findings.html`, `review_policy.html`, `lessons.html`)
+
+- **Review Findings:** Severity summary and finding cards grouped by pass, with severity and status chips.
+- **Review Policy:** Pass cards, severity definitions, nit cap, and reviewer modes.
+- **Lessons Log:** Entry cards with the outcome chip and the eval case list.
+
+#### G. Conversation & Metrics Templates (`conversation.jsonl`, `metrics.json`)
 
 - **Conversation Transcript Viewer:** Structured dialogue stream highlighting user prompts, model reasoning, and tool
   calls.
 - **Telemetry Dashboard:** Metric cards for token usage (input/output/cached), latency, and model execution costs.
 
-#### G. Wiki Template (`wiki/*.html`)
+#### H. Wiki Template (`wiki/*.html`)
 
 - **Documentation Layout:** Two-column reading layout with a sticky table-of-contents navigation drawer and main article
   container with styled callouts.
 
-#### H. API & OpenAPI Templates (`sdk-api/*.html`, `open-api/*.html`)
+#### I. API & OpenAPI Templates (`sdk-api/*.html`, `open-api/*.html`)
 
 - **SDK API Layout:** Package tree navigator, type definitions, method signatures, parameter tables, and usage examples.
 - **OpenAPI Layout:** Endpoint cards grouped by tag with HTTP method chips (`GET`, `POST`, etc.), request schema tables,
   and response code accordions.
 
-#### I. Report Template (`report/*.html`)
+#### J. Report Template (`report/*.html`)
 
 - **Analytics Layout:** KPI summary cards, test execution grids, token burn-down charts, and audit tables.
 
@@ -275,24 +290,24 @@ To ensure rendering operates without build-time compilation, all templates speci
 
 ### Component Composition Example
 
-A task specification template layout using Material Web components:
+An intent unit specification template layout using Material Web components:
 
 ```xhtml
 
 <main class="tosh-doc-container">
     <header class="doc-header">
-        <h1 class="md-typescale-headline-medium">Task 001: Database Schema Migration</h1>
+        <h1 class="md-typescale-headline-medium">Unit 001: Database Schema Migration</h1>
         <md-chip-set>
-            <md-assist-chip label="Status: Completed"></md-assist-chip>
+            <md-assist-chip label="Convergence: Verified"></md-assist-chip>
             <md-assist-chip label="Category: Database"></md-assist-chip>
-            <md-assist-chip label="Phase: 01"></md-assist-chip>
+            <md-assist-chip label="Sub-Intent: 01"></md-assist-chip>
         </md-chip-set>
     </header>
 
     <section class="doc-section">
         <md-outlined-card>
             <div class="card-content">
-                <h2 class="md-typescale-title-medium">Acceptance Checklist</h2>
+                <h2 class="md-typescale-title-medium">Verification Contract</h2>
                 <md-list>
                     <md-list-item>
                         <md-checkbox slot="start" checked="checked"></md-checkbox>
@@ -350,5 +365,6 @@ code) is implemented in the product codebase, not inside this specification dire
 
 | Date       | Version | Description                                                                                                                                                         | Source                                  |
 |:-----------|:--------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------|
+| 2026-10-31 | 0.3.0   | Renamed work item templates to the intent-based document set. Added convergence, autonomy tier, and enforcement level chips and the review and lessons templates. | TOPIC-005 |
 | 2026-09-05 | 0.2.0   | Updated specification scope to clarify documentation-only purpose, detail M3 UI components, integrate with `build-docs/docs`, and define domain document templates. | [Build Docs UI Requirements](README.md) |
 | 2026-08-30 | 0.1.0   | Initial baseline specification defining static UI concept, M3 design system, and core XHTML rules.                                                                  | Initial Design                          |
