@@ -1,19 +1,19 @@
-# Plan Conversation Summary Document Definition
+# Intent Conversation Summary Document Definition
 
-The **Plan Conversation Summary Document** (`05_plan_conversation_summary.html`) is the authoritative Tier 1
+The **Intent Conversation Summary Document** (`05_intent_conversation_summary.html`) is the authoritative Tier 1
 post-planning narrative synthesis in the **Token Optimized Software Harness (`tosh`)** work item lifecycle. It distills
 the multi-agent LLM dialogue, architectural debates, trade-off analyses, and alignment rounds that produced the
 requirements ([
-`00_requirements.html`](requirements.md)), technical
+`00_intent_spec.html`](intent-specification.md)), technical
 design ([
-`01_design_spec.html`](technical-design.md)), and
+`01_solution_strategy.html`](solution-strategy.md)), and
 implementation roadmap ([
-`02_implementation_plan.html`](implementation-plan.md)).
+`02_intent_decomposition.html`](intent-decomposition.md)).
 
 While [
-`06_plan_conversation_metrics.json`](plan-conversation-metrics.md)
+`06_intent_conversation_metrics.json`](intent-conversation-metrics.md)
 captures granular turn-by-turn telemetry (token counts, latencies, tool execution arrays) and `plan_conversation.jsonl`
-preserves the raw interaction stream, `05_plan_conversation_summary.html` provides the human-readable, executive
+preserves the raw interaction stream, `05_intent_conversation_summary.html` provides the human-readable, executive
 evaluation of planning efficacy. It synthesizes high-level telemetry, reviews conversational performance, identifies
 friction points, and delivers targeted improvement recommendations for the participating AI components.
 
@@ -30,15 +30,15 @@ This document fulfills a dual-purpose consumption model:
 
 ---
 
-## Core Planning Paradigm: Applying the 4 Dimensions to Plan Conversation Summaries
+## Core Paradigm: Applying the Four Dimensions to Intent Conversation Summaries
 
-In `tosh`, the plan conversation summary evaluates planning execution against the four foundational planning dimensions:
+In `tosh`, the plan conversation summary evaluates planning execution against the four foundational dimensions:
 
-| Plan Dimension  | Human Engineer Focus                                                                  | AI Coding Tool Focus                                                                              | `tosh` Plan Conversation Summary Manifestation                                                                                                                                                                                                    |
+| Dimension       | Human Engineer Focus                                                                  | AI Coding Tool Focus                                                                              | `tosh` Intent Conversation Summary Manifestation                                                                                                                                                                                                    |
 |:----------------|:--------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Context**     | Relies on tacit codebase conventions and tribal domain knowledge.                     | Needs explicit file paths, referenced patterns, and strict "do not touch" constraints.            | Audits context retrieval precision and repository exploration during planning, ensuring agents grounded their designs in real codebase facts without prompt bloat.                                                                                |
-| **Granularity** | Focuses on high-level patterns and architecture; details left to implementation time. | Requires atomic, single-responsibility sub-tasks with deterministic inputs/outputs.               | Evaluates whether multi-agent dialogue remained focused and progressive, avoiding circular debates or monolithic requirements in favor of atomic phase milestones.                                                                                |
-| **Validation**  | Manual PR review, local exploratory debugging, automated CI.                          | Explicit terminal commands with deterministic output parsing (lint, test, build) after each step. | Reviews the dialogue leading into pre-execution plan validation ([`03_plan_validation.html`](plan-validation.md)), certifying that all gates passed on the first pass (FPSR). |
+| **Granularity** | Focuses on high-level patterns and architecture; details left to implementation time. | Requires atomic, single-responsibility sub-units with deterministic inputs/outputs.               | Evaluates whether multi-agent dialogue remained focused and progressive, avoiding circular debates or monolithic requirements in favor of atomic sub-intent milestones.                                                                                |
+| **Verification** | Manual PR review, local exploratory debugging, automated CI.                          | Explicit terminal commands with deterministic output parsing (lint, test, build) after each step. | Reviews the dialogue leading into pre-execution intent verification ([`03_intent_verification.html`](intent-verification.md)), certifying that all gates passed on the first pass (FPSR). |
 | **Edge Cases**  | Usually caught through intuitive testing or code review cycles.                       | Must be exhaustively itemized upfront to prevent naive happy-path assumptions.                    | Documents how effectively conversational participants surfaced adversarial edge cases, schema boundary failures, and security risks during planning debates.                                                                                      |
 
 ---
@@ -82,34 +82,34 @@ artifacts:
 .tosh/
 └── work_items/
     └── {YYYYMMDDTHHMMSSZ}_{work_item_slug}/
-        ├── 00_requirements.html                # Requirements & Checklists
-        ├── 01_design_spec.html                 # Technical Architecture & Micro-ADRs
-        ├── 02_implementation_plan.html         # Multi-Phase Roadmap & Risk Strategy
-        ├── 03_implementation_ledger.json       # State Machine & Task Dependency DAG
-        ├── 03_plan_validation.html             # Pre-Execution Plan Gating Verdict
-        ├── 04_plan_summary.html                # Execution Rollup Summary
-        ├── 05_plan_conversation_summary.html   # Authoritative Planning Dialogue Synthesis
-        ├── 06_plan_conversation_metrics.json   # Authoritative Planning Telemetry
-        └── phases/
+        ├── 00_intent_spec.html                # Requirements & Checklists
+        ├── 01_solution_strategy.html                 # Technical Architecture & Micro-ADRs
+        ├── 02_intent_decomposition.html         # Multi-Sub-Intent Roadmap & Risk Strategy
+        ├── 03_intent_ledger.json       # State Machine & Unit Dependency DAG
+        ├── 03_intent_verification.html             # Pre-Execution Plan Gating Verdict
+        ├── 04_intent_summary.html                # Execution Rollup Summary
+        ├── 05_intent_conversation_summary.html   # Authoritative Planning Dialogue Synthesis
+        ├── 06_intent_conversation_metrics.json   # Authoritative Planning Telemetry
+        └── sub_intents/
             └── ...
 ```
 
-- **File Name:** `05_plan_conversation_summary.html`
+- **File Name:** `05_intent_conversation_summary.html`
 - **Format:** Strict XHTML (`application/xhtml+xml` compliant, standard XML syntax).
 - **Encoding:** UTF-8.
 - **Runtime:** Fully static, runnable directly in modern browsers via local filesystem (`file://`) or served locally via
   the `tosh` CLI.
 - **Paired Artifacts:**
     - Requirements: [
-      `00_requirements.html`](requirements.md)
-    - Technical Design: [
-      `01_design_spec.html`](technical-design.md)
+      `00_intent_spec.html`](intent-specification.md)
+    - Solution Strategy: [
+      `01_solution_strategy.html`](solution-strategy.md)
     - Implementation Roadmap: [
-      `02_implementation_plan.html`](implementation-plan.md)
-    - Plan Validation Gate: [
-      `03_plan_validation.html`](plan-validation.md)
+      `02_intent_decomposition.html`](intent-decomposition.md)
+    - Intent Verification Gate: [
+      `03_intent_verification.html`](intent-verification.md)
     - Comprehensive Telemetry: [
-      `06_plan_conversation_metrics.json`](plan-conversation-metrics.md)
+      `06_intent_conversation_metrics.json`](intent-conversation-metrics.md)
     - Verbatim Transcript: `plan_conversation.jsonl` (or conversational session store)
 
 ---
@@ -118,7 +118,7 @@ artifacts:
 
 ### 2.1. XHTML Header Example
 
-Every `05_plan_conversation_summary.html` begins with universal baseline `<meta>` tags, planning dialogue metrics,
+Every `05_intent_conversation_summary.html` begins with universal baseline `<meta>` tags, planning dialogue metrics,
 participant lists, and the Material Web ES module importmap loader:
 
 ```xhtml
@@ -134,14 +134,14 @@ participant lists, and the Material Web ES module importmap loader:
     <meta name="doc-type" content="plan-conversation-summary"/>
     <meta name="schema-version" content="1.0.0"/>
     <meta name="domain" content="work-items"/>
-    <meta name="work-item-id" content="20260830T170936Z_user_auth_service"/>
+    <meta name="intent-id" content="20260830T170936Z_user_auth_service"/>
     <meta name="status" content="completed"/> <!-- pending | in-progress | completed | failed | blocked -->
     <meta name="created-at" content="2026-08-30T17:45:00Z"/>
     <meta name="updated-at" content="2026-08-30T17:48:15Z"/>
 
-    <!-- Plan Conversation Summary Domain Metadata -->
-    <meta name="parent-doc-id" content="WI-20260830T170936Z:02:PLAN"/>
-    <meta name="metrics-ref" content="06_plan_conversation_metrics.json"/>
+    <!-- Intent Conversation Summary Domain Metadata -->
+    <meta name="parent-doc-id" content="WI-20260830T170936Z:02:DECOMP"/>
+    <meta name="metrics-ref" content="06_intent_conversation_metrics.json"/>
     <meta name="agent-participants"
           content="agent:orchestrator,agent:architect,agent:security-auditor,agent:database-specialist"/>
     <meta name="turn-count" content="18"/>
@@ -180,30 +180,30 @@ participant lists, and the Material Web ES module importmap loader:
 
 | Metadata Tag           | Scope               | Purpose                                                              | Example                                 |
 |:-----------------------|:--------------------|:---------------------------------------------------------------------|:----------------------------------------|
-| `parent-doc-id`        | Work Item / Summary | Points to the parent Implementation Plan `doc-id`                    | `WI-20260830T170936Z:02:PLAN`           |
-| `metrics-ref`          | Work Item / Summary | Relative path pointer to the Plan Conversation Metrics JSON          | `06_plan_conversation_metrics.json`     |
+| `parent-doc-id`        | Work Item / Summary | Points to the parent Intent Decomposition `doc-id`                    | `WI-20260830T170936Z:02:DECOMP`           |
+| `metrics-ref`          | Work Item / Summary | Relative path pointer to the Intent Conversation Metrics JSON          | `06_intent_conversation_metrics.json`     |
 | `agent-participants`   | Work Item / Summary | Comma-delimited list of all AI agent roles participating in planning | `agent:orchestrator,agent:architect`    |
 | `turn-count`           | Work Item / Summary | Total round-trip conversational turns across all participants        | `18`                                    |
-| `planning-duration-ms` | Work Item / Summary | Total elapsed wall-clock time for the planning phase in milliseconds | `48200`                                 |
+| `planning-duration-ms` | Work Item / Summary | Total elapsed wall-clock time for the planning sub-intent in milliseconds | `48200`                                 |
 | `total-tokens`         | Work Item / Summary | Aggregated token expenditure across all planning exchanges           | `45200`                                 |
 | `total-cost-usd`       | Work Item / Summary | Estimated financial API expenditure for planning in USD              | `0.1356`                                |
 | `conversation-verdict` | Work Item / Summary | Final planning conversation outcome classification                   | `approved` \| `reworked` \| `escalated` |
-| `fpsr`                 | Work Item / Summary | First-Pass Success Rate for pre-execution plan validation            | `1.0` \| `0.0`                          |
+| `fpsr`                 | Work Item / Summary | First-Pass Success Rate for pre-execution intent verification            | `1.0` \| `0.0`                          |
 
 ---
 
 ## 3. Required Sections & M3 Component Structure
 
-The Plan Conversation Summary document contains 7 standardized sections combining semantic XHTML elements, Material
+The Intent Conversation Summary document contains 7 standardized sections combining semantic XHTML elements, Material
 Design 3 Web Components (`md-*`), typography scale classes (`md-typescale-*`), and explicit data attributes (`data-*`).
 
 ### 3.1. Document Header & Metadata Bar
 
 Anchors the summary with work item identification, status chip (`completed`), conversation verdict chip (`approved`),
 duration badge, total tokens badge, financial expenditure badge, and quick navigation links back to [
-`02_implementation_plan.html`](implementation-plan.md)
+`02_intent_decomposition.html`](intent-decomposition.md)
 and [
-`06_plan_conversation_metrics.json`](plan-conversation-metrics.md).
+`06_intent_conversation_metrics.json`](intent-conversation-metrics.md).
 
 ### 3.2. Executive Planning Dialogue Synthesis & Decision Log
 
@@ -213,28 +213,28 @@ engineering roadmap:
 - **Executive Dialogue Narrative:** Concise summary of the problem formulation, architectural consensus, and key risks
   raised by participating agents.
 - **Chronological Dialogue Milestone Timeline:**
-    1. **Phase 1: Requirements Ingestion & Scope Clarification (Turns 1–4):** Ingested user prompt, queried existing
+    1. **Sub-Intent 1: Requirements Ingestion & Scope Clarification (Turns 1–4):** Ingested user prompt, queried existing
        wiki standards, and resolved ambiguous auth requirements (Argon2id hashing vs bcrypt).
-    2. **Phase 2: Architectural Modeling & Trade-off Analysis (Turns 5–10):** Architect agent debated token storage
+    2. **Sub-Intent 2: Architectural Modeling & Trade-off Analysis (Turns 5–10):** Architect agent debated token storage
        strategies (stateless JWT vs stateful Redis revocation), drafting Micro-ADR-001.
-    3. **Phase 3: Work Breakdown & Phase Decomposition (Turns 11–14):** Partitioned execution into 3 discrete phases and
-       9 atomic tasks with deterministic prerequisites.
-    4. **Phase 4: Security & Validation Gating (Turns 15–16):** Security Auditor agent inspected target files and
+    3. **Sub-Intent 3: Work Breakdown & Sub-Intent Decomposition (Turns 11–14):** Partitioned execution into 3 discrete sub-intents and
+       9 atomic units with deterministic prerequisites.
+    4. **Sub-Intent 4: Security & Validation Gating (Turns 15–16):** Security Auditor agent inspected target files and
        verified OWASP password storage compliance.
-    5. **Phase 5: Plan Approval & Document Synthesis (Turns 17–18):** Pre-execution validation suite executed;
-       `03_plan_validation.html` recorded `pass`.
+    5. **Sub-Intent 5: Plan Approval & Document Synthesis (Turns 17–18):** Pre-execution validation suite executed;
+       `03_intent_verification.html` recorded `pass`.
 - **Architectural Decisions & Trade-offs Log:**
 
 | Decision ID | Domain / Scope   | Adopted Architecture           | Rejected Alternative    | Core Rationale                                              | Deciding Agent              |
 |:------------|:-----------------|:-------------------------------|:------------------------|:------------------------------------------------------------|:----------------------------|
 | `ADR-001`   | Password Hashing | Argon2id ($m=65536, t=3, p=4$) | PBKDF2 / BCrypt         | OWASP 2026 recommended password storage baseline            | `agent:security-auditor`    |
-| `ADR-002`   | Token Revocation | DB-backed refresh token table  | In-memory Redis cluster | Avoids introducing new infrastructure dependency in Phase 1 | `agent:architect`           |
+| `ADR-002`   | Token Revocation | DB-backed refresh token table  | In-memory Redis cluster | Avoids introducing new infrastructure dependency in Sub-Intent 1 | `agent:architect`           |
 | `ADR-003`   | Schema Migration | Flyway versioned SQL           | Hibernate auto-ddl      | Guarantees deterministic, auditable schema states in CI     | `agent:database-specialist` |
 
 ### 3.3. High-Level Planning Telemetry & Metrics Rollup
 
 Presents an executive scorecard of planning economics, surfacing high-level KPIs linked directly to [
-`06_plan_conversation_metrics.json`](plan-conversation-metrics.md):
+`06_intent_conversation_metrics.json`](intent-conversation-metrics.md):
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────────────┐
@@ -248,7 +248,7 @@ Presents an executive scorecard of planning economics, surfacing high-level KPIs
 
 - **Total Token Breakdown:** Input prompt tokens (32,100), completion tokens (13,100), and cached prompt tokens
   (25,160).
-- **Economic Efficiency:** Total financial expenditure ($0.1356) and cost-per-planned-task ($0.0151 / task).
+- **Economic Efficiency:** Total financial expenditure ($0.1356) and cost-per-planned-unit ($0.0151 / unit).
 - **Prompt Caching Effectiveness:** High cache read rate (78.4%) proving that system prompts, tool schemas, and
   repository maps maintained stable prefix positions.
 - **Overhead Assessment:** Planning compute represented 14.2% of estimated execution tokens, comfortably within the
@@ -261,7 +261,7 @@ conversation perspective:
 
 - **Multi-Agent Collaboration & Role Specialization:**
     - Evaluates how cleanly agent roles (Orchestrator, Architect, Security Auditor, Database Specialist) were preserved.
-    - Assesses whether agents respected hierarchy bounds, delegated sub-tasks efficiently, and avoided talking past each
+    - Assesses whether agents respected hierarchy bounds, delegated sub-units efficiently, and avoided talking past each
       other.
     - Verifies that cross-agent handoffs utilized structured formats rather than conversational pleasantries.
 - **Trajectory Directness & Convergence Velocity:**
@@ -272,9 +272,9 @@ conversation perspective:
     - Measures the Context Accumulation Rate ($\Delta\text{Tokens}/\text{Turn} = 1,180$ tokens/turn, safely linear).
     - Confirms that agents did not perform unrestricted repository dumping or dump raw unparsed build logs.
 - **Specification Precision & First-Pass Quality:**
-    - Highlights the **Plan First-Pass Approval Rate (FPSR: 100%)**: `03_plan_validation.html` passed on the very first
+    - Highlights the **Plan First-Pass Approval Rate (FPSR: 100%)**: `03_intent_verification.html` passed on the very first
       evaluation without requiring plan rework turns.
-    - 100% of requirement IDs (`REQ-001`, `REQ-002`) were bound to concrete tasks, classes, and verification commands.
+    - 100% of requirement IDs (`EV-001`, `EV-002`) were bound to concrete units, classes, and verification commands.
 
 ### 3.5. Conversational Friction & Inefficiency Post-Mortem
 
@@ -303,8 +303,8 @@ recommendations to optimize the participating AI components for future work item
     - Keep AI components as small and lightweight as possible, reserving large reasoning models strictly for
       architectural trade-offs, Micro-ADR drafting, and security reviews.
 - **Dynamic Reasoning Effort:**
-    - Set reasoning effort to `low` or `medium` during straightforward task manifest decomposition, reserving `high`
-      reasoning effort for multi-phase dependency DAG resolution.
+    - Set reasoning effort to `low` or `medium` during straightforward unit manifest decomposition, reserving `high`
+      reasoning effort for multi-sub-intent dependency DAG resolution.
 
 #### 3.6.2. Agent Personas, System Prompts & Delegation Protocols
 
@@ -358,20 +358,20 @@ recommendations to optimize the participating AI components for future work item
 
 Formal sign-off authorizing the transition from planning to execution:
 
-- **Plan Validation Confirmation:** [
-  `03_plan_validation.html`](plan-validation.md)
+- **Intent Verification Confirmation:** [
+  `03_intent_verification.html`](intent-verification.md)
   verdict confirmed as `PASS`.
 - **Ledger Status:** [
-  `03_implementation_ledger.json`](work-item-ledger.md)
+  `03_intent_ledger.json`](intent-ledger.md)
   updated to `status: "in_progress"`.
-- **Phase 1 Activation:** Phase `phase_01_database_migration` authorized for immediate worker agent activation.
+- **Sub-Intent 1 Activation:** Sub-Intent `sub_intent_01_database_migration` authorized for immediate worker agent activation.
 
 ---
 
 ## 4. Token Optimization & XPath Query Patterns
 
 Downstream orchestrators, CLI tools, and platform analytics extract exact narrative and telemetry fragments from
-`05_plan_conversation_summary.html` using targeted XPath queries:
+`05_intent_conversation_summary.html` using targeted XPath queries:
 
 ### Querying Conversation Verdict & Approval Status
 
@@ -411,22 +411,22 @@ The plan conversation summary links planning interactions to execution reality:
 
 ```mermaid
 graph TD
-    TRANSCRIPT["plan_conversation.jsonl<br/>(Verbatim Session Transcript)"] -->|" Aggregated into "| METRICS["06_plan_conversation_metrics.json<br/>(4-Layer Planning Telemetry)"]
-    TRANSCRIPT -->|" Synthesized into "| SUM["05_plan_conversation_summary.html<br/>(Narrative, Decision Log & AI Recommendations)"]
+    TRANSCRIPT["plan_conversation.jsonl<br/>(Verbatim Session Transcript)"] -->|" Aggregated into "| METRICS["06_intent_conversation_metrics.json<br/>(4-Layer Planning Telemetry)"]
+    TRANSCRIPT -->|" Synthesized into "| SUM["05_intent_conversation_summary.html<br/>(Narrative, Decision Log & AI Recommendations)"]
     METRICS -->|" Telemetry Badges "| SUM
-    SUM -->|" Authorizes Execution "| PLAN["02_implementation_plan.html"]
-    PLAN -->|" Registers Work Item State "| LEDGER["03_implementation_ledger.json"]
-    SUM -->|" Rollup to Final Sign-off "| WSUM["04_plan_summary.html"]
+    SUM -->|" Authorizes Execution "| PLAN["02_intent_decomposition.html"]
+    PLAN -->|" Registers Work Item State "| LEDGER["03_intent_ledger.json"]
+    SUM -->|" Rollup to Final Sign-off "| WSUM["04_intent_summary.html"]
 ```
 
 - **Ledger Pointer:** Referenced in [
-  `03_implementation_ledger.json`](work-item-ledger.md)
+  `03_intent_ledger.json`](intent-ledger.md)
   under root work item metadata.
 - **Summary Link:** Cited in [
-  `04_plan_summary.html`](plan-summary.md) as the
+  `04_intent_summary.html`](intent-summary.md) as the
   authoritative planning post-mortem.
 - **Metrics Pairing:** Binds bi-directionally with [
-  `06_plan_conversation_metrics.json`](plan-conversation-metrics.md).
+  `06_intent_conversation_metrics.json`](intent-conversation-metrics.md).
 
 ---
 
@@ -435,14 +435,14 @@ graph TD
 1. **Truthful Synthesis:** Narrative summaries and decision logs must faithfully reflect the actual interactions
    recorded in `plan_conversation.jsonl`; agents must not invent unrecorded consensus.
 2. **Strict Metrics Alignment:** High-level token counts, duration, costs, and cache hit percentages cited in
-   `05_plan_conversation_summary.html` must match the numerical data in [
-   `06_plan_conversation_metrics.json`](plan-conversation-metrics.md)
+   `05_intent_conversation_summary.html` must match the numerical data in [
+   `06_intent_conversation_metrics.json`](intent-conversation-metrics.md)
    exactly.
 3. **Mandatory AI Improvements Section:** Every plan conversation summary must include actionable recommendations for
    improving AI components (model routing, prompts, skills, tools, cache).
 4. **Current-State Prescriptive Architecture:** Recommendations must be concrete and technical, directly applicable to
    future harness runs.
-5. **Strict XHTML Conformance:** `05_plan_conversation_summary.html` must parse as valid XML
+5. **Strict XHTML Conformance:** `05_intent_conversation_summary.html` must parse as valid XML
    (`xmlns="http://www.w3.org/1999/xhtml"`), with all tags closed, attributes quoted, and ampersands escaped (`&amp;`).
 
 ---
@@ -451,5 +451,6 @@ graph TD
 
 | Date       | Version | Description                                                                                                                                                                                                                                          | Source                |
 |:-----------|:--------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------|
-| 2026-09-06 | 1.0.0   | Authoritative specification for Plan Conversation Summary (`05_plan_conversation_summary.html`) establishing the decision log schema, high-level metrics scorecard, LLM conversation performance evaluation, and AI component improvement framework. | Feature Specification |
+| 2026-10-31 | 1.1.0 | Moved to the intent-based document set: intent, sub-intent, and unit terminology, convergence states, required target scope, and evidence requirement IDs. | TOPIC-005 |
+| 2026-09-06 | 1.0.0   | Authoritative specification for Intent Conversation Summary (`05_intent_conversation_summary.html`) establishing the decision log schema, high-level metrics scorecard, LLM conversation performance evaluation, and AI component improvement framework. | Feature Specification |
 | 2026-08-30 | 0.1.0   | Initial baseline stub in document catalog.                                                                                                                                                                                                           | Initial Specification |

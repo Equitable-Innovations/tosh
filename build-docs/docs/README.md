@@ -74,7 +74,7 @@ The TOSH document architecture is governed by four fundamental operational tenet
 1. **Local-First Processing:** All documents reside directly within the local workspace under `.tosh/`. Reading, querying, and updating documents occur locally without cloud latency or remote API roundtrips.
 2. **Polyglot XHTML Standard:** Documents use strict XHTML 1.0/5 syntax. They are valid XML for programmatic engines (DOM, XPath, SAX) while functioning natively in standard web browsers with CSS and web components.
 3. **Granular Sub-Tree Ingestion:** Agentic tools query specific XML subtrees (e.g., extracting only `//section[@id='acceptance-criteria']` or `/html/head/meta[@name='status']`). Delivering only necessary fragments achieves dramatic token savings (typically 80%–95% reduction compared to full document dumping).
-4. **Graph Traceability via Metadata:** Documents maintain explicit parent-child and cross-domain references in standard `<head>` tags, forming a queryable directed acyclic graph (DAG) across requirements, designs, tasks, code, tests, and reports.
+4. **Graph Traceability via Metadata:** Documents maintain explicit parent-child and cross-domain references in standard `<head>` tags, forming a queryable directed acyclic graph (DAG) across intents, strategies, units, code, tests, and reports.
 
 ---
 
@@ -88,10 +88,10 @@ Every `.html` document must include these seven baseline metadata tags within th
 
 | Tag | Type | Purpose | Example |
 |:---|:---|:---|:---|
-| `doc-id` | String | Globally unique identifier within the workspace | `WI-20260830T170936Z:00:REQ` |
-| `doc-type` | String | Classification of document schema | `requirements`, `wiki-page`, `api-class`, `report` |
+| `doc-id` | String | Globally unique identifier within the workspace | `WI-20260830T170936Z:00:SPEC` |
+| `doc-type` | String | Classification of document schema | `intent-spec`, `wiki-page`, `api-class`, `report` |
 | `schema-version` | SemVer | Document format schema version | `1.0.0` |
-| `domain` | String | Functional document domain | `work-items`, `wiki`, `sdk-api`, `open-api`, `report` |
+| `domain` | String | Functional document domain | `work-items`, `project-mgr`, `wiki`, `sdk-api`, `open-api`, `report` |
 | `status` | Enum | Document lifecycle state | `pending`, `in-progress`, `completed`, `failed`, `blocked` |
 | `created-at` | ISO-8601 | Document creation timestamp | `2026-08-30T17:10:00Z` |
 | `updated-at` | ISO-8601 | Last modification timestamp | `2026-08-30T17:14:22Z` |
@@ -155,31 +155,35 @@ The TOSH documentation ecosystem is partitioned into five distinct domains:
 | **OpenAPI** | `.tosh/open-api/` | Host service schemas and consumed client contracts | [`open-api/README.md`](open-api/README.md) |
 | **Reports** | `.tosh/reports/` | Token telemetry, execution audits, and validation metrics | [`report/README.md`](report/README.md) |
 
+The [project manager](../project-mgr/README.md) adds a sixth set of documents. They use the `project-mgr` value in the `domain` tag. They live in `.tosh/project-mgr/` and hold the PRD, the FSD, initiatives, epics, milestones, and the traceability matrix. The project manager specification defines these documents. The work item backlog lives in `.tosh/wts/`, as the [WTS specification](../project-mgr/wts/README.md) defines.
+
 ---
 
 ### 1. Work Item Documents
 
-**Scope:** Work item documents orchestrate the tactical execution of a feature or bug fix from activation to pull request merge.
+**Scope:** Work item documents orchestrate the tactical delivery of a feature or bug fix, from the declaration of an intent to pull request merge. An intent states the desired outcome, the invariants that must hold, and the evidence that proves satisfaction.
 
-- **Purpose:** Provide an end-to-end audit trail and structured instructions for requirements, architecture design, multi-phase plans, individual tasks, automated verification, conversation logs, and telemetry.
+- **Purpose:** Provide an end-to-end audit trail and declarative specifications for the intent, solution strategy, sub-intent decomposition, individual units, automated verification, review findings, conversation logs, and telemetry.
 - **Key Artifacts:**
-  - `00_requirements.html`: Functional requirements, acceptance criteria, and constraints.
-  - `01_design_spec.html`: Technical architecture, schema models, and component diagrams.
-  - `02_implementation_plan.html`: High-level multi-phase roadmap and dependency tree.
-  - `03_implementation_ledger.json`: Central state machine tracking task statuses and file links.
-  - `03_plan_validation.html`: Pre-execution validation verdict.
-  - `04_plan_summary.html`: Post-execution summary and final metrics.
-  - `05_plan_conversation_summary.html`: Distilled LLM planning dialogue.
-  - `06_plan_conversation_metrics.json`: Planning phase token usage and cost metrics.
-  - `phases/phase_##/phase_spec.html`: Scope, prerequisites, and ordered task manifest.
-  - `phases/phase_##/phase_validation.html`: Phase-level verification suite outputs and verdict.
-  - `phases/phase_##/phase_summary.html`: Phase milestone completion summary.
-  - `phases/phase_##/tasks/task_###/task_spec.html`: Granular task instructions and modified file targets.
-  - `phases/phase_##/tasks/task_###/validation.html`: Unit/integration test results and verification logs.
-  - `phases/phase_##/tasks/task_###/task.diff`: Unified git diff of code modifications produced by the task.
-  - `phases/phase_##/tasks/task_###/summary.html`: Implemented file changes, git diff summary, and PR links.
-  - `phases/phase_##/tasks/task_###/conversation.jsonl`: Raw agentic interaction and tool invocation log.
-  - `phases/phase_##/tasks/task_###/metrics.json`: Granular token, cost, and latency telemetry.
+  - `00_intent_spec.html`: Declared intent, system invariants, boundary envelope, evidence requirements, and autonomy tier.
+  - `01_solution_strategy.html`: Solution hypothesis, invariant preservation strategy, contract changes, and flagged concerns.
+  - `02_intent_decomposition.html`: Sub-intent DAG, dependency graph, and protected resource registry.
+  - `03_intent_ledger.json`: Central convergence state machine tracking unit states, gate verdicts, approvers, and file links.
+  - `03_intent_verification.html`: Feasibility check and master verification harness.
+  - `04_intent_summary.html`: Post-convergence summary and final metrics.
+  - `05_intent_conversation_summary.html`: Distilled LLM formulation dialogue.
+  - `06_intent_conversation_metrics.json`: Formulation token usage and cost metrics.
+  - `07_review_findings.html`: Review findings by pass and severity.
+  - `sub_intents/sub_intent_##/sub_intent_spec.html`: Scope, prerequisites, invariant constraints, and unit manifest.
+  - `sub_intents/sub_intent_##/sub_intent_verification.html`: Sub-intent verification suite outputs and gate verdict.
+  - `sub_intents/sub_intent_##/sub_intent_summary.html`: Sub-intent completion summary.
+  - `sub_intents/sub_intent_##/units/unit_###/intent_unit_spec.html`: Unit goal, required target scope, invariants, and verification contract.
+  - `sub_intents/sub_intent_##/units/unit_###/verification.html`: Literal command output, exit codes, and drift report.
+  - `sub_intents/sub_intent_##/units/unit_###/intent.diff`: Unified git diff of code modifications produced by the unit.
+  - `sub_intents/sub_intent_##/units/unit_###/summary.html`: Implemented file changes, git diff summary, and PR links.
+  - `sub_intents/sub_intent_##/units/unit_###/conversation.jsonl`: Raw agentic interaction and tool invocation log.
+  - `sub_intents/sub_intent_##/units/unit_###/metrics.json`: Granular token, cost, and latency telemetry.
+  - `review_policy.html` and `lessons.html`: Project-level review policy and lessons log at the root of `.tosh/work_items/`.
 - **Detailed Specification:** See [`work-items/README.md`](work-items/README.md).
 
 ---
@@ -189,7 +193,7 @@ The TOSH documentation ecosystem is partitioned into five distinct domains:
 **Scope:** The project wiki serves as the repository for organizational and codebase knowledge that persists across work items (e.g., project overview, coding guidelines, architectural decisions, risk registry).
 
 - **Current Status:** The specific document types, templates, and schemas for this domain are pending ideation and will be defined later.
-- **Active Ideation Topic:** Tracked in [`TOPIC-002: Project Wiki Documents Domain Definition & Architecture`](../../topics/TOPIC-002-wiki-documents-domain-definition.md).
+- **Active Ideation Topic:** Tracked in [`TOPIC-002: Project Wiki Documents Domain Definition & Architecture`](../../topics/TOPIC-002_wiki-documents-domain-definition.md).
 - **Detailed Specification:** See [`wiki/README.md`](wiki/README.md).
 
 ---
@@ -199,7 +203,7 @@ The TOSH documentation ecosystem is partitioned into five distinct domains:
 **Scope:** Code-level API documents generated from codebase source code to provide parseable module, package, class, and interface specifications.
 
 - **Current Status:** The specific document types, symbol representations, and generation boundaries for this domain are pending ideation and will be defined later.
-- **Active Ideation Topic:** Tracked in [`TOPIC-004: SDK & Code API Documents Domain Definition & Architecture`](../../topics/TOPIC-004-sdk-api-documents-domain-definition.md).
+- **Active Ideation Topic:** Tracked in [`TOPIC-004: SDK & Code API Documents Domain Definition & Architecture`](../../topics/TOPIC-004_sdk-api-documents-domain-definition.md).
 - **Detailed Specification:** See [`sdk-api/README.md`](sdk-api/README.md).
 
 ---
@@ -210,7 +214,7 @@ The TOSH documentation ecosystem is partitioned into five distinct domains:
 
 - **Confirmed Requirement:** OpenAPI-compliant JSON or YAML files will get rendered into the UI.
 - **Current Status:** All other details (directory structure under `.tosh/open-api/`, transformation pipelines, endpoint querying, internal vs external service organization) are pending ideation and will be defined later.
-- **Active Ideation Topic:** Tracked in [`TOPIC-003: OpenAPI Documents Rendering & Storage Architecture`](../../topics/TOPIC-003-openapi-documents-rendering-and-storage.md).
+- **Active Ideation Topic:** Tracked in [`TOPIC-003: OpenAPI Documents Rendering & Storage Architecture`](../../topics/TOPIC-003_openapi-documents-rendering-and-storage.md).
 - **Detailed Specification:** See [`open-api/README.md`](open-api/README.md).
 
 ---
@@ -220,7 +224,7 @@ The TOSH documentation ecosystem is partitioned into five distinct domains:
 **Scope:** Historical, analytical, and audit documents summarizing execution performance, quality metrics, and cost economics across work items.
 
 - **Current Status:** There is currently no definition of what reports will be in this domain. Specific report types, schemas, and aggregation mechanisms are pending ideation and will be defined later.
-- **Active Ideation Topic:** Tracked in [`TOPIC-001: Report Documents Domain Definition & Architecture`](../../topics/TOPIC-001-report-documents-domain-definition.md).
+- **Active Ideation Topic:** Tracked in [`TOPIC-001: Report Documents Domain Definition & Architecture`](../../topics/TOPIC-001_report-documents-domain-definition.md).
 - **Detailed Specification:** See [`report/README.md`](report/README.md).
 
 ---
@@ -231,11 +235,11 @@ To complete the design phase for the document ecosystem, each domain under `buil
 
 | Domain Subfolder | Specification Status | Tracking Topic / Artifacts |
 |:---|:---|:---|
-| [`work-items/`](work-items/README.md) | **Complete (18 specs)** | 18 detailed specifications authored: `requirements.md`, `technical-design.md`, `implementation-plan.md`, `work-item-ledger.md`, `plan-validation.md`, `plan-summary.md`, `plan-conversation-summary.md`, `plan-conversation-metrics.md`, `phase-specification.md`, `phase-validation.md`, `phase-summary.md`, `task-specification.md`, `task-validation.md`, `task-diff.md`, `task-summary.md`, `task-conversation.md`, `task-conversation-metrics.md`, `work-item-document-metadata-definition.md`. |
-| [`wiki/`](wiki/README.md) | *Pending Ideation* | Tracked in [`TOPIC-002`](../../topics/TOPIC-002-wiki-documents-domain-definition.md) (Defining wiki document types, templates, and metadata). |
-| [`sdk-api/`](sdk-api/README.md) | *Pending Ideation* | Tracked in [`TOPIC-004`](../../topics/TOPIC-004-sdk-api-documents-domain-definition.md) (Defining code API document types, granularity, and CodeGraph linkage). |
-| [`open-api/`](open-api/README.md) | *In Discussion* | Tracked in [`TOPIC-003`](../../topics/TOPIC-003-openapi-documents-rendering-and-storage.md) (OpenAPI JSON/YAML rendering in UI; defining storage layout and querying). |
-| [`report/`](report/README.md) | *Pending Ideation* | Tracked in [`TOPIC-001`](../../topics/TOPIC-001-report-documents-domain-definition.md) (Defining report document types, metrics, and aggregation). |
+| [`work-items/`](work-items/README.md) | **Revision in progress (21 specs)** | 21 detailed specifications: `intent-specification.md`, `solution-strategy.md`, `intent-decomposition.md`, `intent-ledger.md`, `intent-verification.md`, `intent-summary.md`, `intent-conversation-summary.md`, `intent-conversation-metrics.md`, `sub-intent-specification.md`, `sub-intent-verification.md`, `sub-intent-summary.md`, `intent-unit-specification.md`, `unit-verification.md`, `intent-diff.md`, `unit-summary.md`, `unit-conversation.md`, `unit-conversation-metrics.md`, `review-findings.md`, `review-policy.md`, `lessons-log.md`, `intent-document-metadata-definition.md`. Source: [`TOPIC-005`](../../topics/TOPIC-005_intent-based-sdlc-work-items.md). |
+| [`wiki/`](wiki/README.md) | *Pending Ideation* | Tracked in [`TOPIC-002`](../../topics/TOPIC-002_wiki-documents-domain-definition.md) (Defining wiki document types, templates, and metadata). |
+| [`sdk-api/`](sdk-api/README.md) | *Pending Ideation* | Tracked in [`TOPIC-004`](../../topics/TOPIC-004_sdk-api-documents-domain-definition.md) (Defining code API document types, granularity, and CodeGraph linkage). |
+| [`open-api/`](open-api/README.md) | *In Discussion* | Tracked in [`TOPIC-003`](../../topics/TOPIC-003_openapi-documents-rendering-and-storage.md) (OpenAPI JSON/YAML rendering in UI; defining storage layout and querying). |
+| [`report/`](report/README.md) | *Pending Ideation* | Tracked in [`TOPIC-001`](../../topics/TOPIC-001_report-documents-domain-definition.md) (Defining report document types, metrics, and aggregation). |
 
 ---
 
@@ -248,32 +252,48 @@ When `tosh` operates inside a project repository, it generates and maintains all
 ├── .tosh/
 │   ├── tosh.config.json                     # Workspace configuration & schema settings
 │   │
+│   ├── project-mgr/                         # Project Manager Documents (see project-mgr/README.md)
+│   │   ├── prd.html
+│   │   ├── fsd.html
+│   │   ├── edges.jsonl
+│   │   ├── traceability.html
+│   │   ├── initiatives/
+│   │   ├── epics/
+│   │   └── milestones/
+│   │
+│   ├── wts/                                 # Work item backlog (see project-mgr/wts/README.md)
+│   │   ├── backlog.jsonl
+│   │   └── WORK-ITEM-###_{slug}.md
+│   │
 │   ├── work_items/                          # Work Item Documents Domain
+│   │   ├── review_policy.html               # Project-level review policy
+│   │   ├── lessons.html                     # Project-level lessons log
 │   │   ├── 20260830T170936Z_user_auth_service/
-│   │   │   ├── 00_requirements.html
-│   │   │   ├── 01_design_spec.html
-│   │   │   ├── 02_implementation_plan.html
-│   │   │   ├── 03_implementation_ledger.json
-│   │   │   ├── 03_plan_validation.html
-│   │   │   ├── 04_plan_summary.html
-│   │   │   ├── 05_plan_conversation_summary.html
-│   │   │   ├── 06_plan_conversation_metrics.json
-│   │   │   └── phases/
-│   │   │       ├── phase_01_database_migration/
-│   │   │       │   ├── phase_spec.html
-│   │   │       │   ├── phase_validation.html
-│   │   │       │   ├── phase_summary.html
-│   │   │       │   └── tasks/
-│   │   │       │       ├── task_001_create_tables/
-│   │   │       │       │   ├── task_spec.html
-│   │   │       │       │   ├── validation.html
-│   │   │       │       │   ├── task.diff
+│   │   │   ├── 00_intent_spec.html
+│   │   │   ├── 01_solution_strategy.html
+│   │   │   ├── 02_intent_decomposition.html
+│   │   │   ├── 03_intent_ledger.json
+│   │   │   ├── 03_intent_verification.html
+│   │   │   ├── 04_intent_summary.html
+│   │   │   ├── 05_intent_conversation_summary.html
+│   │   │   ├── 06_intent_conversation_metrics.json
+│   │   │   ├── 07_review_findings.html
+│   │   │   └── sub_intents/
+│   │   │       ├── sub_intent_01_auth_schema/
+│   │   │       │   ├── sub_intent_spec.html
+│   │   │       │   ├── sub_intent_verification.html
+│   │   │       │   ├── sub_intent_summary.html
+│   │   │       │   └── units/
+│   │   │       │       ├── unit_001_create_tables/
+│   │   │       │       │   ├── intent_unit_spec.html
+│   │   │       │       │   ├── verification.html
+│   │   │       │       │   ├── intent.diff
 │   │   │       │       │   ├── summary.html
 │   │   │       │       │   ├── conversation.jsonl
 │   │   │       │       │   └── metrics.json
-│   │   │       │       └── task_002_seed_data/
+│   │   │       │       └── unit_002_seed_data/
 │   │   │       │           └── ...
-│   │   │       └── phase_02_api_endpoints/
+│   │   │       └── sub_intent_02_token_service/
 │   │   │           └── ...
 │   │
 │   ├── wiki/                                # Project Wiki Domain (Specification TBD - TOPIC-002)
@@ -300,10 +320,10 @@ The core mechanism for token conservation in `tosh` is selective XPath extractio
 
 | Extraction Objective | Target Document | XPath Query Pattern |
 |:---|:---|:---|
-| **All Unfinished Tasks** | `03_implementation_ledger.json` | Direct JSON filter: `tasks[?status!='completed']` |
-| **Task Acceptance Checklist** | `task_spec.html` | `//section[@id='acceptance-criteria']//md-list-item` |
-| **Failed Validations** | Work item tree | `//meta[@name='doc-type' and @content='task-validation']/ancestor::head/meta[@name='validation-verdict' and @content='fail']` |
-| **Target Modified Files** | `task_spec.html` | `//meta[@name='target-files']/@content` |
+| **All Unfinished Units** | `03_intent_ledger.json` | Direct JSON filter: `subIntents[*].units[?state!='verified']` |
+| **Unit Invariants** | `intent_unit_spec.html` | `//section[@id='invariants']//md-list-item` |
+| **Failed Verifications** | Work item tree | `//meta[@name='doc-type' and @content='unit-verification']/ancestor::head/meta[@name='evidence-verdict' and @content='fail']` |
+| **Unit Target Scope** | `intent_unit_spec.html` | `//meta[@name='target-files']/@content` |
 | **Specific Endpoint Schema** | `server/api-spec.html` | `//article[@data-endpoint='/api/v1/auth/login' and @data-method='POST']` |
 | **Coding Style Rules** | `coding-standards.html` | `//section[@id='error-handling-conventions']` |
 | **Method Signature & Types** | `types/AuthService.html` | `//div[@data-symbol='authenticateUser']` |
@@ -313,13 +333,13 @@ The core mechanism for token conservation in `tosh` is selective XPath extractio
 ```
 Full Document Ingestion (Standard AI Dev Flow):
 ┌────────────────────────────────────────────────────────┐
-│ Complete Task Spec + Design Spec + Requirements        │
+│ Complete Unit Spec + Strategy + Intent Spec            │
 │ ~12,500 Tokens                                         │
 └────────────────────────────────────────────────────────┘
 
 TOSH XPath Subtree Extraction:
 ┌───────────────────────────────────────┐
-│ Target Checklist + File Manifest Only │
+│ Goal + Invariants + Scope Only        │
 │ ~380 Tokens (96.9% reduction)         │
 └───────────────────────────────────────┘
 ```
@@ -332,11 +352,11 @@ Every document links to related entities via structured `<head>` metadata tags, 
 
 ```mermaid
 graph LR
-    REQ["Requirements<br/>(00_requirements.html)"] --> DESIGN["Technical Design<br/>(01_design_spec.html)"]
-    DESIGN --> PLAN["Implementation Plan<br/>(02_implementation_plan.html)"]
-    PLAN --> PHASE["Phase Spec<br/>(phase_spec.html)"]
-    PHASE --> TASK["Task Spec<br/>(task_spec.html)"]
-    TASK --> VAL["Task Validation<br/>(validation.html)"]
+    REQ["Intent Spec<br/>(00_intent_spec.html)"] --> DESIGN["Solution Strategy<br/>(01_solution_strategy.html)"]
+    DESIGN --> PLAN["Intent Decomposition<br/>(02_intent_decomposition.html)"]
+    PLAN --> PHASE["Sub-Intent Spec<br/>(sub_intent_spec.html)"]
+    PHASE --> TASK["Unit Spec<br/>(intent_unit_spec.html)"]
+    TASK --> VAL["Unit Verification<br/>(verification.html)"]
     VAL --> REP["Reports & Audits<br/>(test-runs/...)"]
 
     WIKI["Wiki Standards<br/>(coding-standards.html)"] -.->|governs| TASK
@@ -346,9 +366,11 @@ graph LR
 
 ### Traceability Metadata Pointers
 
-- `implements-req`: Links designs and tasks back to requirement IDs (e.g., `REQ-001,REQ-002`).
+- `implements-req`: Links strategies and units back to evidence requirement IDs (e.g., `EV-001,EV-002`).
 - `parent-doc-id`: Direct parent node in the document hierarchy.
-- `depends-on`: Preceding task or phase identifiers that block execution.
+- `depends-on`: Preceding unit or sub-intent identifiers that block execution.
+- `origin-ref`: The finding or alert that created an intent.
+- `external-ref`: The ID of a record in a legacy tracking system.
 - `validates-artifact`: Verification documents linking to their corresponding spec or commit hash.
 - `references-wiki`: Pointers to applicable coding guidelines or architectural ADRs.
 - `references-api`: Links to relevant SDK type definitions or OpenAPI endpoints.
@@ -361,10 +383,11 @@ How `build-docs/docs/` specifications interact with other `build-docs/` subcompo
 
 | Subsystem | Specification Path | Interface with Document System |
 |:---|:---|:---|
-| **CLI** | [`build-docs/cli/`](../cli/README.md) | Parses XHTML via XML DOM, evaluates XPath expressions, creates/updates ledger JSON, and runs schema validation. |
-| **MCP Server** | [`build-docs/mcp/`](../mcp/README.md) | Exposes fine-grained tool calls (`tosh_query_doc`, `tosh_update_task`, `tosh_get_schema`) to LLMs without loading full files. |
+| **CLI** | [`build-docs/cli/`](../cli/README.md) | Parses XHTML via XML DOM, evaluates XPath expressions, creates/updates ledger JSON, and runs schema validation. The `tosh work-item` command group exposes work item operations and ships hook templates for `build-gate` invariants. |
+| **MCP Server** | [`build-docs/mcp/`](../mcp/README.md) | Exposes fine-grained tool calls (`tosh_query_doc`, `tosh_update_unit`, `tosh_get_schema`) to LLMs without loading full files, and exposes the gate state of each unit. |
 | **REST API** | [`build-docs/rest-api/`](../rest-api/README.md) | Exposes document domains and ledgers as REST endpoints for third-party tooling, IDE extensions, or remote dashboards. |
 | **Static UI** | [`build-docs/static-ui/`](../static-ui/README.md) | Provides the Material 3 web component templates and layout shells that render each document domain in a browser. |
+| **Project Manager** | [`build-docs/project-mgr/`](../project-mgr/README.md) | Defines the PRD, FSD, epic, initiative, and milestone documents. Links work items to requirements through `implements-req` and the `epic` field. |
 
 ---
 
@@ -385,7 +408,8 @@ All documents under `.tosh/` are plain text (XHTML, JSON, JSONL, CSS) designed f
 2. **Strict XHTML Well-Formedness:** Every document must parse successfully with an XML parser (`xml.etree`, `lxml`, `DOMParser`). Tags must be closed, attributes quoted, and ampersands escaped (`&amp;`).
 3. **Mandatory Metadata:** Omission of any of the seven universal baseline tags is treated as a validation failure.
 4. **Zero Runtime Bundling:** XHTML files must render natively in modern browsers with zero client-side compilation (no Webpack, Vite, or Babel step required).
-5. **Revisions Section:** Every document must track modification history exclusively in the `## Revisions` table at the bottom.
+5. **Declarative Work Items:** Work item unit specifications declare goals, scope, invariants, and verification commands. They contain no step-by-step edit instructions.
+6. **Revisions Section:** Every document must track modification history exclusively in the `## Revisions` table at the bottom.
 
 ---
 
@@ -393,6 +417,8 @@ All documents under `.tosh/` are plain text (XHTML, JSON, JSONL, CSS) designed f
 
 | Date | Version | Description | Source |
 |:---|:---|:---|:---|
+| 2026-11-01 | 0.5.0 | Added the `project-mgr` domain value, the `.tosh/project-mgr/` and `.tosh/wts/` runtime layout, and the project manager row in the subsystem matrix. | TOPIC-006 |
+| 2026-10-31 | 0.4.0 | Rebuilt the Work Items domain inventory, runtime layout, query patterns, traceability graph, and subsystem matrix around declarative intent. | TOPIC-005 |
 | 2026-09-06 | 0.3.0 | Added `task.diff` (Task Diff) specification to Work Items domain artifact inventory and directory layout. | Work Item Architecture Alignment |
 | 2026-09-05 | 0.2.0 | Fully built out document ecosystem architecture: 5-domain taxonomy, specification blueprint inventory, subsystem integration matrix, `.tosh/` runtime layout, universal XHTML baseline, token querying patterns, cross-domain DAG, and linkage to ideation topics TOPIC-001 through TOPIC-004. | Build Docs Harmonization |
 | 2026-08-30 | 0.1.0 | Initial outline of document domain breakdown. | Initial Document |
