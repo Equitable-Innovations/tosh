@@ -40,8 +40,8 @@ its change history only in a `## Revisions` table at the bottom, and that table 
 `TOPIC-###` that produced the change.
 
 `build-docs/docs/README.md` is the master document-architecture spec; it fans out into five document domains, each with its own
-directory and README under `build-docs/docs/`. The table also lists WTS, which has its own directory at
-`build-docs/project-mgr/wts`:
+directory and README under `build-docs/docs/`. The table also lists the Project Manager (`build-docs/project-mgr/`) and
+WTS, which sits inside it at `build-docs/project-mgr/wts`:
 
 | Domain         | Directory                     | Status                                                                                   |
 |----------------|-------------------------------|------------------------------------------------------------------------------------------|
@@ -50,7 +50,8 @@ directory and README under `build-docs/docs/`. The table also lists WTS, which h
 | SDK & Code API | `build-docs/docs/sdk-api/`    | Pending ideation ([TOPIC-004](topics/TOPIC-004_sdk-api-documents-domain-definition.md))  |
 | OpenAPI        | `build-docs/docs/open-api/`   | In discussion ([TOPIC-003](topics/TOPIC-003_openapi-documents-rendering-and-storage.md)) |
 | Reports        | `build-docs/docs/report/`     | Pending ideation ([TOPIC-001](topics/TOPIC-001_report-documents-domain-definition.md))   |
-| WTS            | `build-docs/project-mgr/wts`             | Initial spec drafted (Work Tracking System, modeled on the `todo/` workspace)            |
+| Project Manager | `build-docs/project-mgr/`    | Initial spec drafted ([TOPIC-006](topics/TOPIC-006_project-mgr-product-management-and-work-tracking.md)): PRD, FSD, epics, milestones, release gates |
+| WTS            | `build-docs/project-mgr/wts`  | Initial spec drafted (Work Tracking System, part of the Project Manager, modeled on the `todo/` workspace) |
 
 Other `build-docs/` subsystems being specified alongside the document domains: `cli/` (the distributed binary and
 command surface), `mcp/` (bundled MCP server exposing document tools to LLMs), `rest-api/` (bundled local REST daemon

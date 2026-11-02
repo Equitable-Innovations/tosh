@@ -91,7 +91,7 @@ Every `.html` document must include these seven baseline metadata tags within th
 | `doc-id` | String | Globally unique identifier within the workspace | `WI-20260830T170936Z:00:SPEC` |
 | `doc-type` | String | Classification of document schema | `intent-spec`, `wiki-page`, `api-class`, `report` |
 | `schema-version` | SemVer | Document format schema version | `1.0.0` |
-| `domain` | String | Functional document domain | `work-items`, `wiki`, `sdk-api`, `open-api`, `report` |
+| `domain` | String | Functional document domain | `work-items`, `project-mgr`, `wiki`, `sdk-api`, `open-api`, `report` |
 | `status` | Enum | Document lifecycle state | `pending`, `in-progress`, `completed`, `failed`, `blocked` |
 | `created-at` | ISO-8601 | Document creation timestamp | `2026-08-30T17:10:00Z` |
 | `updated-at` | ISO-8601 | Last modification timestamp | `2026-08-30T17:14:22Z` |
@@ -154,6 +154,8 @@ The TOSH documentation ecosystem is partitioned into five distinct domains:
 | **SDK & API** | `.tosh/sdk-api/` | Machine-indexed code structure, modules, signatures | [`sdk-api/README.md`](sdk-api/README.md) |
 | **OpenAPI** | `.tosh/open-api/` | Host service schemas and consumed client contracts | [`open-api/README.md`](open-api/README.md) |
 | **Reports** | `.tosh/reports/` | Token telemetry, execution audits, and validation metrics | [`report/README.md`](report/README.md) |
+
+The [project manager](../project-mgr/README.md) adds a sixth set of documents. They use the `project-mgr` value in the `domain` tag. They live in `.tosh/project-mgr/` and hold the PRD, the FSD, initiatives, epics, milestones, and the traceability matrix. The project manager specification defines these documents. The work item backlog lives in `.tosh/wts/`, as the [WTS specification](../project-mgr/wts/README.md) defines.
 
 ---
 
@@ -249,6 +251,19 @@ When `tosh` operates inside a project repository, it generates and maintains all
 <repo-root>/
 ├── .tosh/
 │   ├── tosh.config.json                     # Workspace configuration & schema settings
+│   │
+│   ├── project-mgr/                         # Project Manager Documents (see project-mgr/README.md)
+│   │   ├── prd.html
+│   │   ├── fsd.html
+│   │   ├── edges.jsonl
+│   │   ├── traceability.html
+│   │   ├── initiatives/
+│   │   ├── epics/
+│   │   └── milestones/
+│   │
+│   ├── wts/                                 # Work item backlog (see project-mgr/wts/README.md)
+│   │   ├── backlog.jsonl
+│   │   └── WORK-ITEM-###_{slug}.md
 │   │
 │   ├── work_items/                          # Work Item Documents Domain
 │   │   ├── review_policy.html               # Project-level review policy
@@ -372,6 +387,7 @@ How `build-docs/docs/` specifications interact with other `build-docs/` subcompo
 | **MCP Server** | [`build-docs/mcp/`](../mcp/README.md) | Exposes fine-grained tool calls (`tosh_query_doc`, `tosh_update_unit`, `tosh_get_schema`) to LLMs without loading full files, and exposes the gate state of each unit. |
 | **REST API** | [`build-docs/rest-api/`](../rest-api/README.md) | Exposes document domains and ledgers as REST endpoints for third-party tooling, IDE extensions, or remote dashboards. |
 | **Static UI** | [`build-docs/static-ui/`](../static-ui/README.md) | Provides the Material 3 web component templates and layout shells that render each document domain in a browser. |
+| **Project Manager** | [`build-docs/project-mgr/`](../project-mgr/README.md) | Defines the PRD, FSD, epic, initiative, and milestone documents. Links work items to requirements through `implements-req` and the `epic` field. |
 
 ---
 
@@ -401,6 +417,7 @@ All documents under `.tosh/` are plain text (XHTML, JSON, JSONL, CSS) designed f
 
 | Date | Version | Description | Source |
 |:---|:---|:---|:---|
+| 2026-11-01 | 0.5.0 | Added the `project-mgr` domain value, the `.tosh/project-mgr/` and `.tosh/wts/` runtime layout, and the project manager row in the subsystem matrix. | TOPIC-006 |
 | 2026-10-31 | 0.4.0 | Rebuilt the Work Items domain inventory, runtime layout, query patterns, traceability graph, and subsystem matrix around declarative intent. | TOPIC-005 |
 | 2026-09-06 | 0.3.0 | Added `task.diff` (Task Diff) specification to Work Items domain artifact inventory and directory layout. | Work Item Architecture Alignment |
 | 2026-09-05 | 0.2.0 | Fully built out document ecosystem architecture: 5-domain taxonomy, specification blueprint inventory, subsystem integration matrix, `.tosh/` runtime layout, universal XHTML baseline, token querying patterns, cross-domain DAG, and linkage to ideation topics TOPIC-001 through TOPIC-004. | Build Docs Harmonization |

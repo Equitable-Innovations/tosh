@@ -2,6 +2,8 @@
 
 The Work Tracking System (WTS) is the part of `tosh` that tracks planned work. It holds the backlog, the work item files, and the lifecycle of each work item.
 
+WTS is one of two parts of the [project manager](../README.md). The other part is Product Management, which holds requirements, epics, and milestones.
+
 A work item declares one intent. It states the outcome that the system must achieve, the invariants that must hold, and the evidence that proves the result. A work item does not list steps. It holds no user story and no story points.
 
 ---
@@ -33,6 +35,8 @@ WTS covers these items:
 - The commands, MCP tools, REST endpoints, and agent skills that read and change the backlog.
 
 WTS does not cover the runtime intent package. The [Work Items domain](../../docs/work-items/README.md) specifies that package. WTS only seeds it.
+
+WTS does not cover requirements, epics, milestones, or release gates. The [project manager specification](../README.md) covers those items.
 
 ---
 
@@ -144,6 +148,8 @@ Each work item file has a metadata table and eleven numbered sections.
 | Autonomy Tier | `observe`, `propose`, `change-with-review`, or `scoped-automation`. |
 | Author, Assignee | GitHub handle or agent identifier. |
 | Target Milestone | Release version, for example `v0.1.0`. |
+| Epic | Identifier of the parent epic, such as `EPIC-004`. Before assignment, the value is `—`. |
+| Implements | List of FSD requirement identifiers that the work item satisfies, such as `FSD-FR-204`. If none apply, the value is `—`. |
 | Related Topic(s) | Links to originating topics. |
 | Target Build-Doc(s) | Links to the specifications that the work item implements. |
 | Runtime Directory | Path of the seeded intent package, or `—` before seeding. |
@@ -184,6 +190,8 @@ Invariant classes are `must-preserve`, `do-not-touch`, `performance-budget`, and
 | `tier` | Autonomy tier. |
 | `assignee` | Owner. |
 | `milestone` | Target release. |
+| `epic` | Parent epic identifier. If not set, the value is `—`. |
+| `implements` | List of FSD requirement identifiers. If none apply, the list is empty. |
 | `created`, `active`, `updated`, `completed` | Dates as `YYYY-MM-DD`, or `—` when not set. |
 
 The work item file keeps the intent details. The record keeps only the index fields.
@@ -231,6 +239,8 @@ The `check` command reports each of these conditions:
 - A work item file has no record.
 - The status in a file differs from the status in its record.
 - The generated `backlog.md` differs from a fresh build.
+- The `Prerequisites` and `Enables` lists in section 9 of a file differ from the edges in `.tosh/project-mgr/edges.jsonl`.
+- The `epic` field names an epic that does not exist.
 
 ---
 
@@ -256,7 +266,9 @@ Agents read `backlog.jsonl` with XML-free line queries. They read a work item fi
 | Topic | Work item | `Related Topic(s)` metadata row. |
 | Build doc | Work item | `Target Build-Doc(s)` metadata row. |
 | Work item | Intent package | `Runtime Directory` metadata row. |
-| Work item | Work item | Section 9, `Prerequisites` and `Enables`. |
+| Work item | Work item | Section 9, `Prerequisites` and `Enables`. The `blocks` edges in `.tosh/project-mgr/edges.jsonl` hold the same links. |
+| Epic | Work item | `Epic` metadata row. |
+| Requirement | Work item | `Implements` metadata row. |
 
 When `tosh wts start` seeds the intent package, WTS maps the work item as follows:
 
@@ -285,4 +297,5 @@ When `tosh wts start` seeds the intent package, WTS maps the work item as follow
 
 | Date       | Version | Description                                                                                                                                  | Source |
 |:-----------|:--------|:---------------------------------------------------------------------------------------------------------------------------------------------|:-------|
+| 2026-11-01 | 0.2.0   | Linked to the project manager parent. Added the `Epic` and `Implements` fields, the dependency edge consistency check, and the epic and requirement traceability rows. | TOPIC-006 |
 | 2026-11-01 | 0.1.0   | Initial specification of the Work Tracking System: layout, lifecycle, work item file, backlog index and view, command surface, agent assets. | `../../../todo` workspace |

@@ -130,6 +130,7 @@ presentation mode:
 | Document Domain            | Source Path in `build-docs/docs`                       | UI Presentation Specification                                                                                                                                                    |
 |:---------------------------|:-------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Work Items**             | [`docs/work-items/`](../docs/work-items/README.md) | Multi-stage execution views covering intents and invariants, solution strategies, decompositions, sub-intent and unit specifications, verification outputs, review findings, the lessons log, conversation logs, and telemetry. |
+| **Project Manager**        | [`project-mgr/`](../project-mgr/README.md)             | Planning views for the PRD, the FSD, initiatives, epics, and milestones. Also the traceability matrix, the work item dependency graph, and the release gate results. |
 | **Project Wiki**           | [`docs/wiki/`](../docs/wiki/README.md)                 | Structured documentation reader for team knowledge: project setup, coding standards, architecture decisions, and risk registries.                                                |
 | **SDK & API Reference**    | [`docs/sdk-api/`](../docs/sdk-api/README.md)           | Package and class reference view: module trees, type hierarchies, method signatures, parameter tables, and return types.                                                         |
 | **OpenAPI Specifications** | [`docs/open-api/`](../docs/open-api/README.md)         | Interactive endpoint explorer: HTTP method badges (`GET`, `POST`, etc.), path parameters, payload schemas, and response definitions.                                             |
@@ -245,18 +246,31 @@ All document templates inherit a standard XHTML shell:
   calls.
 - **Telemetry Dashboard:** Metric cards for token usage (input/output/cached), latency, and model execution costs.
 
-#### H. Wiki Template (`wiki/*.html`)
+#### H. Project Manager Templates (`prd.html`, `fsd.html`, `initiatives/*.html`, `epics/*.html`, `milestones/*.html`, `traceability.html`)
+
+- **PRD and FSD Layout:** Two-column reading layout with a sticky list of requirement identifiers. Each requirement is a
+  `<section>` with an `id` equal to its identifier, such as `FSD-FR-204`.
+- **Epic and Initiative Layout:** Header chips for status, parent, and milestone. A list of child work items with status
+  chips.
+- **Milestone Board:** Gate result cards for Completion, Convergence, Findings, Coverage, and Authorization, each with a
+  pass or fail chip.
+- **Traceability Matrix:** Table that shows each requirement with its epic, work items, and state chip (`unmapped`,
+  `in-progress`, `verified`, `failing`).
+- **Dependency Graph:** Diagram of `blocks` edges between work items. The diagram marks the work items that can start
+  now.
+
+#### I. Wiki Template (`wiki/*.html`)
 
 - **Documentation Layout:** Two-column reading layout with a sticky table-of-contents navigation drawer and main article
   container with styled callouts.
 
-#### I. API & OpenAPI Templates (`sdk-api/*.html`, `open-api/*.html`)
+#### J. API & OpenAPI Templates (`sdk-api/*.html`, `open-api/*.html`)
 
 - **SDK API Layout:** Package tree navigator, type definitions, method signatures, parameter tables, and usage examples.
 - **OpenAPI Layout:** Endpoint cards grouped by tag with HTTP method chips (`GET`, `POST`, etc.), request schema tables,
   and response code accordions.
 
-#### J. Report Template (`report/*.html`)
+#### K. Report Template (`report/*.html`)
 
 - **Analytics Layout:** KPI summary cards, test execution grids, token burn-down charts, and audit tables.
 
@@ -365,6 +379,7 @@ code) is implemented in the product codebase, not inside this specification dire
 
 | Date       | Version | Description                                                                                                                                                         | Source                                  |
 |:-----------|:--------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------|
+| 2026-11-01 | 0.4.0   | Added the project manager presentation mode and the templates for the PRD, FSD, epics, milestones, traceability matrix, and dependency graph. | TOPIC-006 |
 | 2026-10-31 | 0.3.0   | Renamed work item templates to the intent-based document set. Added convergence, autonomy tier, and enforcement level chips and the review and lessons templates. | TOPIC-005 |
 | 2026-09-05 | 0.2.0   | Updated specification scope to clarify documentation-only purpose, detail M3 UI components, integrate with `build-docs/docs`, and define domain document templates. | [Build Docs UI Requirements](README.md) |
 | 2026-08-30 | 0.1.0   | Initial baseline specification defining static UI concept, M3 design system, and core XHTML rules.                                                                  | Initial Design                          |
