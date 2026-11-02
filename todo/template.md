@@ -1,120 +1,135 @@
-# STORY-###: [Story Title]
+# WORK-ITEM-###: [Work Item Title]
 
 | Metadata | Value |
 | :--- | :--- |
-| **Story ID** | `STORY-###` |
+| **Work Item ID** | `WORK-ITEM-###` |
 | **Status** | `BACKLOG` | <!-- Options: BACKLOG | PLANNED | READY | IN_PROGRESS | IN_REVIEW | DONE | BLOCKED | CANCELLED -->
 | **Priority** | `P2 - Medium` | <!-- Options: P0 - Blocker | P1 - High | P2 - Medium | P3 - Low -->
-| **Story Points** | `3` | <!-- Fibonacci scale: 1, 2, 3, 5, 8, 13 -->
 | **Domain / Component** | `CLI` | <!-- Options: CLI | MCP | REST API | Static UI | Work Items | Wiki | OpenAPI | SDK/API | Core -->
+| **Autonomy Tier** | `propose` | <!-- Options: observe | propose | change-with-review | scoped-automation -->
 | **Author** | @username |
 | **Assignee** | Unassigned |
 | **Target Milestone** | `v0.1.0` |
 | **Related Topic(s)** | [`TOPIC-###`](../topics/TOPIC-###_slug.md) |
 | **Target Build-Doc(s)** | [`build-docs/...`](../build-docs/README.md) |
+| **Runtime Directory** | — | <!-- Set to .tosh/work_items/{timestamp}_{slug}/ when the intent package is seeded -->
 | **Created Date** | YYYY-MM-DD |
 | **Active Date** | — | <!-- Stamped on first activation (transition out of BACKLOG to PLANNED or later); never changed afterward -->
 | **Last Updated** | YYYY-MM-DD |
 
+> A work item is the parent of all intent-driven SDLC documents. This file holds the intent. The runtime intent
+> package (`00_intent_spec.html` through `07_review_findings.html`, sub-intents, and intent units) is seeded from it.
+
 ---
 
-## 1. User Story
+## 1. Declared Intent
 
-**As a** [user persona / developer / agentic LLM],  
-**I want** [capability, feature, or structural behavior],  
-**So that** [clear benefit, value proposition, or token optimization].
+State the intent in the originator's own words. Describe the outcome, not the steps.
+
+- **Desired outcome**: [What the system must achieve.]
+- **Affected users and systems**: [Who and what the intent touches.]
+- **Motivation**: [Why this matters now.]
 
 ---
 
 ## 2. Context & Background
 
 ### 2.1 Problem Description
-What specific problem, user requirement, or technical deficiency does this story address?
+What problem or deficiency does this intent address?
 
 ### 2.2 Background & Motivation
-Why are we building this now? Link to originating design topics from [`topics/`](../topics/README.md) or canonical architecture definitions from [`build-docs/`](../build-docs/README.md).
+Link to originating design topics from [`topics/`](../topics/README.md) or canonical definitions from [`build-docs/`](../build-docs/README.md).
 
 ---
 
-## 3. Scope
+## 3. System Invariants
+
+Conditions that must hold before, during, and after convergence. Each command exits with code `0` when the invariant holds.
+
+| ID | Class | Description | Command | Enforcement |
+| :--- | :--- | :--- | :--- | :--- |
+| `INV-001` | `must-preserve` | [What must stay true.] | `[shell command]` | `ci-gate` |
+
+<!-- Class: must-preserve | do-not-touch | performance-budget | security-boundary -->
+<!-- Enforcement: advisory | build-gate | ci-gate | human-gate -->
+
+---
+
+## 4. Boundary Envelope
 
 ### In Scope
-- [ ] Feature capability 1.
-- [ ] Feature capability 2.
-- [ ] Expected behavior or document output.
+- [ ] Capability 1.
+- [ ] Capability 2.
 
 ### Out of Scope
-- Explicitly excluded item 1 (e.g., deferred to later story `STORY-###`).
-- Explicitly excluded item 2.
+- Excluded capability 1 (for example, deferred to `WORK-ITEM-###`).
+
+### Constraints
+- Constraint that binds the solution (for example, reuse the existing authentication method).
 
 ---
 
-## 4. Acceptance Criteria
+## 5. Evidence Requirements
 
 > [!NOTE]
-> Acceptance criteria should be concrete, testable, and unambiguous. Use Gherkin syntax (`Given / When / Then`) or explicit checklists.
+> Each requirement is an observable outcome with a command that returns pass or fail. The intent settles only when every requirement passes.
 
-- [ ] **AC-1**: **[Scenario Title]**
-  - **Given** [initial state or preconditions]
-  - **When** [action or command is triggered]
-  - **Then** [expected result or state change]
-- [ ] **AC-2**: **[Scenario Title]**
-  - **Given** [initial state or preconditions]
-  - **When** [action or command is triggered]
-  - **Then** [expected result or state change]
-- [ ] **AC-3**: Edge cases, error handling, and validation boundaries tested.
+| ID | Observable Outcome | Verification Command |
+| :--- | :--- | :--- |
+| `EV-001` | [What a reviewer can observe.] | `[shell command]` |
+| `EV-002` | [Edge cases, error handling, and validation boundaries.] | `[shell command]` |
 
 ---
 
-## 5. Technical Approach & Design References
+## 6. Technical Approach & Design References
 
-### 5.1 Architecture & References
+### 6.1 Architecture & References
 - **Specifications**: Refer to [`build-docs/...`](../build-docs/README.md) for target contracts and schemas.
-- **Affected Packages / Files**: Target file paths, modules, or directories.
-- **Data Models / Schemas**: Any XHTML tags, JSON structures, or CLI commands affected.
+- **Affected Packages / Files**: Target paths, modules, or directories. These seed the Target Scope of the intent units.
+- **Data Models / Schemas**: XHTML tags, JSON structures, or CLI commands affected.
 
-### 5.2 Token Optimization & Performance
-- How does this story maintain `tosh` tenets of minimal token consumption and fast local parsing?
-
----
-
-## 6. Implementation Checklist
-
-- [ ] **Step 1: Setup & Scaffolding**
-  - [ ] Create module / directory structure.
-  - [ ] Define interfaces and types.
-- [ ] **Step 2: Core Logic Implementation**
-  - [ ] Implement primary functional logic.
-  - [ ] Handle error states and validation edge cases.
-- [ ] **Step 3: Verification & Testing**
-  - [ ] Author automated unit tests.
-  - [ ] Verify test coverage and pass rates.
-- [ ] **Step 4: Documentation & Integration**
-  - [ ] Update corresponding `build-docs/` or wiki specs if needed.
-  - [ ] Update `todo/backlog.md` status.
+### 6.2 Token Optimization & Performance
+How does this intent keep token use low and local parsing fast?
 
 ---
 
-## 7. Definition of Done (DoD)
+## 7. Candidate Sub-Intents
 
-- [ ] All acceptance criteria (AC-1, AC-2, etc.) are fulfilled and verified.
-- [ ] Code follows repository conventions and formatting standards.
-- [ ] Unit / integration tests pass with zero regressions.
-- [ ] Documentation updated to reflect changes.
-- [ ] Pull request reviewed, approved, and merged.
-- [ ] Story status in this file updated to `DONE` and reflected in [`backlog.md`](backlog.md).
+Verifiable milestones that seed `02_intent_decomposition.html`. List dependencies between them.
+
+- [ ] **SI-1**: [Milestone name]
+  - Depends on: none
+- [ ] **SI-2**: [Milestone name]
+  - Depends on: SI-1
 
 ---
 
-## 8. Dependencies & Blockers
+## 8. Definition of Done (DoD)
 
-- **Prerequisites**: Blocked by or depends on completion of [`STORY-###`](STORY-###_slug.md).
-- **Enables**: Prerequisite for [`STORY-###`](STORY-###_slug.md).
+- [ ] Every invariant holds (`INV-001`, ...).
+- [ ] Every evidence requirement passes (`EV-001`, ...).
+- [ ] Documentation is updated to reflect the changes.
+- [ ] Pull request is reviewed, approved, and merged.
+- [ ] Status in this file is `DONE` and reflected in [`backlog.md`](backlog.md).
+
+---
+
+## 9. Dependencies & Blockers
+
+- **Prerequisites**: Depends on [`WORK-ITEM-###`](WORK-ITEM-###_slug.md).
+- **Enables**: Prerequisite for [`WORK-ITEM-###`](WORK-ITEM-###_slug.md).
 - **External Dependencies**: Third-party packages, tooling, or upstream topics.
 
 ---
 
-## 9. Activity Log & Notes
+## 10. Open Questions
 
-- **YYYY-MM-DD** (@author): Story created and placed into backlog.
-- **YYYY-MM-DD** (@assignee): Refined scope and acceptance criteria.
+| Question | Status | Owner | Resolution |
+| :--- | :--- | :--- | :--- |
+| [Question] | `open` | @owner | — |
+
+---
+
+## 11. Activity Log & Notes
+
+- **YYYY-MM-DD** (@author): Work item created and placed into backlog.
