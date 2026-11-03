@@ -245,7 +245,6 @@ Refer to this directory map when determining where topic outcomes belong within 
 | **Project Wiki**     | [`build-docs/docs/wiki/`](../build-docs/docs/wiki/README.md)             | Coding guidelines, setup guides, architectural standards, repository conventions.    |
 | **SDK & API**        | [`build-docs/docs/sdk-api/`](../build-docs/docs/sdk-api/README.md)       | Internal and client library interfaces, package structures.                          |
 | **OpenAPI**          | [`build-docs/docs/open-api/`](../build-docs/docs/open-api/README.md)     | Upstream and downstream service API specs.                                           |
-| **Reports**          | [`build-docs/docs/report/`](../build-docs/docs/report/README.md)         | Telemetry, token burn-down, audit, and benchmark reporting models.                   |
 
 ---
 

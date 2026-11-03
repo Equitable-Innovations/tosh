@@ -48,7 +48,7 @@ built(if it exposes endpoints) and the services the application call as a client
 ## Visualization
 This framework provides a base page in which a developer can see documents from all domains in a single pane.
 Developers will largely live in the work item documents as they implement new features and fix bugs. The wiki, code,
-OpenAPI, and reports are all possible context options in defining, designing and implementing new code.
+and OpenAPI documents are all possible context options in defining, designing and implementing new code.
 
 The work item documents will be created and updated in real time as the harness processes each stage. 
 

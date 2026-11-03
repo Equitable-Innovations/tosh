@@ -12,7 +12,7 @@ lifecycle, template structure, and conversion pipeline, consult [topics/README.m
 
 | ID | Title | Status | Facilitator | Target Build-Doc(s) | Last Updated |
 |:---|:---|:---|:---|:---|:---|
-| [`TOPIC-001`](TOPIC-001_report-documents-domain-definition.md) | Report Documents Domain Definition & Architecture | `PROPOSED` | @team | [`build-docs/docs/report/README.md`](../build-docs/docs/report/README.md) | 2026-09-05 |
+| [`TOPIC-001`](TOPIC-001_report-documents-domain-definition.md) | Report Documents Domain Definition & Architecture | `REJECTED` | @team | — | 2026-11-02 |
 | [`TOPIC-002`](TOPIC-002_wiki-documents-domain-definition.md) | Project Wiki Documents Domain Definition & Architecture | `PROPOSED` | @team | [`build-docs/docs/wiki/README.md`](../build-docs/docs/wiki/README.md) | 2026-09-05 |
 | [`TOPIC-003`](TOPIC-003_openapi-documents-rendering-and-storage.md) | OpenAPI Documents Rendering & Storage Architecture | `PROPOSED` | @team | [`build-docs/docs/open-api/README.md`](../build-docs/docs/open-api/README.md) | 2026-09-05 |
 | [`TOPIC-004`](TOPIC-004_sdk-api-documents-domain-definition.md) | SDK & Code API Documents Domain Definition & Architecture | `PROPOSED` | @team | [`build-docs/docs/sdk-api/README.md`](../build-docs/docs/sdk-api/README.md) | 2026-09-05 |

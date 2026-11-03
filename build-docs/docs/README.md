@@ -14,7 +14,6 @@
    2. [Project Wiki Documents (`wiki/`)](#2-project-wiki-documents)
    3. [SDK & Code API Documents (`sdk-api/`)](#3-sdk--code-api-documents)
    4. [OpenAPI Specifications (`open-api/`)](#4-openapi-specifications)
-   5. [Report & Telemetry Documents (`report/`)](#5-report--telemetry-documents)
 5. [Domain Specification Inventory & Blueprint](#domain-specification-inventory--blueprint)
 6. [Target Project Runtime Layout (`.tosh/`)](#target-project-runtime-layout-tosh)
 7. [Targeted Querying & XPath Extraction Patterns](#targeted-querying--xpath-extraction-patterns)
@@ -43,14 +42,12 @@ flowchart TD
         Wiki[docs/wiki/<br/>Wiki Specs]
         API[docs/sdk-api/<br/>SDK API Specs]
         OAS[docs/open-api/<br/>OpenAPI Specs]
-        REP[docs/report/<br/>Report Specs]
     end
 
     DocsMaster --> WI
     DocsMaster --> Wiki
     DocsMaster --> API
     DocsMaster --> OAS
-    DocsMaster --> REP
 
     subgraph Subsystems [Consuming Tosh Subsystems]
         CLI[cli/<br/>CLI Commands & Parsers]
@@ -89,9 +86,9 @@ Every `.html` document must include these seven baseline metadata tags within th
 | Tag | Type | Purpose | Example |
 |:---|:---|:---|:---|
 | `doc-id` | String | Globally unique identifier within the workspace | `WI-20260830T170936Z:00:SPEC` |
-| `doc-type` | String | Classification of document schema | `intent-spec`, `wiki-page`, `api-class`, `report` |
+| `doc-type` | String | Classification of document schema | `intent-spec`, `wiki-page`, `api-class` |
 | `schema-version` | SemVer | Document format schema version | `1.0.0` |
-| `domain` | String | Functional document domain | `work-items`, `project-mgr`, `wiki`, `sdk-api`, `open-api`, `report` |
+| `domain` | String | Functional document domain | `work-items`, `project-mgr`, `wiki`, `sdk-api`, `open-api` |
 | `status` | Enum | Document lifecycle state | `pending`, `in-progress`, `completed`, `failed`, `blocked` |
 | `created-at` | ISO-8601 | Document creation timestamp | `2026-08-30T17:10:00Z` |
 | `updated-at` | ISO-8601 | Last modification timestamp | `2026-08-30T17:14:22Z` |
@@ -145,7 +142,7 @@ Every `.html` document must include these seven baseline metadata tags within th
 
 ## Document Domain Taxonomy
 
-The TOSH documentation ecosystem is partitioned into five distinct domains:
+The TOSH documentation ecosystem is partitioned into four distinct domains:
 
 | Domain | Target Directory | Primary Focus | Canonical Specification |
 |:---|:---|:---|:---|
@@ -154,7 +151,7 @@ The TOSH documentation ecosystem is partitioned into five distinct domains:
 | **SDK & API** | `.tosh/sdk-api/` | Machine-indexed code structure, modules, signatures | [`sdk-api/README.md`](sdk-api/README.md) |
 | **OpenAPI** | `.tosh/open-api/` | Host service schemas and consumed client contracts | [`open-api/README.md`](open-api/README.md) |
 
-The [project manager](../project-mgr/README.md) adds a sixth set of documents. They use the `project-mgr` value in the `domain` tag. They live in `.tosh/project-mgr/` and hold the PRD, the FSD, initiatives, epics, milestones, and the traceability matrix. The project manager specification defines these documents. The work item backlog lives in `.tosh/wts/`, as the [WTS specification](../project-mgr/wts/README.md) defines.
+The [project manager](../project-mgr/README.md) adds a fifth set of documents. They use the `project-mgr` value in the `domain` tag. They live in `.tosh/project-mgr/` and hold the PRD, the FSD, initiatives, epics, milestones, and the traceability matrix. The project manager specification defines these documents. The work item backlog lives in `.tosh/wts/`, as the [WTS specification](../project-mgr/wts/README.md) defines.
 
 ---
 
@@ -215,15 +212,6 @@ The [project manager](../project-mgr/README.md) adds a sixth set of documents. T
 - **Current Status:** All other details (directory structure under `.tosh/open-api/`, transformation pipelines, endpoint querying, internal vs external service organization) are pending ideation and will be defined later.
 - **Active Ideation Topic:** Tracked in [`TOPIC-003: OpenAPI Documents Rendering & Storage Architecture`](../../topics/TOPIC-003_openapi-documents-rendering-and-storage.md).
 - **Detailed Specification:** See [`open-api/README.md`](open-api/README.md).
-
----
-
-### 5. Report & Telemetry Documents
-
-**Scope:** Historical, analytical, and audit documents summarizing execution performance, quality metrics, and cost economics across work items.
-
-- **Current Status:** There is currently no definition of what reports will be in this domain. Specific report types, schemas, and aggregation mechanisms are pending ideation and will be defined later.
-- **Active Ideation Topic:** Tracked in [`TOPIC-001: Report Documents Domain Definition & Architecture`](../../topics/TOPIC-001_report-documents-domain-definition.md).
 
 ---
 
@@ -300,8 +288,8 @@ When `tosh` operates inside a project repository, it generates and maintains all
 │   │   └── ...                              # Symbol and interface documents pending ideation
 │   │
 │   └── open-api/                            # OpenAPI Domain (Specification TBD - TOPIC-003)
-│       ├── *.json / *.yaml                  # OpenAPI-compliant specs rendered into Static UI                           # Report & Telemetry Domain (Specification TBD - TOPIC-001)
-│       └── ...                              # Report types and telemetry schemas pending ideation
+│       ├── *.json / *.yaml                  # OpenAPI-compliant specs rendered into Static UI
+│       └── ...                              # Subdirectory layout and storage architecture TBD
 ```
 
 ---
@@ -411,6 +399,7 @@ All documents under `.tosh/` are plain text (XHTML, JSON, JSONL, CSS) designed f
 
 | Date | Version | Description | Source |
 |:---|:---|:---|:---|
+| 2026-11-02 | 0.6.0 | Removed the Report & Telemetry domain from the taxonomy, inventory, runtime layout, and metadata examples. The taxonomy now has four domains. | Build Docs Harmonization |
 | 2026-11-01 | 0.5.0 | Added the `project-mgr` domain value, the `.tosh/project-mgr/` and `.tosh/wts/` runtime layout, and the project manager row in the subsystem matrix. | TOPIC-006 |
 | 2026-10-31 | 0.4.0 | Rebuilt the Work Items domain inventory, runtime layout, query patterns, traceability graph, and subsystem matrix around declarative intent. | TOPIC-005 |
 | 2026-09-06 | 0.3.0 | Added `task.diff` (Task Diff) specification to Work Items domain artifact inventory and directory layout. | Work Item Architecture Alignment |
