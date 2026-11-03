@@ -43,8 +43,6 @@ documentation it specifies you packages/modules, classes, interfaces, etc.
 OpenAPI specification are important clients and LLMs. This domain of documents contain both the service app being
 built(if it exposes endpoints) and the services the application call as a client.
 
-### [Report Documents](build-docs/docs/report/README.md)
-
 
 
 ## Visualization

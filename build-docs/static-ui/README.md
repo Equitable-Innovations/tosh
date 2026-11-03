@@ -134,7 +134,6 @@ presentation mode:
 | **Project Wiki**           | [`docs/wiki/`](../docs/wiki/README.md)                 | Structured documentation reader for team knowledge: project setup, coding standards, architecture decisions, and risk registries.                                                |
 | **SDK & API Reference**    | [`docs/sdk-api/`](../docs/sdk-api/README.md)           | Package and class reference view: module trees, type hierarchies, method signatures, parameter tables, and return types.                                                         |
 | **OpenAPI Specifications** | [`docs/open-api/`](../docs/open-api/README.md)         | Interactive endpoint explorer: HTTP method badges (`GET`, `POST`, etc.), path parameters, payload schemas, and response definitions.                                             |
-| **Reports & Telemetry**    | [`docs/report/`](../docs/report/README.md)             | Analytics dashboard: token usage burn-down, model costs, execution latency graphs, test pass rates, and coverage reports.                                                        |
 
 ---
 

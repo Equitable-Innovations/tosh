@@ -153,7 +153,6 @@ The TOSH documentation ecosystem is partitioned into five distinct domains:
 | **Project Wiki** | `.tosh/wiki/` | Long-term project knowledge, setup, standards, ADRs | [`wiki/README.md`](wiki/README.md) |
 | **SDK & API** | `.tosh/sdk-api/` | Machine-indexed code structure, modules, signatures | [`sdk-api/README.md`](sdk-api/README.md) |
 | **OpenAPI** | `.tosh/open-api/` | Host service schemas and consumed client contracts | [`open-api/README.md`](open-api/README.md) |
-| **Reports** | `.tosh/reports/` | Token telemetry, execution audits, and validation metrics | [`report/README.md`](report/README.md) |
 
 The [project manager](../project-mgr/README.md) adds a sixth set of documents. They use the `project-mgr` value in the `domain` tag. They live in `.tosh/project-mgr/` and hold the PRD, the FSD, initiatives, epics, milestones, and the traceability matrix. The project manager specification defines these documents. The work item backlog lives in `.tosh/wts/`, as the [WTS specification](../project-mgr/wts/README.md) defines.
 
@@ -225,7 +224,6 @@ The [project manager](../project-mgr/README.md) adds a sixth set of documents. T
 
 - **Current Status:** There is currently no definition of what reports will be in this domain. Specific report types, schemas, and aggregation mechanisms are pending ideation and will be defined later.
 - **Active Ideation Topic:** Tracked in [`TOPIC-001: Report Documents Domain Definition & Architecture`](../../topics/TOPIC-001_report-documents-domain-definition.md).
-- **Detailed Specification:** See [`report/README.md`](report/README.md).
 
 ---
 
@@ -239,7 +237,6 @@ To complete the design phase for the document ecosystem, each domain under `buil
 | [`wiki/`](wiki/README.md) | *Pending Ideation* | Tracked in [`TOPIC-002`](../../topics/TOPIC-002_wiki-documents-domain-definition.md) (Defining wiki document types, templates, and metadata). |
 | [`sdk-api/`](sdk-api/README.md) | *Pending Ideation* | Tracked in [`TOPIC-004`](../../topics/TOPIC-004_sdk-api-documents-domain-definition.md) (Defining code API document types, granularity, and CodeGraph linkage). |
 | [`open-api/`](open-api/README.md) | *In Discussion* | Tracked in [`TOPIC-003`](../../topics/TOPIC-003_openapi-documents-rendering-and-storage.md) (OpenAPI JSON/YAML rendering in UI; defining storage layout and querying). |
-| [`report/`](report/README.md) | *Pending Ideation* | Tracked in [`TOPIC-001`](../../topics/TOPIC-001_report-documents-domain-definition.md) (Defining report document types, metrics, and aggregation). |
 
 ---
 
@@ -302,11 +299,8 @@ When `tosh` operates inside a project repository, it generates and maintains all
 │   ├── sdk-api/                             # SDK & Code API Domain (Specification TBD - TOPIC-004)
 │   │   └── ...                              # Symbol and interface documents pending ideation
 │   │
-│   ├── open-api/                            # OpenAPI Domain (Specification TBD - TOPIC-003)
-│   │   ├── *.json / *.yaml                  # OpenAPI-compliant specs rendered into Static UI
-│   │   └── ...                              # Subdirectory layout and storage architecture TBD
-│   │
-│   └── reports/                             # Report & Telemetry Domain (Specification TBD - TOPIC-001)
+│   └── open-api/                            # OpenAPI Domain (Specification TBD - TOPIC-003)
+│       ├── *.json / *.yaml                  # OpenAPI-compliant specs rendered into Static UI                           # Report & Telemetry Domain (Specification TBD - TOPIC-001)
 │       └── ...                              # Report types and telemetry schemas pending ideation
 ```
 
