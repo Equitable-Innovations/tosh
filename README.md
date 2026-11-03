@@ -43,14 +43,12 @@ documentation it specifies you packages/modules, classes, interfaces, etc.
 OpenAPI specification are important clients and LLMs. This domain of documents contain both the service app being
 built(if it exposes endpoints) and the services the application call as a client.
 
-### [Report Documents](build-docs/docs/report/README.md)
-
 
 
 ## Visualization
 This framework provides a base page in which a developer can see documents from all domains in a single pane.
 Developers will largely live in the work item documents as they implement new features and fix bugs. The wiki, code,
-OpenAPI, and reports are all possible context options in defining, designing and implementing new code.
+and OpenAPI documents are all possible context options in defining, designing and implementing new code.
 
 The work item documents will be created and updated in real time as the harness processes each stage. 
 

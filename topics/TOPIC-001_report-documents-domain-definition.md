@@ -3,11 +3,11 @@
 | Metadata              | Value                                      |
 |:----------------------|:-------------------------------------------|
 | **Topic ID**          | `TOPIC-001`                                |
-| **Status**            | `PROPOSED`                                 |
+| **Status**            | `REJECTED`                                 |
 | **Facilitator**       | @team                                      |
 | **Participants**      | @team                                      |
 | **Created Date**      | 2026-09-05                                 |
-| **Last Updated**      | 2026-09-05                                 |
+| **Last Updated**      | 2026-11-02                                 |
 | **Target Build-Docs** | `build-docs/docs/report/README.md`         |
 | **Impacted Domains**  | `Reports` \| `Static UI` \| `CLI` \| `MCP` |
 
@@ -113,6 +113,7 @@ scope, and document types of the dedicated `report` domain remain undefined in t
 ## 6. Discussion Log & Meeting Notes
 
 - **2026-09-05** (@team): Initial topic proposal created to address the undefined state of the `report` document domain.
+- **2026-11-02** (@team): The `report` domain is removed from the document architecture. Reports are not a separate document domain. Work-item metrics stay in the work item documents.
 
 ---
 
@@ -120,11 +121,11 @@ scope, and document types of the dedicated `report` domain remain undefined in t
 
 *(Complete when updating status to `DECIDED`)*
 
-- **Decision**: Pending team discussion.
-- **Core Rationale**: TBD.
-- **Accepted Trade-offs**: TBD.
-- **Decision Date**: TBD.
-- **Sign-off**: TBD.
+- **Decision**: Rejected. `tosh` has no `report` document domain.
+- **Core Rationale**: The domain had no defined document types. Work-item metrics already live in the work item documents.
+- **Accepted Trade-offs**: No dedicated place for cross-work-item analytics. A later topic can add one.
+- **Decision Date**: 2026-11-02.
+- **Sign-off**: @team.
 
 ---
 
