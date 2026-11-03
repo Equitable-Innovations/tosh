@@ -28,7 +28,7 @@ script, which rebuilds the Markdown each time.
     - `update-work-item-status`: Transition a single work item to a new lifecycle status and update `backlog.jsonl`.
     - `update-backlog`: Audit drift, regenerate `backlog.md`, apply bulk non-status edits, or remove a work item.
 - **Strict Boundaries**:
-    - Do **not** invoke any other skills (e.g. do not invoke `capture-thought`).
+    - Do **not** invoke any other skills (e.g. do not invoke `capture-topic`).
     - Do **not** spawn sub-agents (never invoke `Task` or `Agent` tools).
     - Do **not** use web tools or external MCP servers.
     - Confine all file mutations to `todo/` documents.
