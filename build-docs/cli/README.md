@@ -1,6 +1,6 @@
 # CLI Specification
 
-The `tosh` command line interface (CLI) is the distributed binary. It is the only component that reads and writes `tosh` documents. The MCP server and the REST daemon call the same code, so every operation behaves the same on all three surfaces.
+The `tosh` command line interface (CLI) is the distributed binary. It is the only component that reads and writes `tosh` documents. The MCP server calls the same code, so every operation behaves the same on both surfaces.
 
 ---
 
@@ -32,7 +32,7 @@ The CLI covers these items:
 - The output format and the exit codes.
 - Commands that read, validate, and query documents.
 - Commands that change work items, the backlog, and project management documents.
-- Commands that start the MCP server and the REST daemon.
+- The command that starts the MCP server.
 - Commands that install hooks and agent assets.
 
 The CLI does not define document formats. The [document system](../docs/README.md), the [Work Items domain](../docs/work-items/README.md), and the [project manager](../project-mgr/README.md) define them.
@@ -69,7 +69,6 @@ tosh
 │   ├── epic add | initiative add | milestone add
 │   ├── edge add | edge remove
 │   ├── graph | trace | gate | check
-├── serve                      # Start the REST daemon.
 ├── mcp                        # Start the MCP server on standard input and output.
 └── assets install             # Install agent skills and agents.
 ```
@@ -171,7 +170,6 @@ The [project manager specification](../project-mgr/README.md#command-surface) de
 
 | Command | Effect |
 | :--- | :--- |
-| `tosh serve` | Starts the [REST daemon](../rest-api/README.md). The flags `--host` and `--port` set the address. |
 | `tosh mcp` | Starts the [MCP server](../mcp/README.md) on standard input and output. |
 
 ---
@@ -197,24 +195,19 @@ The [project manager specification](../project-mgr/README.md#command-surface) de
 
 ## Configuration
 
-The file `.tosh/tosh.config.json` holds the project configuration.
-
-| Key | Description | Default |
-| :--- | :--- | :--- |
-| `serve.host` | Address of the REST daemon. | `127.0.0.1` |
-| `serve.port` | Port of the REST daemon. | `7077` |
+The file `.tosh/tosh.config.json` holds the project configuration. This version defines no keys.
 
 ---
 
 ## Rules & Constraints
 
 1. This document represents the current state of the design. History lives in `topics/`.
-2. The CLI is the only writer of `tosh` documents. The MCP server and the REST daemon call CLI code.
+2. The CLI is the only writer of `tosh` documents. The MCP server calls CLI code.
 3. A command that fails leaves every file unchanged.
 4. A gate failure exits with code `4` and changes no state.
 5. A command never lets an agent approve a `human-gate` or authorize a release.
 6. A command never edits `backlog.md` or `traceability.html` in place. Only the generate commands write them.
-7. The CLI makes no network call, except that the REST daemon listens on the local address.
+7. The CLI makes no network call.
 
 ---
 
@@ -222,4 +215,5 @@ The file `.tosh/tosh.config.json` holds the project configuration.
 
 | Date | Version | Description | Source |
 | :--- | :--- | :--- | :--- |
+| 2026-11-04 | 0.2.0 | Removed the `tosh serve` command and the `serve.host` and `serve.port` configuration keys. | Removal of the REST API |
 | 2026-11-01 | 0.1.0 | Initial specification: command tree, global flags, exit codes, document, work item, WTS, and project manager commands, server commands, concurrency, and configuration. | TOPIC-006 |

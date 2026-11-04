@@ -3,11 +3,11 @@
 | Metadata              | Value                                      |
 |:----------------------|:-------------------------------------------|
 | **Topic ID**          | `TOPIC-004`                                |
-| **Status**            | `PROPOSED`                                 |
+| **Status**            | `REJECTED`                                 |
 | **Facilitator**       | @team                                      |
 | **Participants**      | @team                                      |
 | **Created Date**      | 2026-09-05                                 |
-| **Last Updated**      | 2026-09-05                                 |
+| **Last Updated**      | 2026-11-04                                 |
 | **Target Build-Docs** | `build-docs/docs/sdk-api/README.md`        |
 | **Impacted Domains**  | `SDK/API` \| `Static UI` \| `CLI` \| `MCP` |
 
@@ -113,6 +113,7 @@ generation mechanism, and integration with partner tools like `CodeGraph` are cu
 
 - **2026-09-05** (@team): Initial topic proposal created to address the undefined state of the `sdk-api` document
   domain.
+- **2026-11-04** (@team): The `sdk-api` domain is rejected. Code interfaces are not a separate document domain.
 
 ---
 
@@ -120,11 +121,11 @@ generation mechanism, and integration with partner tools like `CodeGraph` are cu
 
 *(Complete when updating status to `DECIDED`)*
 
-- **Decision**: Pending team discussion.
-- **Core Rationale**: TBD.
-- **Accepted Trade-offs**: TBD.
-- **Decision Date**: TBD.
-- **Sign-off**: TBD.
+- **Decision**: Rejected. `tosh` has no `sdk-api` document domain.
+- **Core Rationale**: The domain had no defined document types. `CodeGraph` already serves code symbol queries.
+- **Accepted Trade-offs**: No `tosh` document for code interfaces. A later topic can add one.
+- **Decision Date**: 2026-11-04.
+- **Sign-off**: @team.
 
 ---
 

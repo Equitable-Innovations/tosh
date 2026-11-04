@@ -53,8 +53,7 @@ WTS, which sits inside it at `build-docs/project-mgr/wts`:
 | WTS            | `build-docs/project-mgr/wts`  | Initial spec drafted (Work Tracking System, part of the Project Manager, modeled on the `todo/` workspace) |
 
 Other `build-docs/` subsystems being specified alongside the document domains: `cli/` (the distributed binary and
-command surface), `mcp/` (bundled MCP server exposing document tools to LLMs), `rest-api/` (bundled local REST daemon
-for third-party UIs), and `static-ui/` (zero-build M3 web-component templates that render every document domain in a
+command surface), `mcp/` (bundled MCP server exposing document tools to LLMs), and `static-ui/` (zero-build M3 web-component templates that render every document domain in a
 browser).
 
 When adding a new domain spec under `build-docs/docs/`, match the depth and section structure of

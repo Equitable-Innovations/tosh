@@ -6,7 +6,6 @@
 - [TOPIC-006_project-mgr-product-management-and-work-tracking](topics/TOPIC-006_project-mgr-product-management-and-work-tracking.md)
 - [README](build-docs/cli/README.md)
 - [README](build-docs/mcp/README.md)
-- [README](build-docs/rest-api/README.md)
 - [CLAUDE](CLAUDE.md)
 - [README](build-docs/README.md)
 - [README](build-docs/project-mgr/README.md)

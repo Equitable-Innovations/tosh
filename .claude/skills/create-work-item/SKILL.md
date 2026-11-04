@@ -52,7 +52,7 @@ Ask in short, grouped rounds with `AskUserQuestion`. If the user already gave th
 
 - **Round 5: Work Item Metadata**
   - Priority: `P0 - Blocker`, `P1 - High`, `P2 - Medium` (default), or `P3 - Low`
-  - Domain / Component: `CLI`, `MCP`, `REST API`, `Static UI`, `Work Items`, `Wiki`, `OpenAPI`, `SDK/API`, or `Core`
+  - Domain / Component: `CLI`, `MCP`, `Static UI`, `Work Items`, `Wiki`, `OpenAPI`, `SDK/API`, or `Core`
   - Autonomy tier: `observe`, `propose` (default), `change-with-review`, or `scoped-automation`
   - Initial status: `BACKLOG` (default), `PLANNED`, or `READY`
   - Target milestone: default `v0.1.0`
