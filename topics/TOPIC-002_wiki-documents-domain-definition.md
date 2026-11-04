@@ -3,11 +3,11 @@
 | Metadata              | Value                                   |
 |:----------------------|:----------------------------------------|
 | **Topic ID**          | `TOPIC-002`                             |
-| **Status**            | `PROPOSED`                              |
+| **Status**            | `GRADUATED`                             |
 | **Facilitator**       | @team                                   |
 | **Participants**      | @team                                   |
 | **Created Date**      | 2026-09-05                              |
-| **Last Updated**      | 2026-09-05                              |
+| **Last Updated**      | 2026-11-04                              |
 | **Target Build-Docs** | `build-docs/docs/wiki/README.md`        |
 | **Impacted Domains**  | `Wiki` \| `Static UI` \| `CLI` \| `MCP` |
 
@@ -101,16 +101,27 @@ LLMs. Without a clear specification for what the wiki domain contains and how it
 
 ## 5. Open Questions & Spikes
 
-- [ ] **Q1**: What canonical wiki document types should be defined for the `wiki` domain? *(Owner: @team)*
-- [ ] **Q2**: How should Architectural Decision Records (ADRs) be structured in the wiki while adhering to the rule that
+- [x] **Q1**: What canonical wiki document types should be defined for the `wiki` domain? *(Owner: @team)*
+  Answer: five core pages (`overview`, `architecture`, `setup-guide`, `coding-standards`, `risk-register`), ADRs under
+  `decisions/`, and freeform pages under `pages/`.
+- [x] **Q2**: How should Architectural Decision Records (ADRs) be structured in the wiki while adhering to the rule that
   documents reflect current-state design? *(Owner: @team)*
-- [ ] **Q3**: How should the Static UI navigate wiki documents (tree navigation drawer vs flat tabs)? *(Owner: @team)*
+  Answer: the current-state rule applies to the `tosh` build-docs, not to the wiki of a target project. In the target
+  wiki, the core pages describe the current state and git holds their history. An ADR is a dated record. After
+  acceptance only its status changes, and a changed decision is a new ADR with `supersedes`.
+- [x] **Q3**: How should the Static UI navigate wiki documents (tree navigation drawer vs flat tabs)? *(Owner: @team)*
+  Answer: a tree navigation drawer with the groups Core, Decisions, Risks, and Pages. The template builds it in the
+  browser from `index.json`, so page markup holds no navigation.
 
 ---
 
 ## 6. Discussion Log & Meeting Notes
 
 - **2026-09-05** (@team): Initial topic proposal created to address the undefined state of the `wiki` document domain.
+- **2026-11-04** (@samsassin): Chose Option C (core pages plus a freeform directory). Chose the XHTML page as the single
+  source of truth, over a Markdown source with generated XHTML (the OpenAPI model) and over a mixed model. A Markdown
+  source puts two copies of every page in git. A mixed model makes the CLI support two models. Chose
+  overview, architecture, setup guide, coding standards, ADRs, and a risk register as the core document set.
 
 ---
 
@@ -118,11 +129,17 @@ LLMs. Without a clear specification for what the wiki domain contains and how it
 
 *(Complete when updating status to `DECIDED`)*
 
-- **Decision**: Pending team discussion.
-- **Core Rationale**: TBD.
-- **Accepted Trade-offs**: TBD.
-- **Decision Date**: TBD.
-- **Sign-off**: TBD.
+- **Decision**: Option C. Five required core pages with fixed file names and section identifiers, ADRs under
+  `decisions/`, and freeform pages under `pages/`. The XHTML page is the single source of truth. People can edit pages
+  by hand. Agents write one section at a time through `tosh wiki` commands or MCP tools, with an expected section hash.
+  A CLI-owned `index.json` lists every page and section with a summary, a hash, and a token estimate.
+- **Core Rationale**: Fixed section identifiers let agents find standards with one query. The index and the outline let
+  an agent see the token cost of a section before it reads the section. Freeform pages keep the wiki useful for
+  project-specific topics. One XHTML source keeps the token-efficient query model of `tosh` and avoids a second copy.
+- **Accepted Trade-offs**: Hand-editing XHTML is harder than Markdown. `tosh wiki check` and `tosh wiki index` catch
+  invalid hand edits. The fixed core adds structure that a small project can leave partly empty.
+- **Decision Date**: 2026-11-04.
+- **Sign-off**: @samsassin.
 
 ---
 
@@ -132,15 +149,18 @@ LLMs. Without a clear specification for what the wiki domain contains and how it
 
 ### 8.1 Target Build-Docs Destinations
 
-- [ ] Destination: `build-docs/docs/wiki/README.md`
-- [ ] Destination: Canonical wiki document specification files under `build-docs/docs/wiki/`
+- [x] Destination: [`build-docs/docs/wiki/README.md`](../build-docs/docs/wiki/README.md)
+- [x] Destination: [`build-docs/docs/README.md`](../build-docs/docs/README.md) (taxonomy, inventory, runtime layout)
+- [x] Destination: [`build-docs/cli/README.md`](../build-docs/cli/README.md) (`tosh wiki` command group)
+- [x] Destination: [`build-docs/mcp/README.md`](../build-docs/mcp/README.md) (wiki tools and resource)
+- [x] Destination: [`build-docs/static-ui/README.md`](../build-docs/static-ui/README.md) (Wiki template)
 
 ### 8.2 Specification Authoring Checklist
 
-- [ ] Drafted normative, prescriptive technical specifications.
-- [ ] Verified compliance with [`build-docs/README.md`](../build-docs/README.md) rules:
-    - [ ] Content represents the **current state** of the design.
-    - [ ] Content is **strictly void** of references to past decisions, debate, or rejected alternatives.
-- [ ] Added entry to the `## Revisions` table in the target build-doc referencing this `TOPIC-002`.
-- [ ] Updated status in this topic to `GRADUATED`.
-- [ ] Updated Topic Registry table in [`topic-registry.md`](topic-registry.md).
+- [x] Drafted normative, prescriptive technical specifications.
+- [x] Verified compliance with [`build-docs/README.md`](../build-docs/README.md) rules:
+    - [x] Content represents the **current state** of the design.
+    - [x] Content is **strictly void** of references to past decisions, debate, or rejected alternatives.
+- [x] Added entry to the `## Revisions` table in the target build-doc referencing this `TOPIC-002`.
+- [x] Updated status in this topic to `GRADUATED`.
+- [x] Updated Topic Registry table in [`topic-registry.md`](topic-registry.md).

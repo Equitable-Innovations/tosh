@@ -9,7 +9,7 @@
 | **Created Date** | YYYY-MM-DD |
 | **Last Updated** | YYYY-MM-DD |
 | **Target Build-Docs** | `build-docs/...` |
-| **Impacted Domains** | `CLI` \| `MCP` \| `Static UI` \| `Work Items` \| `Wiki` \| `OpenAPI` \| `SDK/API` |
+| **Impacted Domains** | `CLI` \| `MCP` \| `Static UI` \| `Work Items` \| `Wiki` \| `OpenAPI` |
 
 ---
 

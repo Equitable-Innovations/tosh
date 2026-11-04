@@ -5,7 +5,7 @@
 | **Work Item ID** | `WORK-ITEM-###` |
 | **Status** | `BACKLOG` | <!-- Options: BACKLOG | PLANNED | READY | IN_PROGRESS | IN_REVIEW | DONE | BLOCKED | CANCELLED -->
 | **Priority** | `P2 - Medium` | <!-- Options: P0 - Blocker | P1 - High | P2 - Medium | P3 - Low -->
-| **Domain / Component** | `CLI` | <!-- Options: CLI | MCP | Static UI | Work Items | Wiki | OpenAPI | SDK/API | Core -->
+| **Domain / Component** | `CLI` | <!-- Options: CLI | MCP | Static UI | Work Items | Wiki | OpenAPI | Core -->
 | **Autonomy Tier** | `propose` | <!-- Options: observe | propose | change-with-review | scoped-automation -->
 | **Author** | @username |
 | **Assignee** | Unassigned |

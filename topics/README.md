@@ -104,7 +104,7 @@ Every topic document must follow this standardized format to ensure thorough ana
 | **Created Date**       | YYYY-MM-DD                                                                                      |
 | **Last Updated**       | YYYY-MM-DD                                                                                      |
 | **Target Build-Docs**  | `build-docs/...`                                                                                |
-| **Impacted Domains**   | `CLI` \| `MCP` \| `Static UI` \| `Work Items` \| `Wiki` \| `OpenAPI` \| `SDK/API` |
+| **Impacted Domains**   | `CLI` \| `MCP` \| `Static UI` \| `Work Items` \| `Wiki` \| `OpenAPI` |
 
 ---
 
@@ -242,7 +242,6 @@ Refer to this directory map when determining where topic outcomes belong within 
 | **Static UI**        | [`build-docs/static-ui/`](../build-docs/static-ui/README.md)             | HTML/CSS/JS templates, Material 3 components, single-pane documentation visualizer.  |
 | **Work Items**       | [`build-docs/docs/work-items/`](../build-docs/docs/work-items/README.md) | XHTML metadata standards, requirements, designs, phase/task specs, ledger formats.   |
 | **Project Wiki**     | [`build-docs/docs/wiki/`](../build-docs/docs/wiki/README.md)             | Coding guidelines, setup guides, architectural standards, repository conventions.    |
-| **SDK & API**        | [`build-docs/docs/sdk-api/`](../build-docs/docs/sdk-api/README.md)       | Internal and client library interfaces, package structures.                          |
 | **OpenAPI**          | [`build-docs/docs/open-api/`](../build-docs/docs/open-api/README.md)     | Upstream and downstream service API specs.                                           |
 
 ---

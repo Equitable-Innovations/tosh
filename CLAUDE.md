@@ -39,15 +39,14 @@ write deliberative language ("we decided X over Y because...", comparisons, reje
 its change history only in a `## Revisions` table at the bottom, and that table should cite the source
 `TOPIC-###` that produced the change.
 
-`build-docs/docs/README.md` is the master document-architecture spec; it fans out into four document domains, each with its own
+`build-docs/docs/README.md` is the master document-architecture spec; it fans out into three document domains, each with its own
 directory and README under `build-docs/docs/`. The table also lists the Project Manager (`build-docs/project-mgr/`) and
 WTS, which sits inside it at `build-docs/project-mgr/wts`:
 
 | Domain         | Directory                     | Status                                                                                   |
 |----------------|-------------------------------|------------------------------------------------------------------------------------------|
 | Work Items     | `build-docs/docs/work-items/` | Complete (18 specs) — the reference example for depth/format                             |
-| Project Wiki   | `build-docs/docs/wiki/`       | Pending ideation ([TOPIC-002](topics/TOPIC-002_wiki-documents-domain-definition.md))     |
-| SDK & Code API | `build-docs/docs/sdk-api/`    | Pending ideation ([TOPIC-004](topics/TOPIC-004_sdk-api-documents-domain-definition.md))  |
+| Project Wiki   | `build-docs/docs/wiki/`       | Specified (README) ([TOPIC-002](topics/TOPIC-002_wiki-documents-domain-definition.md)): core pages, ADRs, freeform pages, section-level reads and writes |
 | OpenAPI        | `build-docs/docs/open-api/`   | In discussion ([TOPIC-003](topics/TOPIC-003_openapi-documents-rendering-and-storage.md)) |
 | Project Manager | `build-docs/project-mgr/`    | Initial spec drafted ([TOPIC-006](topics/TOPIC-006_project-mgr-product-management-and-work-tracking.md)): PRD, FSD, epics, milestones, release gates |
 | WTS            | `build-docs/project-mgr/wts`  | Initial spec drafted (Work Tracking System, part of the Project Manager, modeled on the `todo/` workspace) |

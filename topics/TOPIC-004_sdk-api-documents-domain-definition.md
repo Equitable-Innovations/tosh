@@ -8,7 +8,7 @@
 | **Participants**      | @team                                      |
 | **Created Date**      | 2026-09-05                                 |
 | **Last Updated**      | 2026-11-04                                 |
-| **Target Build-Docs** | `build-docs/docs/sdk-api/README.md`        |
+| **Target Build-Docs** | None (`build-docs/docs/sdk-api/` removed)  |
 | **Impacted Domains**  | `SDK/API` \| `Static UI` \| `CLI` \| `MCP` |
 
 ---
@@ -114,6 +114,9 @@ generation mechanism, and integration with partner tools like `CodeGraph` are cu
 - **2026-09-05** (@team): Initial topic proposal created to address the undefined state of the `sdk-api` document
   domain.
 - **2026-11-04** (@team): The `sdk-api` domain is rejected. Code interfaces are not a separate document domain.
+- **2026-11-04** (@samsassin): A doc-generator approach (Javadoc and pydoc output converted to XHTML) came up again
+  and was dropped. The `build-docs/docs/sdk-api/` placeholder and every link to it were removed from the build-docs,
+  the topic templates, and the work item domain list.
 
 ---
 

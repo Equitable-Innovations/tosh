@@ -44,5 +44,4 @@
 - [README](topics/README.md)
 - [template](topics/template.md)
 - [README](build-docs/docs/open-api/README.md)
-- [README](build-docs/docs/sdk-api/README.md)
 - [README](build-docs/docs/wiki/README.md)
