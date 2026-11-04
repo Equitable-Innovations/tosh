@@ -47,8 +47,8 @@ Conditions that must hold before, during, and after convergence. Each command ex
 | ID | Class | Description | Command | Enforcement |
 | :--- | :--- | :--- | :--- | :--- |
 | `INV-001` | `must-preserve` | The Go code builds and passes `go vet`. | `go build ./... && go vet ./...` | `ci-gate` |
-| `INV-002` | `security-boundary` | The CLI makes no network call. No Go file imports `net/http` or dials a socket. | `! grep -rE "net/http\|net\.Dial" --include=*.go .` | `ci-gate` |
-| `INV-003` | `do-not-touch` | This work item changes no file in `build-docs/` or `topics/`. | `git diff --quiet main -- build-docs topics` | `human-gate` |
+| `INV-002` | `security-boundary` | The CLI makes no network call. No Go file imports `net/http` or dials a socket. | `! grep -r -e "net/http" -e "net\.Dial" --include=*.go .` | `ci-gate` |
+| `INV-003` | `do-not-touch` | This work item changes no file in `build-docs/` or `topics/`. | `git diff --quiet 24a304e -- build-docs topics` | `human-gate` |
 
 <!-- Class: must-preserve | do-not-touch | performance-budget | security-boundary -->
 <!-- Enforcement: advisory | build-gate | ci-gate | human-gate -->
