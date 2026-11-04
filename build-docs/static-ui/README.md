@@ -48,8 +48,8 @@ The planned user interface built by `tosh` must adhere to the following architec
 
 - **Completely Static:** The UI requires zero client-side compilation or bundlers at runtime. Pages are standard
   browser-executable XHTML files that can be opened directly via the `file://` protocol.
-- **Single-Pane Visualizer:** A unified interface providing seamless navigation across all documentation domains (work
-  items, project wikis, API references, and reports).
+- **Single-Pane Visualizer:** One interface for navigation across all documentation domains: work items, the
+  project manager, the project wiki, and OpenAPI contracts.
 - **Parseable Document Viewer:** Documents act as dual-purpose artifacts: fully styled visual web pages for developers
   and structured, queryable XML/XHTML documents for LLM agents and the `tosh` CLI.
 
@@ -66,22 +66,22 @@ The user interface will be built using the Material Design 3 (M3) design system:
   `md-typescale-label-*`).
 - **Icons:** [Material Symbols Outlined](https://fonts.google.com/icons).
 - **Color Roles & Theming:** Standard M3 CSS custom properties (`--md-sys-color-surface`, `--md-sys-color-primary`,
-  `--md-sys-color-outline`, etc.) with dark and light theme adaptability.
+  `--md-sys-color-outline`, and the other `--md-sys-color-*` roles) with dark and light themes.
 - **Context7 Library ID:** `/material-components/material-web`
 
 ---
 
 ## UI Component Specifications
 
-The planned UI will utilize standard Web Components (Custom Elements) from `@material/web`. The specifications define
-how each component must be leveraged across documentation views:
+The planned UI uses standard Web Components (Custom Elements) from `@material/web`. The specifications define how
+each documentation view uses each component:
 
 ### 1. Navigation & Structural Components
 
 - **Top App Bar (`md-elevation`):** Anchors the document view, displaying the active work item ID, document title,
   breadcrumbs, search trigger, and theme switcher.
 - **Navigation Rail & Drawer (`md-navigation-rail`, `md-navigation-drawer`):** Left-hand navigation hierarchy enabling
-  top-level domain switching (Work Items, Wiki, SDK API, OpenAPI, Reports).
+  top-level domain switching (Work Items, Project Manager, Wiki, OpenAPI).
 - **Tabs (`md-tabs`, `md-primary-tab`, `md-secondary-tab`):** Horizontal switcher for multi-sub-intent workflows, unit
   suites, or switching between visual rendered view and raw XHTML source.
 
@@ -103,7 +103,7 @@ how each component must be leveraged across documentation views:
     - **Enforcement level:** `advisory`, `build-gate`, `ci-gate`, `human-gate`
     - **Priority:** `critical`, `high`, `medium`, `low`
     - **Verdicts:** `pass`, `fail`
-    - **Classification:** `intent-spec`, `solution-strategy`, `intent-unit-spec`, `unit-verification`, etc.
+    - **Classification:** `intent-spec`, `solution-strategy`, `intent-unit-spec`, `unit-verification`, and the other `doc-type` values.
 
 ### 4. Interactive Controls
 
@@ -131,8 +131,7 @@ presentation mode:
 | **Work Items**             | [`docs/work-items/`](../docs/work-items/README.md) | Multi-stage execution views covering intents and invariants, solution strategies, decompositions, sub-intent and unit specifications, verification outputs, review findings, the lessons log, conversation logs, and telemetry. |
 | **Project Manager**        | [`project-mgr/`](../project-mgr/README.md)             | Planning views for the PRD, the FSD, initiatives, epics, and milestones. Also the traceability matrix, the work item dependency graph, and the release gate results. |
 | **Project Wiki**           | [`docs/wiki/`](../docs/wiki/README.md)                 | Structured documentation reader for team knowledge: project setup, coding standards, architecture decisions, and risk registries.                                                |
-| **SDK & API Reference**    | [`docs/sdk-api/`](../docs/sdk-api/README.md)           | Package and class reference view: module trees, type hierarchies, method signatures, parameter tables, and return types.                                                         |
-| **OpenAPI Specifications** | [`docs/open-api/`](../docs/open-api/README.md)         | Interactive endpoint explorer: HTTP method badges (`GET`, `POST`, etc.), path parameters, payload schemas, and response definitions.                                             |
+| **OpenAPI Specifications** | [`docs/open-api/`](../docs/open-api/README.md)         | Interactive endpoint explorer: HTTP method badges (for example `GET` and `POST`), path parameters, payload schemas, and response definitions.                                             |
 
 ---
 
@@ -261,11 +260,14 @@ All document templates inherit a standard XHTML shell:
 
 - **Documentation Layout:** Two-column reading layout with a sticky table-of-contents navigation drawer and main article
   container with styled callouts.
+- **Navigation Tree:** The drawer groups pages into Core, Decisions, Risks, and Pages. The template builds the drawer in
+  the browser from `.tosh/wiki/index.json`, so the page markup holds no navigation.
+- **State Display:** Chips show a draft page and the status of an ADR. Banners show a page that needs a review and a
+  superseded ADR. The [wiki specification](../docs/wiki/README.md#static-ui-rendering) defines the full rules.
 
-#### J. API & OpenAPI Templates (`sdk-api/*.html`, `open-api/*.html`)
+#### J. OpenAPI Template (`open-api/*.html`)
 
-- **SDK API Layout:** Package tree navigator, type definitions, method signatures, parameter tables, and usage examples.
-- **OpenAPI Layout:** Endpoint cards grouped by tag with HTTP method chips (`GET`, `POST`, etc.), request schema tables,
+- **OpenAPI Layout:** Endpoint cards grouped by tag with HTTP method chips (for example `GET` and `POST`), request schema tables,
   and response code accordions.
 
 #### K. Report Template (`report/*.html`)
@@ -276,7 +278,7 @@ All document templates inherit a standard XHTML shell:
 
 ## Rendering Engine & Header Specification
 
-To ensure rendering operates without build-time compilation, all templates specify an ES module importmap in the
+Rendering needs no build-time compilation, because all templates specify an ES module importmap in the
 `<head>` tag:
 
 ```xhtml
@@ -352,8 +354,8 @@ The `build-docs/static-ui/` directory is scoped strictly to documentation, speci
 | `*.xhtml` prototypes / mockups | Reference mockups validating template layouts against XHTML and XSD constraints prior to implementation. |
 
 > [!IMPORTANT]
-> The final product code (e.g., the CLI code that builds/serves templates, bundled distribution assets, or production UI
-code) is implemented in the product codebase, not inside this specification directory.
+> The final product code lives in the product codebase, not in this specification directory. Examples are the CLI code
+that builds or serves templates, the bundled distribution assets, and the production UI code.
 
 ---
 
@@ -365,7 +367,7 @@ code) is implemented in the product codebase, not inside this specification dire
 3. **XPath Queryable:** All metadata, checklists, and document nodes must be addressable via XPath expressions.
 4. **XSD Conformance:** Document structures must conform to their corresponding XML Schema Definitions (XSDs).
 5. **Zero Compile-Time Dependency:** The UI must render directly in modern browsers without requiring client-side
-   bundlers (webpack, vite, etc.).
+   bundlers, for example webpack or vite.
 6. **Local-First & Offline Capable:** The UI must support offline viewing through local file
    access.
 7. **Current State Design:** All documentation in this directory represents the current active specification and
@@ -377,6 +379,8 @@ code) is implemented in the product codebase, not inside this specification dire
 
 | Date       | Version | Description                                                                                                                                                         | Source                                  |
 |:-----------|:--------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------|
+| 2026-11-04 | 0.7.0   | Added the navigation tree and the state display rules to the Wiki template. | TOPIC-002 |
+| 2026-11-04 | 0.6.0   | Removed the SDK & API domain from the navigation rail, the domain integration table, and the template list. | TOPIC-004 |
 | 2026-11-04 | 0.5.0   | Removed the local server from the static page statement and the offline viewing principle. | Removal of the REST API |
 | 2026-11-01 | 0.4.0   | Added the project manager presentation mode and the templates for the PRD, FSD, epics, milestones, traceability matrix, and dependency graph. | TOPIC-006 |
 | 2026-10-31 | 0.3.0   | Renamed work item templates to the intent-based document set. Added convergence, autonomy tier, and enforcement level chips and the review and lessons templates. | TOPIC-005 |

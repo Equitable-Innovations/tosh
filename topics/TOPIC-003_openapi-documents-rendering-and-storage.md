@@ -3,13 +3,13 @@
 | Metadata              | Value                                                    |
 |:----------------------|:---------------------------------------------------------|
 | **Topic ID**          | `TOPIC-003`                                              |
-| **Status**            | `PROPOSED`                                               |
+| **Status**            | `GRADUATED`                                              |
 | **Facilitator**       | @team                                                    |
 | **Participants**      | @team                                                    |
 | **Created Date**      | 2026-09-05                                               |
-| **Last Updated**      | 2026-09-05                                               |
+| **Last Updated**      | 2026-11-04                                               |
 | **Target Build-Docs** | `build-docs/docs/open-api/README.md`                     |
-| **Impacted Domains**  | `OpenAPI` \| `Static UI` \| `CLI` \| `MCP` \| `REST API` |
+| **Impacted Domains**  | `OpenAPI` \| `Static UI` \| `CLI` \| `MCP`               |
 
 ---
 
@@ -37,12 +37,12 @@ to specify `build-docs/docs/open-api/` fully.
 
 ### Goals
 
-- [ ] Specify the mechanism for rendering OpenAPI JSON or YAML files into the static UI.
-- [ ] Define the workspace directory structure under `.tosh/open-api/` for storing OpenAPI source files and rendered
+- [x] Specify the mechanism for rendering OpenAPI JSON or YAML files into the static UI.
+- [x] Define the workspace directory structure under `.tosh/open-api/` for storing OpenAPI source files and rendered
   views.
-- [ ] Determine how internal application service endpoints vs. external consumed client endpoints are organized and
+- [x] Determine how internal application service endpoints vs. external consumed client endpoints are organized and
   distinguished.
-- [ ] Define targeted querying patterns for LLMs to inspect specific routes, request payloads, and response schemas
+- [x] Define targeted querying patterns for LLMs to inspect specific routes, request payloads, and response schemas
   without reading entire OpenAPI files.
 
 ### Non-Goals
@@ -105,12 +105,16 @@ to specify `build-docs/docs/open-api/` fully.
 
 ## 5. Open Questions & Spikes
 
-- [ ] **Q1**: What directory layout should be standardized under `.tosh/open-api/` (e.g. `services/` for exposed
+- [x] **Q1**: What directory layout should be standardized under `.tosh/open-api/` (e.g. `services/` for exposed
   endpoints vs `clients/` for consumed 3rd-party APIs)? *(Owner: @team)*
-- [ ] **Q2**: Which rendering approach best fulfills the static UI single-pane requirement while keeping OpenAPI specs
+  - Answer: `{services|clients}/{api-id}/v{major}/`, with the source in `source/` and generated documents beside it.
+- [x] **Q2**: Which rendering approach best fulfills the static UI single-pane requirement while keeping OpenAPI specs
   parseable for agents? *(Owner: @team)*
-- [ ] **Q3**: How should versioning of OpenAPI contracts be represented when an application supports multiple API
+  - Answer: Option A (pre-generated XHTML), with the targeted CLI and MCP extraction tools of Option C.
+- [x] **Q3**: How should versioning of OpenAPI contracts be represented when an application supports multiple API
   versions? *(Owner: @team)*
+  - Answer: One directory per major version (`v1/`, `v2/`). Minor and patch changes replace the source in place, and
+    git holds that history.
 
 ---
 
@@ -118,6 +122,9 @@ to specify `build-docs/docs/open-api/` fully.
 
 - **2026-09-05** (@team): Initial topic proposal created based on the confirmed requirement that OpenAPI-compliant JSON
   or YAML files will get rendered into the UI.
+- **2026-11-04** (@samsassin): Direction set: a saved OpenAPI source generates XHTML documents for developers to
+  read. The source stays the single source of truth. Option A chosen, with per-operation and per-schema documents so
+  agents read one fragment. CLI and MCP extraction tools from Option C added on top of the generated XHTML.
 
 ---
 
@@ -125,11 +132,16 @@ to specify `build-docs/docs/open-api/` fully.
 
 *(Complete when updating status to `DECIDED`)*
 
-- **Decision**: Pending team discussion.
-- **Core Rationale**: TBD.
-- **Accepted Trade-offs**: TBD.
-- **Decision Date**: TBD.
-- **Sign-off**: TBD.
+- **Decision**: Option A. The OpenAPI 3.0/3.1 source file under `.tosh/open-api/{services|clients}/{api-id}/v{major}/source/`
+  is the source of truth. `tosh open-api generate` produces an overview, one XHTML document per operation, one per
+  component schema, and a project catalog (`catalog.json`, `catalog.html`). CLI commands and read-only MCP tools
+  (from Option C) return single operation or schema fragments.
+- **Core Rationale**: Matches every other `tosh` domain (strict XHTML, M3, XPath), needs no browser-side OpenAPI
+  renderer, and per-operation files keep agent reads to a few hundred tokens.
+- **Accepted Trade-offs**: A generation step is required after every source change. `tosh open-api check` and a
+  source hash in every document detect stale output. Swagger 2.0 and remote `$ref` targets are not supported.
+- **Decision Date**: 2026-11-04.
+- **Sign-off**: @samsassin.
 
 ---
 
@@ -139,15 +151,15 @@ to specify `build-docs/docs/open-api/` fully.
 
 ### 8.1 Target Build-Docs Destinations
 
-- [ ] Destination: `build-docs/docs/open-api/README.md`
-- [ ] Destination: Detailed OpenAPI rendering and schema specifications under `build-docs/docs/open-api/`
+- [x] Destination: `build-docs/docs/open-api/README.md`
+- [ ] Destination (later): Detailed OpenAPI rendering and schema specifications under `build-docs/docs/open-api/`
 
 ### 8.2 Specification Authoring Checklist
 
-- [ ] Drafted normative, prescriptive technical specifications.
-- [ ] Verified compliance with [`build-docs/README.md`](../build-docs/README.md) rules:
-    - [ ] Content represents the **current state** of the design.
-    - [ ] Content is **strictly void** of references to past decisions, debate, or rejected alternatives.
-- [ ] Added entry to the `## Revisions` table in the target build-doc referencing this `TOPIC-003`.
-- [ ] Updated status in this topic to `GRADUATED`.
-- [ ] Updated Topic Registry table in [`topic-registry.md`](topic-registry.md).
+- [x] Drafted normative, prescriptive technical specifications.
+- [x] Verified compliance with [`build-docs/README.md`](../build-docs/README.md) rules:
+    - [x] Content represents the **current state** of the design.
+    - [x] Content is **strictly void** of references to past decisions, debate, or rejected alternatives.
+- [x] Added entry to the `## Revisions` table in the target build-doc referencing this `TOPIC-003`.
+- [x] Updated status in this topic to `GRADUATED`.
+- [x] Updated Topic Registry table in [`topic-registry.md`](topic-registry.md).

@@ -15,12 +15,13 @@ The `tosh` command line interface (CLI) is the distributed binary. It is the onl
 7. [Work Item Commands](#work-item-commands)
 8. [WTS Commands](#wts-commands)
 9. [Project Manager Commands](#project-manager-commands)
-10. [Server Commands](#server-commands)
-11. [Setup Commands](#setup-commands)
-12. [Concurrency and Atomic Writes](#concurrency-and-atomic-writes)
-13. [Configuration](#configuration)
-14. [Rules & Constraints](#rules--constraints)
-15. [Revisions](#revisions)
+10. [OpenAPI Commands](#openapi-commands)
+11. [Server Commands](#server-commands)
+12. [Setup Commands](#setup-commands)
+13. [Concurrency and Atomic Writes](#concurrency-and-atomic-writes)
+14. [Configuration](#configuration)
+15. [Rules & Constraints](#rules--constraints)
+16. [Revisions](#revisions)
 
 ---
 
@@ -32,6 +33,7 @@ The CLI covers these items:
 - The output format and the exit codes.
 - Commands that read, validate, and query documents.
 - Commands that change work items, the backlog, and project management documents.
+- Commands that add OpenAPI sources and generate OpenAPI documents.
 - The command that starts the MCP server.
 - Commands that install hooks and agent assets.
 
@@ -69,6 +71,14 @@ tosh
 │   ├── epic add | initiative add | milestone add
 │   ├── edge add | edge remove
 │   ├── graph | trace | gate | check
+├── open-api
+│   ├── add | update | generate | check | list | operation | schema | remove
+├── wiki
+│   ├── init | list | outline | get | find | rules | review | index | check
+│   ├── page add | set-meta | move | remove
+│   ├── section set | add | remove
+│   ├── adr add | accept | deprecate
+│   └── risk add | set
 ├── mcp                        # Start the MCP server on standard input and output.
 └── assets install             # Install agent skills and agents.
 ```
@@ -101,7 +111,7 @@ With `--format json`, a command prints one JSON object or one JSON object per li
 | `2` | The arguments are not valid. |
 | `3` | A document is not valid. It does not follow its schema. |
 | `4` | A gate failed. The state did not change. |
-| `5` | A drift check found a difference. |
+| `5` | A drift scan found a difference. |
 | `6` | A lock or version conflict stopped the write. |
 
 ---
@@ -158,11 +168,48 @@ The [project manager specification](../project-mgr/README.md#command-surface) de
 | :--- | :--- |
 | `tosh pm init` | Creates `prd.html`, `fsd.html`, and the directories. |
 | `tosh pm epic add`, `tosh pm initiative add`, `tosh pm milestone add` | Create the document and register it. |
-| `tosh pm edge add`, `tosh pm edge remove` | Change a `blocks` edge. `edge add` runs the cycle check first. |
+| `tosh pm edge add`, `tosh pm edge remove` | Change a `blocks` edge. Before `edge add` writes the edge, it makes sure that the edge creates no cycle. |
 | `tosh pm graph` | Prints the work items that can start now. The flag `--reduce` reports redundant edges. |
 | `tosh pm trace` | Rebuilds `traceability.html`. |
 | `tosh pm gate --milestone <version>` | Runs the release gates and records the verdicts. The Authorization gate needs a human. |
 | `tosh pm check` | Reports drift. It changes nothing. |
+
+---
+
+## OpenAPI Commands
+
+The [OpenAPI specification](../docs/open-api/README.md#command-surface) defines the `tosh open-api` commands.
+
+| Command | Effect |
+| :--- | :--- |
+| `tosh open-api add` | Saves a new OpenAPI source and generates its documents. |
+| `tosh open-api update` | Replaces the source of an existing version and generates its documents. |
+| `tosh open-api generate` | Regenerates the documents of one version or of every `stale` version. |
+| `tosh open-api check` | Reports `stale` and `invalid` versions. It changes nothing. |
+| `tosh open-api list` | Prints the APIs and versions from `catalog.json`. |
+| `tosh open-api operation` | Prints sections of one operation document. |
+| `tosh open-api schema` | Prints sections of one schema document. |
+| `tosh open-api remove` | Deletes one API version and its catalog entry. |
+
+---
+
+## Wiki Commands
+
+The [wiki specification](../docs/wiki/README.md#command-surface) defines the `tosh wiki` commands.
+
+| Command | Effect |
+| :--- | :--- |
+| `tosh wiki init` | Creates `.tosh/wiki/`, the five core pages, and the index. |
+| `tosh wiki list`, `tosh wiki outline`, `tosh wiki get` | Print page records, the sections of one page, or selected sections. |
+| `tosh wiki find` | Searches the section text of published pages and prints section references. |
+| `tosh wiki rules` | Prints the coding standard rules that apply to a set of paths. |
+| `tosh wiki page add`, `set-meta`, `move`, `remove` | Create, change, move, or delete a freeform page. |
+| `tosh wiki section set`, `add`, `remove` | Change one section. A write needs the expected section hash. |
+| `tosh wiki adr add`, `accept`, `deprecate` | Create an ADR or change its status. `accept` and `deprecate` need a named human. |
+| `tosh wiki risk add`, `set` | Add a risk or change its attributes. |
+| `tosh wiki review` | Records a review of a page. |
+| `tosh wiki index` | Makes sure that every page is valid and rebuilds `index.json` and `index.html`. |
+| `tosh wiki check` | Reports invalid pages, broken links, index drift, and pages that need a review. It changes nothing. |
 
 ---
 
@@ -202,11 +249,11 @@ The file `.tosh/tosh.config.json` holds the project configuration. This version 
 ## Rules & Constraints
 
 1. This document represents the current state of the design. History lives in `topics/`.
-2. The CLI is the only writer of `tosh` documents. The MCP server calls CLI code.
+2. The CLI is the only writer of `tosh` documents. The MCP server calls CLI code. A person can edit a wiki page or an OpenAPI source file in a text editor. `tosh wiki check` and `tosh open-api check` find an invalid edit.
 3. A command that fails leaves every file unchanged.
 4. A gate failure exits with code `4` and changes no state.
 5. A command never lets an agent approve a `human-gate` or authorize a release.
-6. A command never edits `backlog.md` or `traceability.html` in place. Only the generate commands write them.
+6. A command never edits `backlog.md`, `traceability.html`, or a generated OpenAPI document in place. Only the generate commands write them. Only `tosh wiki` commands write the wiki `index.json` and `index.html`.
 7. The CLI makes no network call.
 
 ---
@@ -215,5 +262,7 @@ The file `.tosh/tosh.config.json` holds the project configuration. This version 
 
 | Date | Version | Description | Source |
 | :--- | :--- | :--- | :--- |
+| 2026-11-04 | 0.4.0 | Added the `tosh wiki` command group and the rule for hand edits of wiki pages. | TOPIC-002 |
+| 2026-11-04 | 0.3.0 | Added the `tosh open-api` command group. | TOPIC-003 |
 | 2026-11-04 | 0.2.0 | Removed the `tosh serve` command and the `serve.host` and `serve.port` configuration keys. | Removal of the REST API |
 | 2026-11-01 | 0.1.0 | Initial specification: command tree, global flags, exit codes, document, work item, WTS, and project manager commands, server commands, concurrency, and configuration. | TOPIC-006 |

@@ -144,7 +144,7 @@ Each work item file has a metadata table and eleven numbered sections.
 | Work Item ID | `WORK-ITEM-###` |
 | Status | One of the eight lifecycle statuses. |
 | Priority | `P0 - Blocker`, `P1 - High`, `P2 - Medium`, or `P3 - Low`. |
-| Domain / Component | `CLI`, `MCP`, `Static UI`, `Work Items`, `Wiki`, `OpenAPI`, `SDK/API`, or `Core`. |
+| Domain / Component | `CLI`, `MCP`, `Static UI`, `Work Items`, `Wiki`, `OpenAPI`, or `Core`. |
 | Autonomy Tier | `observe`, `propose`, `change-with-review`, or `scoped-automation`. |
 | Author, Assignee | GitHub handle or agent identifier. |
 | Target Milestone | Release version, for example `v0.1.0`. |
@@ -297,6 +297,7 @@ When `tosh wts start` seeds the intent package, WTS maps the work item as follow
 
 | Date       | Version | Description                                                                                                                                  | Source |
 |:-----------|:--------|:---------------------------------------------------------------------------------------------------------------------------------------------|:-------|
+| 2026-11-04 | 0.3.1   | Removed `SDK/API` from the domain list. | TOPIC-004 |
 | 2026-11-04 | 0.3.0   | Removed the REST API from the interface statement, the domain list, and the operations statement. | Removal of the REST API |
 | 2026-11-01 | 0.2.0   | Linked to the project manager parent. Added the `Epic` and `Implements` fields, the dependency edge consistency check, and the epic and requirement traceability rows. | TOPIC-006 |
 | 2026-11-01 | 0.1.0   | Initial specification of the Work Tracking System: layout, lifecycle, work item file, backlog index and view, command surface, agent assets. | `../../../todo` workspace |

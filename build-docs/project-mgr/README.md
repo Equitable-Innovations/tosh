@@ -38,7 +38,7 @@ Product Management defines what the product must do and how the system must beha
 - Release gates that block a milestone from closing.
 - The work item backlog and lifecycle, which WTS specifies.
 
-`project-mgr` does not cover the runtime intent package. The [Work Items domain](../docs/work-items/README.md) specifies that package. `project-mgr` does not cover technical design documents such as database schemas and API contracts. Those belong to the [OpenAPI](../docs/open-api/README.md) and [SDK & API](../docs/sdk-api/README.md) domains.
+`project-mgr` does not cover the runtime intent package. The [Work Items domain](../docs/work-items/README.md) specifies that package. `project-mgr` does not cover technical design documents such as database schemas and API contracts. API contracts belong to the [OpenAPI](../docs/open-api/README.md) domain.
 
 ---
 
@@ -389,5 +389,6 @@ The MCP server exposes the same operations. It calls the same code as the CLI.
 
 | Date | Version | Description | Source |
 | :--- | :--- | :--- | :--- |
+| 2026-11-04 | 0.2.1 | Removed the link to the SDK & API domain from the scope statement. | TOPIC-004 |
 | 2026-11-04 | 0.2.0 | Removed the REST API from the report path, the operations statement, and the subsystem table. | Removal of the REST API |
 | 2026-11-01 | 0.1.0 | Initial specification of project-mgr: PRD and FSD, work hierarchy, epics, milestones, dependency graph, remediation loop, release gates, traceability matrix, and command surface. | TOPIC-006 |
