@@ -47,8 +47,7 @@ completely static user interface:
 The planned user interface built by `tosh` must adhere to the following architectural model:
 
 - **Completely Static:** The UI requires zero client-side compilation or bundlers at runtime. Pages are standard
-  browser-executable XHTML files that can be opened directly via the `file://` protocol or served locally by the `tosh`
-  CLI.
+  browser-executable XHTML files that can be opened directly via the `file://` protocol.
 - **Single-Pane Visualizer:** A unified interface providing seamless navigation across all documentation domains (work
   items, project wikis, API references, and reports).
 - **Parseable Document Viewer:** Documents act as dual-purpose artifacts: fully styled visual web pages for developers
@@ -367,7 +366,7 @@ code) is implemented in the product codebase, not inside this specification dire
 4. **XSD Conformance:** Document structures must conform to their corresponding XML Schema Definitions (XSDs).
 5. **Zero Compile-Time Dependency:** The UI must render directly in modern browsers without requiring client-side
    bundlers (webpack, vite, etc.).
-6. **Local-First & Offline Capable:** The UI must support offline viewing via the `tosh` CLI local server or local file
+6. **Local-First & Offline Capable:** The UI must support offline viewing through local file
    access.
 7. **Current State Design:** All documentation in this directory represents the current active specification and
    contains no historical deliberations or references to superseded decisions.
@@ -378,6 +377,7 @@ code) is implemented in the product codebase, not inside this specification dire
 
 | Date       | Version | Description                                                                                                                                                         | Source                                  |
 |:-----------|:--------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------|
+| 2026-11-04 | 0.5.0   | Removed the local server from the static page statement and the offline viewing principle. | Removal of the REST API |
 | 2026-11-01 | 0.4.0   | Added the project manager presentation mode and the templates for the PRD, FSD, epics, milestones, traceability matrix, and dependency graph. | TOPIC-006 |
 | 2026-10-31 | 0.3.0   | Renamed work item templates to the intent-based document set. Added convergence, autonomy tier, and enforcement level chips and the review and lessons templates. | TOPIC-005 |
 | 2026-09-05 | 0.2.0   | Updated specification scope to clarify documentation-only purpose, detail M3 UI components, integrate with `build-docs/docs`, and define domain document templates. | [Build Docs UI Requirements](README.md) |

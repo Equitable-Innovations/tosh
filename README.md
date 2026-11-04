@@ -66,10 +66,6 @@ also provides easy real-time management of checklists.
 The MCP server is bundled in the CLI and allows for a cleaner and less chatty usage of the CLI by the agentic LLM
 development tool.
 
-### [RestAPI](build-docs/rest-api/README.md)
-The REST API is bundled in the CLI. When this RestAPI server is running it can be interfaced from any 3rd party
-application which has integrated with the REST API. These could allow for a rich UI like React, Angular, Vue, etc.
-
 ### [UI](build-docs/static-ui/README.md)
 The UI templates are bundled in the CLI to build local files. In the initial phases the UI will be completely static
 and be maintained by the CLI.

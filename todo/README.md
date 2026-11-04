@@ -164,7 +164,7 @@ The work item files keep the intent details (invariants, evidence, scope). The r
 | **Status** | Current lifecycle state | `READY`, `IN_PROGRESS`, `DONE` |
 | **Priority** | Urgency and impact rating (`P0`, `P1`, `P2`, `P3`) | `P1` |
 | **Autonomy Tier** | Agent autonomy level (`observe`, `propose`, `change-with-review`, `scoped-automation`) | `propose` |
-| **Domain** | Target subsystem (`CLI`, `MCP`, `REST API`, `Static UI`, `Work Items`, `Wiki`, `Core`) | `CLI` |
+| **Domain** | Target subsystem (`CLI`, `MCP`, `Static UI`, `Work Items`, `Wiki`, `Core`) | `CLI` |
 | **Assignee** | GitHub handle or agent identifier | `@developer` |
 | **Target Release** | Milestone or release version | `v0.1.0` |
 | **Active** | Date the work item first left `BACKLOG` (`YYYY-MM-DD` or `—` if still in `BACKLOG`) | `2026-09-06` |

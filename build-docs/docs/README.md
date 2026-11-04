@@ -32,7 +32,7 @@ During the product ideation and design phase, the [`build-docs/`](../README.md) 
 - **Normative Document Contracts:** Governs the required structure, XHTML schemas, semantic `<head>` metadata, and body sectioning for every artifact `tosh` generates.
 - **Token-Optimized Schema Design:** Ensures documents are structured specifically for fast local extraction via XML parsers and XPath queries, minimizing LLM prompt bloat.
 - **Single-Pane Visual Integration:** Guarantees every document complies with the Material Design 3 static UI specifications defined in [`build-docs/static-ui/`](../static-ui/README.md).
-- **Subsystem Alignment:** Informs the command tree of the [`CLI`](../cli/README.md), the tool catalog of the [`MCP Server`](../mcp/README.md), and the data models of the [`REST API`](../rest-api/README.md).
+- **Subsystem Alignment:** Informs the command tree of the [`CLI`](../cli/README.md) and the tool catalog of the [`MCP Server`](../mcp/README.md).
 
 ```mermaid
 flowchart TD
@@ -52,13 +52,11 @@ flowchart TD
     subgraph Subsystems [Consuming Tosh Subsystems]
         CLI[cli/<br/>CLI Commands & Parsers]
         MCP[mcp/<br/>MCP Tools & Resources]
-        REST[rest-api/<br/>REST API Daemon]
         UI[static-ui/<br/>M3 Static Templates]
     end
 
     DocsMaster -.->|Schema Contracts| CLI
     DocsMaster -.->|Query Protocols| MCP
-    DocsMaster -.->|Resource Endpoints| REST
     DocsMaster -.->|Layout & Stylesheets| UI
 ```
 
@@ -367,7 +365,6 @@ How `build-docs/docs/` specifications interact with other `build-docs/` subcompo
 |:---|:---|:---|
 | **CLI** | [`build-docs/cli/`](../cli/README.md) | Parses XHTML via XML DOM, evaluates XPath expressions, creates/updates ledger JSON, and runs schema validation. The `tosh work-item` command group exposes work item operations and ships hook templates for `build-gate` invariants. |
 | **MCP Server** | [`build-docs/mcp/`](../mcp/README.md) | Exposes fine-grained tool calls (`tosh_query_doc`, `tosh_update_unit`, `tosh_get_schema`) to LLMs without loading full files, and exposes the gate state of each unit. |
-| **REST API** | [`build-docs/rest-api/`](../rest-api/README.md) | Exposes document domains and ledgers as REST endpoints for third-party tooling, IDE extensions, or remote dashboards. |
 | **Static UI** | [`build-docs/static-ui/`](../static-ui/README.md) | Provides the Material 3 web component templates and layout shells that render each document domain in a browser. |
 | **Project Manager** | [`build-docs/project-mgr/`](../project-mgr/README.md) | Defines the PRD, FSD, epic, initiative, and milestone documents. Links work items to requirements through `implements-req` and the `epic` field. |
 
@@ -399,6 +396,7 @@ All documents under `.tosh/` are plain text (XHTML, JSON, JSONL, CSS) designed f
 
 | Date | Version | Description | Source |
 |:---|:---|:---|:---|
+| 2026-11-04 | 0.7.0 | Removed the REST API subsystem from the architecture diagram, the subsystem alignment list, and the subsystem integration matrix. | Build Docs Harmonization |
 | 2026-11-02 | 0.6.0 | Removed the Report & Telemetry domain from the taxonomy, inventory, runtime layout, and metadata examples. The taxonomy now has four domains. | Build Docs Harmonization |
 | 2026-11-01 | 0.5.0 | Added the `project-mgr` domain value, the `.tosh/project-mgr/` and `.tosh/wts/` runtime layout, and the project manager row in the subsystem matrix. | TOPIC-006 |
 | 2026-10-31 | 0.4.0 | Rebuilt the Work Items domain inventory, runtime layout, query patterns, traceability graph, and subsystem matrix around declarative intent. | TOPIC-005 |

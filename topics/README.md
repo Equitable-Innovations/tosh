@@ -104,7 +104,7 @@ Every topic document must follow this standardized format to ensure thorough ana
 | **Created Date**       | YYYY-MM-DD                                                                                      |
 | **Last Updated**       | YYYY-MM-DD                                                                                      |
 | **Target Build-Docs**  | `build-docs/...`                                                                                |
-| **Impacted Domains**   | `CLI` \| `MCP` \| `REST API` \| `Static UI` \| `Work Items` \| `Wiki` \| `OpenAPI` \| `SDK/API` |
+| **Impacted Domains**   | `CLI` \| `MCP` \| `Static UI` \| `Work Items` \| `Wiki` \| `OpenAPI` \| `SDK/API` |
 
 ---
 
@@ -239,7 +239,6 @@ Refer to this directory map when determining where topic outcomes belong within 
 | **Overview & Rules** | [`build-docs/README.md`](../build-docs/README.md)                        | Core build-doc rules, high-level project vision.                                     |
 | **CLI Binary**       | [`build-docs/cli/`](../build-docs/cli/README.md)                         | CLI command tree, flags, parsing engine, local document querying, checklist manager. |
 | **MCP Server**       | [`build-docs/mcp/`](../build-docs/mcp/README.md)                         | Model Context Protocol tools, resources, prompts, agent integration.                 |
-| **REST API**         | [`build-docs/rest-api/`](../build-docs/rest-api/README.md)               | Local daemon endpoints, OpenAPI schema generation, 3rd party integration.            |
 | **Static UI**        | [`build-docs/static-ui/`](../build-docs/static-ui/README.md)             | HTML/CSS/JS templates, Material 3 components, single-pane documentation visualizer.  |
 | **Work Items**       | [`build-docs/docs/work-items/`](../build-docs/docs/work-items/README.md) | XHTML metadata standards, requirements, designs, phase/task specs, ledger formats.   |
 | **Project Wiki**     | [`build-docs/docs/wiki/`](../build-docs/docs/wiki/README.md)             | Coding guidelines, setup guides, architectural standards, repository conventions.    |

@@ -248,7 +248,7 @@ The ledger counts each return to remediation in the `retries` field of the unit.
 - A named human must approve a new approach before the work item returns to `IN_PROGRESS`.
 - The release gates treat a unit with a hold as an unmet Convergence gate.
 
-A review or verification agent reports a failing unit through the CLI, the MCP server, or the REST daemon. The report links the finding to the failing unit and to its work item.
+A review or verification agent reports a failing unit through the CLI or the MCP server. The report links the finding to the failing unit and to its work item.
 
 ---
 
@@ -353,7 +353,7 @@ Product Management commands live under `tosh pm`. WTS commands stay under `tosh 
 | `tosh pm gate` | Runs the release gates for a milestone and records the verdicts. |
 | `tosh pm check` | Reports drift between epics, work items, edges, and the matrix. It changes nothing. |
 
-The MCP server and the REST daemon expose the same operations. They call the same code as the CLI.
+The MCP server exposes the same operations. It calls the same code as the CLI.
 
 ---
 
@@ -363,7 +363,6 @@ The MCP server and the REST daemon expose the same operations. They call the sam
 | :--- | :--- | :--- |
 | CLI | [`build-docs/cli/`](../cli/README.md) | Hosts the `tosh pm` and `tosh wts` command groups. |
 | MCP Server | [`build-docs/mcp/`](../mcp/README.md) | Exposes tools to read requirements, list startable work items, report a failing unit, and read gate state. |
-| REST API | [`build-docs/rest-api/`](../rest-api/README.md) | Exposes initiatives, epics, milestones, the matrix, and the dependency graph. |
 | Static UI | [`build-docs/static-ui/`](../static-ui/README.md) | Renders the PRD, the FSD, the milestone board, the traceability matrix, and the dependency graph. |
 | Work Items domain | [`build-docs/docs/work-items/`](../docs/work-items/README.md) | Supplies convergence state, review findings, `retries`, and holds. |
 
@@ -390,4 +389,5 @@ The MCP server and the REST daemon expose the same operations. They call the sam
 
 | Date | Version | Description | Source |
 | :--- | :--- | :--- | :--- |
+| 2026-11-04 | 0.2.0 | Removed the REST API from the report path, the operations statement, and the subsystem table. | Removal of the REST API |
 | 2026-11-01 | 0.1.0 | Initial specification of project-mgr: PRD and FSD, work hierarchy, epics, milestones, dependency graph, remediation loop, release gates, traceability matrix, and command surface. | TOPIC-006 |

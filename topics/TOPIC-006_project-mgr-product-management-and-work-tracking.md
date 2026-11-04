@@ -176,6 +176,7 @@ The WTS spec describes a backlog of intents. It has no link from a work item to 
 
 - **2026-11-01** (@samsassin): Shared a Gemini conversation on PRD, FSD, work item hierarchy, DAG, and MVP capabilities. Asked for a `project-mgr` README.
 - **2026-11-02** (@samsassin): Marked the topic `GRADUATED`. The CLI, MCP, and REST API specs were drafted. Q1 to Q7 stay open.
+- **2026-11-04** (@samsassin): Removed the REST API subsystem and its build-doc.
 - **2026-11-01** (@samsassin): Answered four design questions. WTS sits inside `project-mgr`. The hierarchy adds Initiative and Epic. The PRD and FSD use strict XHTML. The README comes first, and this topic follows.
 
 ---
@@ -201,7 +202,7 @@ The WTS spec describes a backlog of intents. It has no link from a work item to 
 - [ ] `build-docs/README.md` (subsystem index)
 - [x] `build-docs/cli/README.md` (`tosh pm` command group)
 - [x] `build-docs/mcp/README.md` (requirement, graph, failing-unit, and gate tools)
-- [x] `build-docs/rest-api/README.md` (initiative, epic, milestone, matrix, and graph endpoints)
+- [x] `build-docs/rest-api/README.md` (initiative, epic, milestone, matrix, and graph endpoints). The REST API was removed on 2026-11-04.
 - [x] `build-docs/static-ui/README.md` (PRD, FSD, milestone board, matrix, and graph views)
 - [x] `CLAUDE.md` (domain table row for project-mgr)
 
