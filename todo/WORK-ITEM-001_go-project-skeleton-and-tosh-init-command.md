@@ -58,17 +58,16 @@ Conditions that must hold before, during, and after convergence. Each command ex
 ## 4. Boundary Envelope
 
 ### In Scope
-- [ ] A Go module `github.com/samsassin/tosh` with the `cobra` library and a `cmd/tosh` entry point.
+- [ ] A Go module `github.com/Equitable-Innovations/tosh`, which targets Go 1.26, with the `cobra` library and a `cmd/tosh` entry point.
 - [ ] A root command with the global flags `--root`, `--format`, `--quiet`, and `--help`.
 - [ ] The exit code table from the CLI specification.
 - [ ] The command `tosh init`, which creates `.tosh/` and an empty `.tosh/tosh.config.json`.
-- [ ] Empty stub commands for the other groups in the command tree.
-- [ ] The stub groups are `doc`, `work-item`, `wts`, `pm`, `open-api`, `wiki`, `mcp`, and `assets`.
 - [ ] Go unit tests for `tosh init` and the root command.
-- [ ] A CI step that runs `go build`, `go vet`, and `go test`.
+- [ ] A GitHub Actions workflow that runs `go build`, `go vet`, and `go test`.
 
 ### Out of Scope
 - Real behavior for any command other than `tosh init`. Later work items add it.
+- Empty stub commands for the other groups in the command tree. Later work items add each group with its real behavior.
 - The `tosh assets install` logic.
 - The MCP server.
 - Release packaging and distribution of the binary.
@@ -90,8 +89,7 @@ Conditions that must hold before, during, and after convergence. Each command ex
 | :--- | :--- | :--- |
 | `EV-001` | In an empty directory, `tosh init` creates `.tosh/` and `.tosh/tosh.config.json` and exits with code `0`. | `go build -o bin/tosh ./cmd/tosh && d=$(mktemp -d) && ./bin/tosh init --root "$d" && test -f "$d/.tosh/tosh.config.json"` |
 | `EV-002` | In a directory that holds `.tosh/`, `tosh init` changes no file, prints a message, and exits with code `2`. | `d=$(mktemp -d) && ./bin/tosh init --root "$d" && ./bin/tosh init --root "$d"; test $? -eq 2` |
-| `EV-003` | `tosh --help` lists every command group in the command tree. | `./bin/tosh --help \| grep -E "doc\|work-item\|wts\|pm\|open-api\|wiki\|mcp\|assets"` |
-| `EV-004` | All Go tests pass. | `go test ./...` |
+| `EV-003` | All Go tests pass. | `go test ./...` |
 
 ---
 
@@ -99,7 +97,7 @@ Conditions that must hold before, during, and after convergence. Each command ex
 
 ### 6.1 Architecture & References
 - **Specifications**: [`build-docs/cli/README.md`](../build-docs/cli/README.md) (command tree, global flags, exit codes, setup commands).
-- **Affected Packages / Files**: `go.mod`, `cmd/tosh/`, `internal/cli/`, `internal/initcmd/`, and the CI workflow file.
+- **Affected Packages / Files**: `go.mod`, `cmd/tosh/`, `internal/cli/`, `internal/initcmd/`, and `.github/workflows/ci.yml`.
 - **Data Models / Schemas**: `.tosh/` directory and `.tosh/tosh.config.json` (an empty JSON object).
 
 ### 6.2 Token Optimization & Performance
@@ -113,17 +111,15 @@ Conditions that must hold before, during, and after convergence. Each command ex
   - Depends on: none
 - [ ] **SI-2**: `tosh init` creates `.tosh/` and `tosh.config.json`, with the exit code `2` rule
   - Depends on: SI-1
-- [ ] **SI-3**: Empty stub commands for the other command groups
-  - Depends on: SI-1
-- [ ] **SI-4**: Unit tests and CI step
-  - Depends on: SI-2, SI-3
+- [ ] **SI-3**: Unit tests and GitHub Actions workflow
+  - Depends on: SI-2
 
 ---
 
 ## 8. Definition of Done (DoD)
 
 - [ ] Every invariant holds (`INV-001` to `INV-003`).
-- [ ] Every evidence requirement passes (`EV-001` to `EV-004`).
+- [ ] Every evidence requirement passes (`EV-001` to `EV-003`).
 - [ ] Documentation is updated to reflect the changes.
 - [ ] Pull request is reviewed, approved, and merged.
 - [ ] Status in this file is `DONE` and reflected in [`backlog.md`](backlog.md).
@@ -142,12 +138,13 @@ Conditions that must hold before, during, and after convergence. Each command ex
 
 | Question | Status | Owner | Resolution |
 | :--- | :--- | :--- | :--- |
-| Which Go version does the module target? | `open` | @samsassin | — |
-| Which CI system runs the build (for example GitHub Actions)? | `open` | @samsassin | — |
-| Do the empty stub commands conflict with guideline 2 (YAGNI)? The user asked for them, so the work item keeps them. | `open` | @samsassin | — |
+| Which Go version does the module target? | `resolved` | @samsassin | Go 1.26, the version of the local toolchain. |
+| Which CI system runs the build (for example GitHub Actions)? | `resolved` | @samsassin | GitHub Actions. The workflow file is `.github/workflows/ci.yml`. |
+| Do the empty stub commands conflict with guideline 2 (YAGNI)? The user asked for them, so the work item keeps them. | `resolved` | @samsassin | Remove the stubs. Later work items add each group with real behavior. |
 
 ---
 
 ## 11. Activity Log & Notes
 
 - **2026-11-04** (@samsassin): Work item created and placed into `PLANNED`.
+- **2026-11-04** (@samsassin): Answered the open questions. Go 1.26, GitHub Actions, no stub commands. The module path is `github.com/Equitable-Innovations/tosh` to match the git remote. Removed SI-3 and `EV-003` and renumbered the rest.
