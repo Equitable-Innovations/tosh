@@ -93,8 +93,12 @@ At the beginning this harness will utilize `CodeGraph` for token optimization wh
 In time `tosh` may gain it's own knowledge graph for code making this a more all-in-one solution.
 
 
-## Not a Project Management System
-This is not a project management systems but instead allows for the integration with project management systems. The
-CLI will allow for the expansion of capabilities through add-on modules. In the case of project management a module
-form Jira, Linear, ADO, or other could be created. The team using `tosh` could download the Jira module if their team
-uses Jira for project management.
+## Project Management
+`tosh` includes a basic [Project Manager](build-docs/project-mgr/README.md). It holds the product requirements, the
+plan, and the release gates. It also holds the [Work Tracking System](build-docs/project-mgr/wts/README.md), which
+tracks work items and their lifecycle. The Project Manager is small by design. It is not a full replacement for a
+dedicated project management system.
+
+`tosh` can also integrate with 3rd party project and work management systems. The CLI will allow for the expansion of
+capabilities through add-on modules. A module for Jira, Linear, ADO, or other systems can be created. A team that uses
+Jira can download the Jira module and keep Jira as its system of record.
