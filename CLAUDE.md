@@ -73,3 +73,11 @@ location for generated documents in a consuming project is `.tosh/` at that proj
 
 Keep this standard in mind when authoring or reviewing any new domain specification — new document types should follow
 the same metadata baseline and XHTML conformance rules rather than introducing a divergent format.
+
+## Programming guidelines
+
+@build-docs/guidelines/README.md
+
+When you write a design plan or an implementation plan, apply these guidelines. End each plan with a "Guideline check" section. Name the guideline numbers that shaped the plan, and name any guideline that the plan breaks, with the reason. If two guidelines conflict, the lower number wins.
+
+These guidelines govern the code of `tosh`. This repository holds no code yet, so they apply to plans now and to code later.
