@@ -18,3 +18,4 @@ Plain ideas go in [`idea-stream.md`](idea-stream.md) via the `capture-idea` skil
 - `[2026-09-06 00:24]` Make sure to update the AI components to make sure they are as small and as light weight as possible.
 - `[2026-09-06 00:30]` The token Optimization & XPath Query Patterns in the work item docs will need to be updated once we get real html templates for the documents.
 - `[2026-09-06 02:09]` Need to do a review of the work-item-ledger doc. I think AI went a bit overboard or off target
+- `[2026-11-04 16:46]` tosh settings
