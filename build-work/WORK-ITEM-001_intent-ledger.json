@@ -11,14 +11,14 @@
   "timestamps": {
     "declaredAt": "2026-11-04T00:00:00Z",
     "convergingAt": "2026-11-04T23:57:35Z",
-    "updatedAt": "2026-11-04T23:59:39Z",
+    "updatedAt": "2026-11-05T00:00:38Z",
     "settledAt": null
   },
   "metricsRollup": {
     "totalSubIntents": 3,
     "verifiedSubIntents": 0,
     "totalUnits": 8,
-    "verifiedUnits": 1,
+    "verifiedUnits": 2,
     "driftEvents": 0,
     "totalTokensUsed": 0,
     "totalCostUsd": 0.0,
@@ -75,7 +75,7 @@
           "index": 2,
           "title": "Exit codes and ExitError",
           "category": "backend",
-          "state": "declared",
+          "state": "verified",
           "executionWave": 2,
           "dependsOn": ["unit_001_module_and_main"],
           "implementsReq": ["EV-002"],
@@ -83,9 +83,9 @@
           "targetScope": ["internal/cli/exitcode.go", "internal/cli/errors.go", "internal/cli/errors_test.go"],
           "retries": 0,
           "hold": null,
-          "identities": {"writer": null, "approver": null},
+          "identities": {"writer": "agent:go-engineer", "approver": "agent:code-reviewer"},
           "assignedAgent": {"role": "agent:go-engineer"},
-          "validationVerdict": "pending",
+          "validationVerdict": "pass",
           "paths": {
             "spec": "sub_intents/sub_intent_01_module_and_root_command/units/unit_002_exit_codes_and_errors/intent_unit_spec.html",
             "verification": "sub_intents/sub_intent_01_module_and_root_command/units/unit_002_exit_codes_and_errors/verification.html",
