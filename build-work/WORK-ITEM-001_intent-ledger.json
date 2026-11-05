@@ -11,12 +11,12 @@
   "timestamps": {
     "declaredAt": "2026-11-04T00:00:00Z",
     "convergingAt": "2026-11-04T23:57:35Z",
-    "updatedAt": "2026-11-05T00:08:50Z",
+    "updatedAt": "2026-11-05T00:11:03Z",
     "settledAt": null
   },
   "metricsRollup": {
     "totalSubIntents": 3,
-    "verifiedSubIntents": 1,
+    "verifiedSubIntents": 2,
     "totalUnits": 8,
     "verifiedUnits": 6,
     "driftEvents": 0,
@@ -151,11 +151,11 @@
       "subIntentId": "sub_intent_02_init_command",
       "index": 2,
       "title": "The tosh init command",
-      "state": "declared",
+      "state": "verified",
       "executionMode": "sequential",
       "dependsOn": ["sub_intent_01_module_and_root_command"],
       "hold": null,
-      "gate": {"name": "sub-intent-verification", "type": "deterministic", "verdict": "pending", "approver": null, "decidedAt": null},
+      "gate": {"name": "sub-intent-verification", "type": "deterministic", "verdict": "pass", "approver": null, "decidedAt": "2026-11-05T00:11:03Z"},
       "paths": {
         "spec": "sub_intents/sub_intent_02_init_command/sub_intent_spec.html",
         "verification": "sub_intents/sub_intent_02_init_command/sub_intent_verification.html",
