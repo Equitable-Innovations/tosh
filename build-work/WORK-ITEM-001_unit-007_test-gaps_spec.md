@@ -79,7 +79,7 @@ Section id: `verification-contract`. Every command must exit with code `0`.
 | `go build ./... && go vet ./...` | No output. |
 | `! grep -r -e "net/http" -e "net\.Dial" --include=*.go .` | No output. |
 | `git diff --quiet 24a304e -- build-docs topics` | No output. |
-| `! git diff --name-only HEAD \| grep -v "_test.go$"` (run before the commit) | No output. The diff holds only test files. |
+| `! git diff --name-only HEAD -- . ':!build-work' \| grep -v "_test.go$"` (run before the commit) | No output. Outside `build-work/`, the diff holds only test files. |
 
 If an earlier unit named a test differently, the earlier name stays. Then the reviewer updates the name list in this document and in the feasibility stage.
 
@@ -118,7 +118,7 @@ Section id: `acceptance-criteria`.
 
 - `AC-001`: Every test name in section 5 appears in the test listing.
 - `AC-002`: `go test -shuffle=on -count=1 ./...` passes.
-- `AC-003`: The diff holds only `_test.go` files.
+- `AC-003`: Outside `build-work/`, the diff holds only `_test.go` files. The workflow bookkeeping in `build-work/` does not count.
 - `AC-004`: No existing test is deleted or weakened.
 
 ---
