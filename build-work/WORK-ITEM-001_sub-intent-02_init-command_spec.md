@@ -93,11 +93,11 @@ Section id: `sub-intent-verification-gate`. Every command must exit with code `0
 | Command | Expected output |
 | :--- | :--- |
 | `go build ./... && go vet ./... && go test ./...` | No output from build and vet. Every package line starts with `ok` or `?`. |
-| `go build -o bin/tosh ./cmd/tosh && d=$(mktemp -d) && ./bin/tosh init --root "$d" && test -f "$d/.tosh/tosh.config.json"` | One line: `Created .tosh/` (`EV-001`). |
-| `d=$(mktemp -d) && ./bin/tosh init --root "$d" && ./bin/tosh init --root "$d"; test $? -eq 2` | The second run prints `.tosh/ already exists. No change made.` on standard error (`EV-002`). |
+| `go build -o bin/tosh ./cmd/tosh && d=$(mktemp -d) && ./bin/tosh init --root "$d" --format text && test -f "$d/.tosh/tosh.config.json"` | One line: `Created .tosh/` (`EV-001`). |
+| `d=$(mktemp -d) && ./bin/tosh init --root "$d" --format text && ./bin/tosh init --root "$d" --format text; test $? -eq 2` | The second run prints `.tosh/ already exists. No change made.` on standard error (`EV-002`). |
 | `d=$(mktemp -d) && ./bin/tosh init --root "$d" --format json` | `{"created":".tosh"}` |
 | `d=$(mktemp -d) && test -z "$(./bin/tosh init --root "$d" --quiet)" && test -d "$d/.tosh"` | No output. |
-| `d=$(mktemp -d) && ./bin/tosh init --root "$d" && test "$(cat "$d/.tosh/tosh.config.json")" = "{}"` | One line: `Created .tosh/`. |
+| `d=$(mktemp -d) && ./bin/tosh init --root "$d" --format text && test "$(cat "$d/.tosh/tosh.config.json")" = "{}"` | One line: `Created .tosh/`. |
 | `! grep -r -e "net/http" -e "net\.Dial" --include=*.go .` | No output (`INV-002`). |
 | `git diff --quiet 24a304e -- build-docs topics` | No output (`INV-003`). |
 

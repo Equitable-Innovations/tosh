@@ -79,8 +79,8 @@ Section id: `verification-contract`. Every command must exit with code `0`.
 | :--- | :--- |
 | `go test ./internal/cli/...` | `ok` and no failure. |
 | `go build ./... && go vet ./...` | No output. |
-| `go build -o bin/tosh ./cmd/tosh && d=$(mktemp -d) && ./bin/tosh init --root "$d" && test -f "$d/.tosh/tosh.config.json"` | `Created .tosh/` (`EV-001`). |
-| `d=$(mktemp -d) && ./bin/tosh init --root "$d" && ./bin/tosh init --root "$d"; test $? -eq 2` | `.tosh/ already exists. No change made.` on standard error (`EV-002`). |
+| `go build -o bin/tosh ./cmd/tosh && d=$(mktemp -d) && ./bin/tosh init --root "$d" --format text && test -f "$d/.tosh/tosh.config.json"` | `Created .tosh/` (`EV-001`). |
+| `d=$(mktemp -d) && ./bin/tosh init --root "$d" --format text && ./bin/tosh init --root "$d" --format text; test $? -eq 2` | `.tosh/ already exists. No change made.` on standard error (`EV-002`). |
 | `d=$(mktemp -d) && ./bin/tosh init --root "$d" --format json` | `{"created":".tosh"}` |
 | `d=$(mktemp -d) && ./bin/tosh init --root "$d" && ./bin/tosh init --root "$d" --format json; test $? -eq 2` | `{"error":"already_initialized","message":".tosh/ already exists. No change made."}` on standard error. |
 | `d=$(mktemp -d) && test -z "$(./bin/tosh init --root "$d" --quiet)" && test -d "$d/.tosh"` | No output. |
