@@ -3,7 +3,7 @@
 | Metadata | Value |
 | :--- | :--- |
 | **Work Item ID** | `WORK-ITEM-001` |
-| **Status** | `PLANNED` |
+| **Status** | `DONE` |
 | **Priority** | `P1 - High` |
 | **Domain / Component** | `CLI` |
 | **Autonomy Tier** | `propose` |
@@ -16,7 +16,6 @@
 | **Created Date** | 2026-11-04 |
 | **Active Date** | 2026-11-04 |
 | **Last Updated** | 2026-11-04 |
-
 > A work item is the parent of all intent-driven SDLC documents. This file holds the intent. The runtime intent
 > package (`00_intent_spec.html` through `07_review_findings.html`, sub-intents, and intent units) is seeded from it.
 
@@ -118,11 +117,11 @@ Conditions that must hold before, during, and after convergence. Each command ex
 
 ## 8. Definition of Done (DoD)
 
-- [ ] Every invariant holds (`INV-001` to `INV-003`).
-- [ ] Every evidence requirement passes (`EV-001` to `EV-003`).
-- [ ] Documentation is updated to reflect the changes.
-- [ ] Pull request is reviewed, approved, and merged.
-- [ ] Status in this file is `DONE` and reflected in [`backlog.md`](backlog.md).
+- [x] Every invariant holds (`INV-001` to `INV-003`).
+- [x] Every evidence requirement passes (`EV-001` to `EV-003`).
+- [x] Documentation is updated to reflect the changes.
+- [x] Pull request is reviewed, approved, and merged.
+- [x] Status in this file is `DONE` and reflected in [`backlog.md`](backlog.md).
 
 ---
 
@@ -148,3 +147,4 @@ Conditions that must hold before, during, and after convergence. Each command ex
 
 - **2026-11-04** (@samsassin): Work item created and placed into `PLANNED`.
 - **2026-11-04** (@samsassin): Answered the open questions. Go 1.26, GitHub Actions, no stub commands. The module path is `github.com/Equitable-Innovations/tosh` to match the git remote. Removed SI-3 and `EV-003` and renumbered the rest.
+- **2026-11-04** (@samsassin): PLANNED -> DONE. Override confirmed: skipped standard progression. All invariants and evidence requirements pass.

@@ -13,7 +13,7 @@ For guidelines on work item lifecycles, formatting standards, and execution work
 
 | Total Work Items | Backlog | Planned | Ready | In Progress | In Review | Done | Blocked |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 |
+| 1 | 0 | 0 | 0 | 0 | 0 | 1 | 0 |
 
 ---
 
@@ -23,7 +23,7 @@ For guidelines on work item lifecycles, formatting standards, and execution work
 
 | ID | Title | Status | Priority | Domain | Autonomy Tier | Assignee | Target Release | Active | Last Updated |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---:|:---|
-| [`WORK-ITEM-001`](WORK-ITEM-001_go-project-skeleton-and-tosh-init-command.md) | Go Project Skeleton and tosh init Command | `PLANNED` | `P1` | `CLI` | `propose` | Unassigned | `v0.1.0` | 2026-11-04 | 2026-11-04 |
+| *None yet* | *No active work items registered* | — | — | — | — | — | — | — | — |
 
 ---
 
@@ -31,7 +31,7 @@ For guidelines on work item lifecycles, formatting standards, and execution work
 
 | ID | Title | Domain | Autonomy Tier | Resolution | Completed Date | Target Release |
 |:---|:---|:---|:---|:---|:---|:---|
-| *None yet* | *No completed work items registered* | — | — | — | — | — |
+| [`WORK-ITEM-001`](WORK-ITEM-001_go-project-skeleton-and-tosh-init-command.md) | Go Project Skeleton and tosh init Command | `CLI` | `propose` | `DONE` | 2026-11-04 | `v0.1.0` |
 
 ---
 

@@ -4,12 +4,38 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repository is
 
-This repo is currently **documentation-only**: it is the design/specification phase for `tosh` (Token Optimized Software
-Harness), a not-yet-built CLI-based agentic development harness. There is no source code, build system, package
-manifest, or test suite in this repository yet — everything here is Markdown (and eventually XHTML)
-specifying what `tosh` will do and how its generated documents will be structured. Do not assume or invent build/lint/
-test commands; none exist. Work in this repo means authoring/editing specification documents, not writing application
-code.
+This repo holds the design/specification for `tosh` (Token Optimized Software Harness), a CLI-based agentic development
+harness, and the first Go code for it. The Go skeleton and the `tosh init` command are built
+([WORK-ITEM-001](todo/WORK-ITEM-001_go-project-skeleton-and-tosh-init-command.md), `DONE`). Every other command is
+still specification only. Most of the repository is Markdown (and eventually XHTML) specifying what `tosh` will do and
+how its generated documents will be structured.
+
+### Go code
+
+- Module: `github.com/Equitable-Innovations/tosh`, Go 1.26, `cobra` for the command tree.
+- Layout: `cmd/tosh/` is the entry point. `internal/cli/` holds the root command, the global flags (`--root`,
+  `--format`, `--quiet`), exit codes, `ExitError`, the environment, and the printer. `internal/initcmd/` holds the
+  `tosh init` logic.
+- Commands (these are the only ones that exist, so do not invent others):
+  - `go build ./...`
+  - `go vet ./...`
+  - `go test ./...`
+  - `go build -o bin/tosh ./cmd/tosh` (`bin/` is git-ignored)
+- CI: `.github/workflows/ci.yml` runs build, vet, and test on every push and pull request. There is no lint or format
+  command beyond `go vet`.
+- Behavior built so far: `tosh init` creates `.tosh/` and an empty `.tosh/tosh.config.json`. If `.tosh/` exists, it
+  changes nothing, prints a message, and exits with code `2`.
+- Each new command group is added with real behavior, not as an empty stub, following the
+  [CLI specification](build-docs/cli/README.md).
+
+### Work tracking
+
+- `todo/` holds the development backlog. Each work item is `todo/WORK-ITEM-###_<slug>.md` and is registered in
+  `todo/backlog.jsonl`.
+- `todo/backlog.md` is generated. Never edit it by hand. Use `node todo/scripts/backlog.mjs`, or the
+  `create-work-item`, `update-work-item-status`, and `update-backlog` skills.
+- `build-work/` holds the working documents (intent spec, ledger, unit specs, verification) that a work item
+  produces while it is built.
 
 The core idea being specified: `tosh` will manage project documentation as strict XHTML files so that both humans
 (rendered in a browser with Material Design 3 web components) and LLM agents (via XPath/XML subtree extraction) can
