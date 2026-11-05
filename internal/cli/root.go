@@ -6,6 +6,8 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+
+	"github.com/Equitable-Innovations/tosh/internal/initcmd"
 )
 
 const (
@@ -39,6 +41,8 @@ func NewRootCommand(env Env) *cobra.Command {
 		return usageError(err)
 	})
 	root.CompletionOptions.DisableDefaultCmd = true
+
+	root.AddCommand(newInitCommand(env, initcmd.Run))
 
 	flags := root.PersistentFlags()
 	flags.String(flagRoot, "", "project root directory")
