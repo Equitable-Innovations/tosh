@@ -1,0 +1,285 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "schemaVersion": "1.0.0",
+  "ledgerVersion": 1,
+  "intentId": "20261104T000000Z_go_project_skeleton_and_tosh_init",
+  "state": "converging",
+  "autonomyTier": "propose",
+  "originRef": null,
+  "externalRef": null,
+  "executionMode": "sequential",
+  "timestamps": {
+    "declaredAt": "2026-11-04T00:00:00Z",
+    "convergingAt": "2026-11-04T23:57:35Z",
+    "updatedAt": "2026-11-05T00:23:04Z",
+    "settledAt": null
+  },
+  "metricsRollup": {
+    "totalSubIntents": 3,
+    "verifiedSubIntents": 3,
+    "totalUnits": 8,
+    "verifiedUnits": 8,
+    "driftEvents": 0,
+    "totalTokensUsed": 0,
+    "totalCostUsd": 0.0,
+    "totalDurationMs": 0
+  },
+  "gates": [
+    {"name": "feasibility", "type": "deterministic", "verdict": "pass", "approver": null, "decidedAt": "2026-11-04T00:00:00Z"},
+    {"name": "strategy-acceptance", "type": "human", "verdict": "pass", "approver": "samsassin", "decidedAt": "2026-11-04T23:57:35Z"},
+    {"name": "release-authorization", "type": "human", "verdict": "pending", "approver": null, "decidedAt": null}
+  ],
+  "subIntents": [
+    {
+      "subIntentId": "sub_intent_01_module_and_root_command",
+      "index": 1,
+      "title": "Go module and root command",
+      "state": "verified",
+      "executionMode": "sequential",
+      "dependsOn": [],
+      "hold": null,
+      "gate": {"name": "sub-intent-verification", "type": "deterministic", "verdict": "pass", "approver": null, "decidedAt": "2026-11-05T00:05:55Z"},
+      "paths": {
+        "spec": "sub_intents/sub_intent_01_module_and_root_command/sub_intent_spec.html",
+        "verification": "sub_intents/sub_intent_01_module_and_root_command/sub_intent_verification.html",
+        "summary": "sub_intents/sub_intent_01_module_and_root_command/sub_intent_summary.html"
+      },
+      "units": [
+        {
+          "unitId": "unit_001_module_and_main",
+          "index": 1,
+          "title": "Go module and main entry point",
+          "category": "backend",
+          "state": "verified",
+          "executionWave": 1,
+          "dependsOn": [],
+          "implementsReq": ["EV-001"],
+          "invariants": ["INV-001", "INV-002", "INV-003"],
+          "targetScope": ["go.mod", "cmd/tosh/main.go", ".gitignore"],
+          "retries": 1,
+          "hold": null,
+          "identities": {"writer": "agent:go-engineer", "approver": "agent:code-reviewer"},
+          "assignedAgent": {"role": "agent:go-engineer"},
+          "validationVerdict": "pass",
+          "paths": {
+            "spec": "sub_intents/sub_intent_01_module_and_root_command/units/unit_001_module_and_main/intent_unit_spec.html",
+            "verification": "sub_intents/sub_intent_01_module_and_root_command/units/unit_001_module_and_main/verification.html",
+            "diff": "sub_intents/sub_intent_01_module_and_root_command/units/unit_001_module_and_main/intent.diff",
+            "summary": "sub_intents/sub_intent_01_module_and_root_command/units/unit_001_module_and_main/summary.html",
+            "conversation": "sub_intents/sub_intent_01_module_and_root_command/units/unit_001_module_and_main/conversation.jsonl",
+            "metrics": "sub_intents/sub_intent_01_module_and_root_command/units/unit_001_module_and_main/metrics.json"
+          }
+        },
+        {
+          "unitId": "unit_002_exit_codes_and_errors",
+          "index": 2,
+          "title": "Exit codes and ExitError",
+          "category": "backend",
+          "state": "verified",
+          "executionWave": 2,
+          "dependsOn": ["unit_001_module_and_main"],
+          "implementsReq": ["EV-002"],
+          "invariants": ["INV-001", "INV-002", "INV-003"],
+          "targetScope": ["internal/cli/exitcode.go", "internal/cli/errors.go", "internal/cli/errors_test.go"],
+          "retries": 0,
+          "hold": null,
+          "identities": {"writer": "agent:go-engineer", "approver": "agent:code-reviewer"},
+          "assignedAgent": {"role": "agent:go-engineer"},
+          "validationVerdict": "pass",
+          "paths": {
+            "spec": "sub_intents/sub_intent_01_module_and_root_command/units/unit_002_exit_codes_and_errors/intent_unit_spec.html",
+            "verification": "sub_intents/sub_intent_01_module_and_root_command/units/unit_002_exit_codes_and_errors/verification.html",
+            "diff": "sub_intents/sub_intent_01_module_and_root_command/units/unit_002_exit_codes_and_errors/intent.diff",
+            "summary": "sub_intents/sub_intent_01_module_and_root_command/units/unit_002_exit_codes_and_errors/summary.html",
+            "conversation": "sub_intents/sub_intent_01_module_and_root_command/units/unit_002_exit_codes_and_errors/conversation.jsonl",
+            "metrics": "sub_intents/sub_intent_01_module_and_root_command/units/unit_002_exit_codes_and_errors/metrics.json"
+          }
+        },
+        {
+          "unitId": "unit_003_env_and_printer",
+          "index": 3,
+          "title": "Env and Printer",
+          "category": "backend",
+          "state": "verified",
+          "executionWave": 3,
+          "dependsOn": ["unit_002_exit_codes_and_errors"],
+          "implementsReq": ["EV-001", "EV-002"],
+          "invariants": ["INV-001", "INV-002", "INV-003"],
+          "targetScope": ["internal/cli/env.go", "internal/cli/output.go", "internal/cli/output_test.go"],
+          "retries": 0,
+          "hold": null,
+          "identities": {"writer": "agent:go-engineer", "approver": "agent:code-reviewer"},
+          "assignedAgent": {"role": "agent:go-engineer"},
+          "validationVerdict": "pass",
+          "paths": {
+            "spec": "sub_intents/sub_intent_01_module_and_root_command/units/unit_003_env_and_printer/intent_unit_spec.html",
+            "verification": "sub_intents/sub_intent_01_module_and_root_command/units/unit_003_env_and_printer/verification.html",
+            "diff": "sub_intents/sub_intent_01_module_and_root_command/units/unit_003_env_and_printer/intent.diff",
+            "summary": "sub_intents/sub_intent_01_module_and_root_command/units/unit_003_env_and_printer/summary.html",
+            "conversation": "sub_intents/sub_intent_01_module_and_root_command/units/unit_003_env_and_printer/conversation.jsonl",
+            "metrics": "sub_intents/sub_intent_01_module_and_root_command/units/unit_003_env_and_printer/metrics.json"
+          }
+        },
+        {
+          "unitId": "unit_004_root_command_and_flags",
+          "index": 4,
+          "title": "Root command and global flags",
+          "category": "backend",
+          "state": "verified",
+          "executionWave": 4,
+          "dependsOn": ["unit_003_env_and_printer"],
+          "implementsReq": ["EV-001", "EV-002"],
+          "invariants": ["INV-001", "INV-002", "INV-003"],
+          "targetScope": ["internal/cli/root.go", "internal/cli/root_test.go", "cmd/tosh/main.go", "go.mod", "go.sum"],
+          "retries": 1,
+          "hold": null,
+          "identities": {"writer": "agent:go-engineer", "approver": "agent:code-reviewer"},
+          "assignedAgent": {"role": "agent:go-engineer"},
+          "validationVerdict": "pass",
+          "paths": {
+            "spec": "sub_intents/sub_intent_01_module_and_root_command/units/unit_004_root_command_and_flags/intent_unit_spec.html",
+            "verification": "sub_intents/sub_intent_01_module_and_root_command/units/unit_004_root_command_and_flags/verification.html",
+            "diff": "sub_intents/sub_intent_01_module_and_root_command/units/unit_004_root_command_and_flags/intent.diff",
+            "summary": "sub_intents/sub_intent_01_module_and_root_command/units/unit_004_root_command_and_flags/summary.html",
+            "conversation": "sub_intents/sub_intent_01_module_and_root_command/units/unit_004_root_command_and_flags/conversation.jsonl",
+            "metrics": "sub_intents/sub_intent_01_module_and_root_command/units/unit_004_root_command_and_flags/metrics.json"
+          }
+        }
+      ]
+    },
+    {
+      "subIntentId": "sub_intent_02_init_command",
+      "index": 2,
+      "title": "The tosh init command",
+      "state": "verified",
+      "executionMode": "sequential",
+      "dependsOn": ["sub_intent_01_module_and_root_command"],
+      "hold": null,
+      "gate": {"name": "sub-intent-verification", "type": "deterministic", "verdict": "pass", "approver": null, "decidedAt": "2026-11-05T00:11:03Z"},
+      "paths": {
+        "spec": "sub_intents/sub_intent_02_init_command/sub_intent_spec.html",
+        "verification": "sub_intents/sub_intent_02_init_command/sub_intent_verification.html",
+        "summary": "sub_intents/sub_intent_02_init_command/sub_intent_summary.html"
+      },
+      "units": [
+        {
+          "unitId": "unit_005_init_logic",
+          "index": 1,
+          "title": "Init logic",
+          "category": "backend",
+          "state": "verified",
+          "executionWave": 1,
+          "dependsOn": [],
+          "implementsReq": ["EV-001", "EV-002"],
+          "invariants": ["INV-001", "INV-002", "INV-003"],
+          "targetScope": ["internal/initcmd/init.go", "internal/initcmd/init_test.go"],
+          "retries": 0,
+          "hold": null,
+          "identities": {"writer": "agent:go-engineer", "approver": "agent:code-reviewer"},
+          "assignedAgent": {"role": "agent:go-engineer"},
+          "validationVerdict": "pass",
+          "paths": {
+            "spec": "sub_intents/sub_intent_02_init_command/units/unit_005_init_logic/intent_unit_spec.html",
+            "verification": "sub_intents/sub_intent_02_init_command/units/unit_005_init_logic/verification.html",
+            "diff": "sub_intents/sub_intent_02_init_command/units/unit_005_init_logic/intent.diff",
+            "summary": "sub_intents/sub_intent_02_init_command/units/unit_005_init_logic/summary.html",
+            "conversation": "sub_intents/sub_intent_02_init_command/units/unit_005_init_logic/conversation.jsonl",
+            "metrics": "sub_intents/sub_intent_02_init_command/units/unit_005_init_logic/metrics.json"
+          }
+        },
+        {
+          "unitId": "unit_006_init_command_wiring",
+          "index": 2,
+          "title": "Init command wiring",
+          "category": "backend",
+          "state": "verified",
+          "executionWave": 2,
+          "dependsOn": ["unit_005_init_logic"],
+          "implementsReq": ["EV-001", "EV-002"],
+          "invariants": ["INV-001", "INV-002", "INV-003"],
+          "targetScope": ["internal/cli/init.go", "internal/cli/init_test.go", "internal/cli/root.go"],
+          "retries": 0,
+          "hold": null,
+          "identities": {"writer": "agent:go-engineer", "approver": "agent:code-reviewer"},
+          "assignedAgent": {"role": "agent:go-engineer"},
+          "validationVerdict": "pass",
+          "paths": {
+            "spec": "sub_intents/sub_intent_02_init_command/units/unit_006_init_command_wiring/intent_unit_spec.html",
+            "verification": "sub_intents/sub_intent_02_init_command/units/unit_006_init_command_wiring/verification.html",
+            "diff": "sub_intents/sub_intent_02_init_command/units/unit_006_init_command_wiring/intent.diff",
+            "summary": "sub_intents/sub_intent_02_init_command/units/unit_006_init_command_wiring/summary.html",
+            "conversation": "sub_intents/sub_intent_02_init_command/units/unit_006_init_command_wiring/conversation.jsonl",
+            "metrics": "sub_intents/sub_intent_02_init_command/units/unit_006_init_command_wiring/metrics.json"
+          }
+        }
+      ]
+    },
+    {
+      "subIntentId": "sub_intent_03_tests_and_ci",
+      "index": 3,
+      "title": "Test coverage and CI",
+      "state": "verified",
+      "executionMode": "sequential",
+      "dependsOn": ["sub_intent_02_init_command"],
+      "hold": null,
+      "gate": {"name": "sub-intent-verification", "type": "deterministic", "verdict": "pass", "approver": null, "decidedAt": "2026-11-05T00:23:04Z"},
+      "paths": {
+        "spec": "sub_intents/sub_intent_03_tests_and_ci/sub_intent_spec.html",
+        "verification": "sub_intents/sub_intent_03_tests_and_ci/sub_intent_verification.html",
+        "summary": "sub_intents/sub_intent_03_tests_and_ci/sub_intent_summary.html"
+      },
+      "units": [
+        {
+          "unitId": "unit_007_test_gaps",
+          "index": 1,
+          "title": "Close test coverage gaps",
+          "category": "test",
+          "state": "verified",
+          "executionWave": 1,
+          "dependsOn": [],
+          "implementsReq": ["EV-003"],
+          "invariants": ["INV-001", "INV-002", "INV-003"],
+          "targetScope": ["internal/cli/*_test.go", "internal/initcmd/*_test.go"],
+          "retries": 0,
+          "hold": null,
+          "identities": {"writer": "agent:go-engineer", "approver": "agent:code-reviewer"},
+          "assignedAgent": {"role": "agent:go-engineer"},
+          "validationVerdict": "pass",
+          "paths": {
+            "spec": "sub_intents/sub_intent_03_tests_and_ci/units/unit_007_test_gaps/intent_unit_spec.html",
+            "verification": "sub_intents/sub_intent_03_tests_and_ci/units/unit_007_test_gaps/verification.html",
+            "diff": "sub_intents/sub_intent_03_tests_and_ci/units/unit_007_test_gaps/intent.diff",
+            "summary": "sub_intents/sub_intent_03_tests_and_ci/units/unit_007_test_gaps/summary.html",
+            "conversation": "sub_intents/sub_intent_03_tests_and_ci/units/unit_007_test_gaps/conversation.jsonl",
+            "metrics": "sub_intents/sub_intent_03_tests_and_ci/units/unit_007_test_gaps/metrics.json"
+          }
+        },
+        {
+          "unitId": "unit_008_ci_workflow",
+          "index": 2,
+          "title": "GitHub Actions workflow",
+          "category": "infrastructure",
+          "state": "verified",
+          "executionWave": 2,
+          "dependsOn": ["unit_007_test_gaps"],
+          "implementsReq": ["EV-003"],
+          "invariants": ["INV-001", "INV-002", "INV-003"],
+          "targetScope": [".github/workflows/ci.yml"],
+          "retries": 0,
+          "hold": null,
+          "identities": {"writer": "agent:go-engineer", "approver": "agent:code-reviewer"},
+          "assignedAgent": {"role": "agent:go-engineer"},
+          "validationVerdict": "pass",
+          "paths": {
+            "spec": "sub_intents/sub_intent_03_tests_and_ci/units/unit_008_ci_workflow/intent_unit_spec.html",
+            "verification": "sub_intents/sub_intent_03_tests_and_ci/units/unit_008_ci_workflow/verification.html",
+            "diff": "sub_intents/sub_intent_03_tests_and_ci/units/unit_008_ci_workflow/intent.diff",
+            "summary": "sub_intents/sub_intent_03_tests_and_ci/units/unit_008_ci_workflow/summary.html",
+            "conversation": "sub_intents/sub_intent_03_tests_and_ci/units/unit_008_ci_workflow/conversation.jsonl",
+            "metrics": "sub_intents/sub_intent_03_tests_and_ci/units/unit_008_ci_workflow/metrics.json"
+          }
+        }
+      ]
+    }
+  ]
+}
