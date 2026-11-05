@@ -11,14 +11,14 @@
   "timestamps": {
     "declaredAt": "2026-11-04T00:00:00Z",
     "convergingAt": "2026-11-04T23:57:35Z",
-    "updatedAt": "2026-11-05T00:00:38Z",
+    "updatedAt": "2026-11-05T00:02:15Z",
     "settledAt": null
   },
   "metricsRollup": {
     "totalSubIntents": 3,
     "verifiedSubIntents": 0,
     "totalUnits": 8,
-    "verifiedUnits": 2,
+    "verifiedUnits": 3,
     "driftEvents": 0,
     "totalTokensUsed": 0,
     "totalCostUsd": 0.0,
@@ -100,7 +100,7 @@
           "index": 3,
           "title": "Env and Printer",
           "category": "backend",
-          "state": "declared",
+          "state": "verified",
           "executionWave": 3,
           "dependsOn": ["unit_002_exit_codes_and_errors"],
           "implementsReq": ["EV-001", "EV-002"],
@@ -108,9 +108,9 @@
           "targetScope": ["internal/cli/env.go", "internal/cli/output.go", "internal/cli/output_test.go"],
           "retries": 0,
           "hold": null,
-          "identities": {"writer": null, "approver": null},
+          "identities": {"writer": "agent:go-engineer", "approver": "agent:code-reviewer"},
           "assignedAgent": {"role": "agent:go-engineer"},
-          "validationVerdict": "pending",
+          "validationVerdict": "pass",
           "paths": {
             "spec": "sub_intents/sub_intent_01_module_and_root_command/units/unit_003_env_and_printer/intent_unit_spec.html",
             "verification": "sub_intents/sub_intent_01_module_and_root_command/units/unit_003_env_and_printer/verification.html",
