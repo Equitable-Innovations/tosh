@@ -11,14 +11,14 @@
   "timestamps": {
     "declaredAt": "2026-11-04T00:00:00Z",
     "convergingAt": "2026-11-04T23:57:35Z",
-    "updatedAt": "2026-11-05T00:21:06Z",
+    "updatedAt": "2026-11-05T00:22:13Z",
     "settledAt": null
   },
   "metricsRollup": {
     "totalSubIntents": 3,
     "verifiedSubIntents": 2,
     "totalUnits": 8,
-    "verifiedUnits": 7,
+    "verifiedUnits": 8,
     "driftEvents": 0,
     "totalTokensUsed": 0,
     "totalCostUsd": 0.0,
@@ -259,7 +259,7 @@
           "index": 2,
           "title": "GitHub Actions workflow",
           "category": "infrastructure",
-          "state": "declared",
+          "state": "verified",
           "executionWave": 2,
           "dependsOn": ["unit_007_test_gaps"],
           "implementsReq": ["EV-003"],
@@ -267,9 +267,9 @@
           "targetScope": [".github/workflows/ci.yml"],
           "retries": 0,
           "hold": null,
-          "identities": {"writer": null, "approver": null},
+          "identities": {"writer": "agent:go-engineer", "approver": "agent:code-reviewer"},
           "assignedAgent": {"role": "agent:go-engineer"},
-          "validationVerdict": "pending",
+          "validationVerdict": "pass",
           "paths": {
             "spec": "sub_intents/sub_intent_03_tests_and_ci/units/unit_008_ci_workflow/intent_unit_spec.html",
             "verification": "sub_intents/sub_intent_03_tests_and_ci/units/unit_008_ci_workflow/verification.html",
