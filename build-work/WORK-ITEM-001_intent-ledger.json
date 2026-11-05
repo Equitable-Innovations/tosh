@@ -11,12 +11,12 @@
   "timestamps": {
     "declaredAt": "2026-11-04T00:00:00Z",
     "convergingAt": "2026-11-04T23:57:35Z",
-    "updatedAt": "2026-11-05T00:05:15Z",
+    "updatedAt": "2026-11-05T00:05:55Z",
     "settledAt": null
   },
   "metricsRollup": {
     "totalSubIntents": 3,
-    "verifiedSubIntents": 0,
+    "verifiedSubIntents": 1,
     "totalUnits": 8,
     "verifiedUnits": 4,
     "driftEvents": 0,
@@ -34,11 +34,11 @@
       "subIntentId": "sub_intent_01_module_and_root_command",
       "index": 1,
       "title": "Go module and root command",
-      "state": "declared",
+      "state": "verified",
       "executionMode": "sequential",
       "dependsOn": [],
       "hold": null,
-      "gate": {"name": "sub-intent-verification", "type": "deterministic", "verdict": "pending", "approver": null, "decidedAt": null},
+      "gate": {"name": "sub-intent-verification", "type": "deterministic", "verdict": "pass", "approver": null, "decidedAt": "2026-11-05T00:05:55Z"},
       "paths": {
         "spec": "sub_intents/sub_intent_01_module_and_root_command/sub_intent_spec.html",
         "verification": "sub_intents/sub_intent_01_module_and_root_command/sub_intent_verification.html",
