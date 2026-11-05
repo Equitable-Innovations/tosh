@@ -11,12 +11,12 @@
   "timestamps": {
     "declaredAt": "2026-11-04T00:00:00Z",
     "convergingAt": "2026-11-04T23:57:35Z",
-    "updatedAt": "2026-11-05T00:22:13Z",
+    "updatedAt": "2026-11-05T00:23:04Z",
     "settledAt": null
   },
   "metricsRollup": {
     "totalSubIntents": 3,
-    "verifiedSubIntents": 2,
+    "verifiedSubIntents": 3,
     "totalUnits": 8,
     "verifiedUnits": 8,
     "driftEvents": 0,
@@ -218,11 +218,11 @@
       "subIntentId": "sub_intent_03_tests_and_ci",
       "index": 3,
       "title": "Test coverage and CI",
-      "state": "declared",
+      "state": "verified",
       "executionMode": "sequential",
       "dependsOn": ["sub_intent_02_init_command"],
-      "hold": "The writer is blocked. build-work/WORK-ITEM-001_intent-ledger.json is modified and uncommitted. build-work/** is protected, so the AC-003 check (the diff holds only _test.go files) fails. The orchestrator or user must commit the ledger as a separate bookkeeping commit (or stash it) before the unit-007 check runs. The hold text in the ledger is also stale: it mentions the unit-006 and sub-intent-02 spec edits, which are now committed.",
-      "gate": {"name": "sub-intent-verification", "type": "deterministic", "verdict": "pending", "approver": null, "decidedAt": null},
+      "hold": null,
+      "gate": {"name": "sub-intent-verification", "type": "deterministic", "verdict": "pass", "approver": null, "decidedAt": "2026-11-05T00:23:04Z"},
       "paths": {
         "spec": "sub_intents/sub_intent_03_tests_and_ci/sub_intent_spec.html",
         "verification": "sub_intents/sub_intent_03_tests_and_ci/sub_intent_verification.html",
